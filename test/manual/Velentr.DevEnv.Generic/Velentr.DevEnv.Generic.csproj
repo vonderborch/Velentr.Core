@@ -10,6 +10,9 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
     <StartupObject>Velentr.DevEnv.Program</StartupObject>
+    <Version>2.0.1</Version>
+    <FileVersion>2.0.1</FileVersion>
+    <AssemblyVersion>2.0.1</AssemblyVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>$(DefineConstants)TRACE;GENERIC</DefineConstants>
