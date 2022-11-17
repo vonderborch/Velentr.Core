@@ -13,9 +13,9 @@
     <PackageTags>Velentr, Core, FNA</PackageTags>
     <Description>The core Velentr package, containing helpers and basic objects and interfaces shared across other Velentr packages.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>2.0.2</Version>
-    <FileVersion>2.0.2</FileVersion>
-    <AssemblyVersion>2.0.2</AssemblyVersion>
+    <Version>2.0.3</Version>
+    <FileVersion>2.0.3</FileVersion>
+    <AssemblyVersion>2.0.3</AssemblyVersion>
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
