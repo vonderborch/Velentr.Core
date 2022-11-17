@@ -1,5 +1,5 @@
 # Velentr.Core
-A library
+The core Velentr package, containing helpers and basic objects and interfaces shared across other Velentr packages.
 
 # Installation
 There are nuget packages available for Monogame and FNA:

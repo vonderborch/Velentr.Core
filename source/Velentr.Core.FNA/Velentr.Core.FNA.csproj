@@ -10,8 +10,8 @@
     <Authors>Christian Webber</Authors>
     <Company>Christian Webber</Company>
     <RepositoryUrl>https://github.com/vonderborch/Velentr.Core</RepositoryUrl>
-    <PackageTags>Velentr</PackageTags>
-    <Description>A library</Description>
+    <PackageTags>Velentr, Core, FNA</PackageTags>
+    <Description>The core Velentr package, containing helpers and basic objects and interfaces shared across other Velentr packages.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Version>2.0.0</Version>
     <FileVersion>2.0.0</FileVersion>
