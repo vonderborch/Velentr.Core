@@ -46,7 +46,7 @@
     <EmbeddedResource Include="Icon.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Velentr.Debugging" Version="1.0.0" />
+    <PackageReference Include="Velentr.PerformanceMetrics.FNA" Version="2.0.2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\FNA\FNA\FNA.Core.csproj" />
