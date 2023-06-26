@@ -1,6 +1,5 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
 using Velentr.PerformanceMetrics;
 
 namespace Velentr.DevEnv

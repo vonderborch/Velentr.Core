@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PublishReadyToRun>false</PublishReadyToRun>
@@ -12,9 +12,6 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
     <StartupObject>Velentr.DevEnv.Program</StartupObject>
-    <Version>2.0.3</Version>
-    <FileVersion>2.0.3</FileVersion>
-    <AssemblyVersion>2.0.3</AssemblyVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <DefineConstants>$(DefineConstants)TRACE;FNA</DefineConstants>
@@ -50,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\FNA\FNA\FNA.Core.csproj" />
-    <ProjectReference Include="..\..\..\source\Velentr.Core.FNA\Velentr.Core.FNA.csproj" />
   </ItemGroup>
   <ItemGroup>
     <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />
