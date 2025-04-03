@@ -17,43 +17,53 @@ public static class HslHelpers
     /// <param name="red">The red component of the color as a double.</param>
     /// <param name="green">The green component of the color as a double.</param>
     /// <param name="blue">The blue component of the color as a double.</param>
-    public static void ConvertHslToRgb(int hue, double saturation, double lightness, out double red, out double green,
+    public static void ConvertHslToRgb(double hue, double saturation, double lightness, out double red, out double green,
         out double blue)
     {
         Validations.ValidateRange(hue, nameof(hue), 0, 360);
         Validations.ValidateRange(saturation, nameof(saturation), 0, 1);
         Validations.ValidateRange(lightness, nameof(lightness), 0, 1);
 
-        var actualHue = Maths<int>.CircularClamp(hue, 0, 360) / 360d;
-        var actualSaturation = Maths<double>.Clamp(saturation, 0, 1);
-        var actualLightness = Maths<double>.Clamp(lightness, 0, 1);
+        hue = Maths<double>.CircularClamp(hue, 0, 360);
+        saturation = Maths<double>.Clamp(saturation, 0, 1);
+        lightness = Maths<double>.Clamp(lightness, 0, 1);
 
         red = 0;
         green = 0;
         blue = 0;
-        if (actualSaturation == 0)
+        if (saturation == 0)
         {
-            red = 1;
-            green = 1;
-            blue = 1;
+            red = green = blue = lightness; // achromatic
         }
         else
         {
-            double q = 0;
-            if (q < 0.5d)
+            double q = lightness < 0.5 ? lightness * (1 + saturation) : lightness + saturation - lightness * saturation;
+            double p = 2 * lightness - q;
+            double hk = hue / 360.0;
+
+            double[] t = new double[3];
+            t[0] = hk + 1.0 / 3.0; // red
+            t[1] = hk;             // green
+            t[2] = hk - 1.0 / 3.0; // blue
+
+            for (int i = 0; i < 3; i++)
             {
-                q = actualLightness * (1 + actualSaturation);
-            }
-            else
-            {
-                q = actualLightness + actualSaturation - actualLightness * actualSaturation;
+                if (t[i] < 0) t[i] += 1;
+                if (t[i] > 1) t[i] -= 1;
+
+                if (t[i] < 1.0 / 6.0)
+                    t[i] = p + (q - p) * 6 * t[i];
+                else if (t[i] < 1.0 / 2.0)
+                    t[i] = q;
+                else if (t[i] < 2.0 / 3.0)
+                    t[i] = p + (q - p) * (2.0 / 3.0 - t[i]) * 6;
+                else
+                    t[i] = p;
             }
 
-            var p = 2 * actualLightness - q;
-            var third = 1 / 3d;
-            red = GetHslColourComponent(p, q, actualHue + third);
-            green = GetHslColourComponent(p, q, actualHue);
-            blue = GetHslColourComponent(p, q, actualHue - third);
+            red = t[0];
+            green = t[1];
+            blue = t[2];
         }
     }
 
@@ -108,7 +118,7 @@ public static class HslHelpers
     /// <param name="green">The green component of the color as a byte.</param>
     /// <param name="blue">The blue component of the color as a byte.</param>
     /// <returns>A tuple containing the hue, saturation, and lightness components of the color.</returns>
-    public static (int hue, double saturation, double lightness) ConvertRgbToHsl(byte red, byte green, byte blue)
+    public static (double hue, double saturation, double lightness) ConvertRgbToHsl(byte red, byte green, byte blue)
     {
         ConvertRgbToHsl(red, green, blue, out var hue, out var saturation, out var lightness);
         return (hue, saturation, lightness);
@@ -121,7 +131,7 @@ public static class HslHelpers
     /// <param name="green">The green component of the color as a double.</param>
     /// <param name="blue">The blue component of the color as a double.</param>
     /// <returns>A tuple containing the hue, saturation, and lightness components of the color.</returns>
-    public static (int hue, double saturation, double lightness) ConvertRgbToHsl(double red, double green, double blue)
+    public static (double hue, double saturation, double lightness) ConvertRgbToHsl(double red, double green, double blue)
     {
         ConvertRgbToHsl(red, green, blue, out var hue, out var saturation, out var lightness);
         return (hue, saturation, lightness);
@@ -136,7 +146,7 @@ public static class HslHelpers
     /// <param name="hue">The hue component of the color (0-360).</param>
     /// <param name="saturation">The saturation component of the color (0-1).</param>
     /// <param name="lightness">The lightness component of the color (0-1).</param>
-    public static void ConvertRgbToHsl(byte red, byte green, byte blue, out int hue, out double saturation,
+    public static void ConvertRgbToHsl(byte red, byte green, byte blue, out double hue, out double saturation,
         out double lightness)
     {
         var r = red / 255d;
@@ -155,100 +165,41 @@ public static class HslHelpers
     /// <param name="hue">The hue component of the color (0-360).</param>
     /// <param name="saturation">The saturation component of the color (0-1).</param>
     /// <param name="lightness">The lightness component of the color (0-1).</param>
-    public static void ConvertRgbToHsl(double red, double green, double blue, out int hue, out double saturation,
+    public static void ConvertRgbToHsl(double red, double green, double blue, out double hue, out double saturation,
         out double lightness)
     {
         var min = Maths<double>.Minimum(red, green, blue);
         var max = Maths<double>.Maximum(red, green, blue);
         var delta = max - min;
-        var minMaxSum = min + max;
-        lightness = minMaxSum / 2d;
-        if (lightness <= 0)
-        {
-            hue = 0;
-            saturation = 0;
-            lightness = 0;
-            return;
-        }
+        
+        lightness = (max + min) / 2.0;
 
-        double h = 0;
         if (delta == 0)
         {
+            hue = 0;
             saturation = 0;
         }
         else
         {
-            if (lightness < 0.5)
-            {
-                saturation = delta / minMaxSum;
-            }
-            else
-            {
-                saturation = delta / (2 - delta);
-            }
+            saturation = lightness < 0.5 ? delta / (max + min) : delta / (2.0 - max - min);
 
             if (red == max)
             {
-                h = (green - blue) / 6 / delta;
+                hue = (60 * (((green - blue) / delta) % 6));
             }
             else if (green == max)
             {
-                h = 1 / 3d + (blue - red) / 6 / delta;
+                hue = (60 * (((blue - red) / delta) + 2));
             }
             else
             {
-                h = 2 / 3d + (red - green) / 6 / delta;
+                hue = (60 * (((red - green) / delta) + 4));
             }
 
-            if (h < 0)
+            if (hue < 0)
             {
-                h += 1;
-            }
-
-            if (h > 1)
-            {
-                h -= 1;
+                hue += 360;
             }
         }
-
-        hue = (int)Math.Round(h * 360);
-    }
-
-    /// <summary>
-    ///     Gets the HSL color component.
-    /// </summary>
-    /// <param name="p">The first parameter.</param>
-    /// <param name="q">The second parameter.</param>
-    /// <param name="t">The third parameter.</param>
-    /// <returns>The HSL color component.</returns>
-    private static double GetHslColourComponent(double p, double q, double t)
-    {
-        var actualT = t;
-        if (actualT < 0)
-        {
-            actualT += 1;
-        }
-
-        if (actualT > 1)
-        {
-            actualT -= 1;
-        }
-
-        if (actualT < 1d / 6)
-        {
-            return p + (q - p) * 6 * actualT;
-        }
-
-        if (actualT < 1d / 2)
-        {
-            return q;
-        }
-
-        if (actualT < 2d / 3)
-        {
-            return p + (q - p) * (2d / 3 - actualT) * 6;
-        }
-
-        return p;
     }
 }

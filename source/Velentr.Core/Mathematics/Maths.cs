@@ -10,6 +10,16 @@ public static class Maths<T> where T : INumber<T>
         return difference <= maxDifference;
     }
 
+    public static bool IsNegativeZero(float x, float maxDifference = 0.0001f)
+    {
+        return ApproximatelyEqual(x, 0, maxDifference) && float.IsNegativeInfinity(1f / x);
+    }
+
+    public static bool IsNegativeZero(double x, double maxDifference = 0.0001d)
+    {
+        return ApproximatelyEqual(x, 0, maxDifference) && double.IsNegativeInfinity(1d / x);
+    }
+
     public static bool ApproximatelyEqual(float a, float b, float maxDifference)
     {
         var difference = Math.Abs(a - b);
