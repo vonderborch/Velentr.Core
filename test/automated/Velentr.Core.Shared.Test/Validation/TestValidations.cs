@@ -8,7 +8,8 @@ public class TestValidations
     [Test]
     public void TestNotNullCheck_NullString()
     {
-        var ex = Assert.Throws<ArgumentNullException>(() => Validations.NotNullCheck(null, "testParam"));
+        string actual = null;
+        var ex = Assert.Throws<ArgumentNullException>(() => Validations.NotNullCheck(actual, "testParam"));
         Assert.That(ex.ParamName, Is.EqualTo("testParam"));
     }
 

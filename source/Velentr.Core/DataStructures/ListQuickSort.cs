@@ -1,38 +1,12 @@
 namespace Velentr.Core.DataStructures;
 
 /// <summary>
-/// Provides sorting methods for lists.
+///     Provides sorting methods for lists.
 /// </summary>
 public static class ListQuickSort
 {
     /// <summary>
-    /// Sorts the specified list using the provided comparison method.
-    /// </summary>
-    /// <typeparam name="T">The type of elements in the list.</typeparam>
-    /// <param name="list">The list to sort.</param>
-    /// <param name="compareMethod">The comparison method to use for sorting.</param>
-    /// <param name="low">The starting index of the range to sort (optional).</param>
-    /// <param name="high">The ending index of the range to sort (optional).</param>
-    public static void QuickSort<T>(this List<T> list, Func<T, T, int> compareMethod, int? low = null, int? high = null)
-    {
-        InternalSort(list, low ?? 0, high ?? list.Count() - 1, compareMethod);
-    }
-    
-    /// <summary>
-    /// Sorts the specified list using the provided comparison method.
-    /// </summary>
-    /// <typeparam name="T">The type of elements in the list.</typeparam>
-    /// <param name="list">The list to sort.</param>
-    /// <param name="compareMethod">The comparison method to use for sorting.</param>
-    /// <param name="low">The starting index of the range to sort (optional).</param>
-    /// <param name="high">The ending index of the range to sort (optional).</param>
-    public static void Sort<T>(List<T> list, Func<T, T, int> compareMethod, int? low = null, int? high = null)
-    {
-        InternalSort(list, low ?? 0, high ?? list.Count() - 1, compareMethod);
-    }
-
-    /// <summary>
-    /// Recursively sorts the specified range of the list using the provided comparison method.
+    ///     Recursively sorts the specified range of the list using the provided comparison method.
     /// </summary>
     /// <typeparam name="T">The type of elements in the list.</typeparam>
     /// <param name="list">The list to sort.</param>
@@ -50,7 +24,7 @@ public static class ListQuickSort
     }
 
     /// <summary>
-    /// Partitions the specified range of the list using the provided comparison method.
+    ///     Partitions the specified range of the list using the provided comparison method.
     /// </summary>
     /// <typeparam name="T">The type of elements in the list.</typeparam>
     /// <param name="list">The list to partition.</param>
@@ -80,5 +54,31 @@ public static class ListQuickSort
         list[high] = temp;
 
         return index + 1;
+    }
+
+    /// <summary>
+    ///     Sorts the specified list using the provided comparison method.
+    /// </summary>
+    /// <typeparam name="T">The type of elements in the list.</typeparam>
+    /// <param name="list">The list to sort.</param>
+    /// <param name="compareMethod">The comparison method to use for sorting.</param>
+    /// <param name="low">The starting index of the range to sort (optional).</param>
+    /// <param name="high">The ending index of the range to sort (optional).</param>
+    public static void QuickSort<T>(this List<T> list, Func<T, T, int> compareMethod, int? low = null, int? high = null)
+    {
+        InternalSort(list, low ?? 0, high ?? list.Count() - 1, compareMethod);
+    }
+
+    /// <summary>
+    ///     Sorts the specified list using the provided comparison method.
+    /// </summary>
+    /// <typeparam name="T">The type of elements in the list.</typeparam>
+    /// <param name="list">The list to sort.</param>
+    /// <param name="compareMethod">The comparison method to use for sorting.</param>
+    /// <param name="low">The starting index of the range to sort (optional).</param>
+    /// <param name="high">The ending index of the range to sort (optional).</param>
+    public static void Sort<T>(List<T> list, Func<T, T, int> compareMethod, int? low = null, int? high = null)
+    {
+        InternalSort(list, low ?? 0, high ?? list.Count() - 1, compareMethod);
     }
 }

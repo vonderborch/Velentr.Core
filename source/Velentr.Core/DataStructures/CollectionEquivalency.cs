@@ -1,24 +1,12 @@
 namespace Velentr.Core.DataStructures;
 
 /// <summary>
-/// Provides methods for checking the equivalency of collections.
+///     Provides methods for checking the equivalency of collections.
 /// </summary>
 public static class CollectionEquivalency
 {
     /// <summary>
-    /// Determines whether two collections are equivalent.
-    /// </summary>
-    /// <typeparam name="T">The type of elements in the collections.</typeparam>
-    /// <param name="a">The first collection to compare.</param>
-    /// <param name="b">The second collection to compare.</param>
-    /// <returns><c>true</c> if the collections are equivalent; otherwise, <c>false</c>.</returns>
-    public static bool IsEquivalent<T>(this ICollection<T> a, ICollection<T> b)
-    {
-        return CollectionsEquivalent(a, b);
-    }
-        
-    /// <summary>
-    /// Determines whether two collections are equivalent.
+    ///     Determines whether two collections are equivalent.
     /// </summary>
     /// <typeparam name="T">The type of elements in the collections.</typeparam>
     /// <param name="a">The first collection to compare.</param>
@@ -43,5 +31,17 @@ public static class CollectionEquivalency
         }
 
         return true;
+    }
+
+    /// <summary>
+    ///     Determines whether two collections are equivalent.
+    /// </summary>
+    /// <typeparam name="T">The type of elements in the collections.</typeparam>
+    /// <param name="a">The first collection to compare.</param>
+    /// <param name="b">The second collection to compare.</param>
+    /// <returns><c>true</c> if the collections are equivalent; otherwise, <c>false</c>.</returns>
+    public static bool IsEquivalent<T>(this ICollection<T> a, ICollection<T> b)
+    {
+        return CollectionsEquivalent(a, b);
     }
 }

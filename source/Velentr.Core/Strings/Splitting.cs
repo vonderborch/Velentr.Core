@@ -3,14 +3,14 @@ using Velentr.Core.Validation;
 namespace Velentr.Helpers.Strings;
 
 /// <summary>
-/// Provides methods for splitting strings by chunk size or new lines.
+///     Provides methods for splitting strings by chunk size or new lines.
 /// </summary>
 public static class Splitting
 {
     private static readonly string[] NewLineChars = ["\r\n", "\r", "\n"];
 
     /// <summary>
-    /// Splits the string into chunks of the specified size.
+    ///     Splits the string into chunks of the specified size.
     /// </summary>
     /// <param name="value">The string to split.</param>
     /// <param name="chunkSize">The size of each chunk.</param>
@@ -21,7 +21,7 @@ public static class Splitting
     }
 
     /// <summary>
-    /// Splits the string by new line characters.
+    ///     Splits the string by new line characters.
     /// </summary>
     /// <param name="value">The string to split.</param>
     /// <returns>An enumerable of strings split by new lines.</returns>
@@ -31,7 +31,7 @@ public static class Splitting
     }
 
     /// <summary>
-    /// Splits the string into chunks of the specified size.
+    ///     Splits the string into chunks of the specified size.
     /// </summary>
     /// <param name="str">The string to split.</param>
     /// <param name="chunkSize">The size of each chunk.</param>
@@ -48,7 +48,7 @@ public static class Splitting
     }
 
     /// <summary>
-    /// Splits the string by new line characters.
+    ///     Splits the string by new line characters.
     /// </summary>
     /// <param name="str">The string to split.</param>
     /// <returns>An enumerable of strings split by new lines.</returns>

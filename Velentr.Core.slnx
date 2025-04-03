@@ -34,11 +34,11 @@
   </Folder>
   <Folder Name="/test/" />
   <Folder Name="/test/automated/">
-    <Project Path="test\automated\Velentr.Core.Core.Test\Velentr.Core.Core.Test.csproj" Type="Classic C#" />
     <Project Path="test\automated\Velentr.Core.FNA.Test\Velentr.Core.FNA.Test.csproj" Type="Classic C#" />
     <Project Path="test\automated\Velentr.Core.Monogame.Test\Velentr.Core.Monogame.Test.csproj" Type="Classic C#" />
     <Project Path="test\automated\Velentr.Core.Shared.Test\Velentr.Core.Shared.Test.shproj" />
     <Project Path="test\automated\Velentr.Core.SharedSupport.Test\Velentr.Core.SharedSupport.Test.shproj" />
+    <Project Path="test\automated\Velentr.Core.Test\Velentr.Core.Test.csproj" Type="Classic C#" />
   </Folder>
   <Folder Name="/test/manual/">
     <Project Path="test\manual\Velentr.Core.Core.TestApp\Velentr.Core.Core.TestApp.csproj" Type="Classic C#" />

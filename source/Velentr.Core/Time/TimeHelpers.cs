@@ -1,12 +1,12 @@
 namespace Velentr.Core.Time;
 
 /// <summary>
-/// Provides helper methods for time-related calculations.
+///     Provides helper methods for time-related calculations.
 /// </summary>
 public static class TimeHelpers
 {
     /// <summary>
-    /// Calculates the elapsed time in milliseconds between two `TimeSpan` values.
+    ///     Calculates the elapsed time in milliseconds between two `TimeSpan` values.
     /// </summary>
     /// <param name="startTime">The start time.</param>
     /// <param name="endTime">The end time.</param>

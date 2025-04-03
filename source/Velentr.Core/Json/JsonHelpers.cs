@@ -4,12 +4,30 @@ using Velentr.Core.IO;
 namespace Velentr.Core.Json;
 
 /// <summary>
-/// Provides helper methods for JSON serialization and deserialization, including operations with files and archives.
+///     Provides helper methods for JSON serialization and deserialization, including operations with files and archives.
 /// </summary>
 public static class JsonHelpers
 {
     /// <summary>
-    /// Deserializes JSON content from a file into an object of type <typeparamref name="TValue"/>.
+    ///     Deserializes JSON content from a file within an archive into an object of type <typeparamref name="T" />.
+    /// </summary>
+    /// <typeparam name="T">The type of the object to deserialize to.</typeparam>
+    /// <param name="archive">The path of the archive containing the file.</param>
+    /// <param name="file">The name of the file within the archive.</param>
+    /// <returns>The deserialized object, or default if the file does not exist or is empty.</returns>
+    public static T? DeserializeFromArchivedFile<T>(string archive, string file)
+    {
+        var contents = ArchiveHelpers.GetFileContentsFromArchive(archive, file);
+        if (string.IsNullOrWhiteSpace(contents))
+        {
+            return default;
+        }
+
+        return DeserializeString<T>(contents);
+    }
+
+    /// <summary>
+    ///     Deserializes JSON content from a file into an object of type <typeparamref name="TValue" />.
     /// </summary>
     /// <typeparam name="TValue">The type of the object to deserialize to.</typeparam>
     /// <param name="path">The path of the file containing the JSON content.</param>
@@ -32,25 +50,7 @@ public static class JsonHelpers
     }
 
     /// <summary>
-    /// Deserializes JSON content from a file within an archive into an object of type <typeparamref name="T"/>.
-    /// </summary>
-    /// <typeparam name="T">The type of the object to deserialize to.</typeparam>
-    /// <param name="archive">The path of the archive containing the file.</param>
-    /// <param name="file">The name of the file within the archive.</param>
-    /// <returns>The deserialized object, or default if the file does not exist or is empty.</returns>
-    public static T? DeserializeFromArchivedFile<T>(string archive, string file)
-    {
-        var contents = ArchiveHelpers.GetFileContentsFromArchive(archive, file);
-        if (string.IsNullOrWhiteSpace(contents))
-        {
-            return default;
-        }
-
-        return DeserializeString<T>(contents);
-    }
-
-    /// <summary>
-    /// Deserializes JSON content from a string into an object of type <typeparamref name="TValue"/>.
+    ///     Deserializes JSON content from a string into an object of type <typeparamref name="TValue" />.
     /// </summary>
     /// <typeparam name="TValue">The type of the object to deserialize to.</typeparam>
     /// <param name="contents">The JSON content as a string.</param>
@@ -83,7 +83,7 @@ public static class JsonHelpers
     }
 
     /// <summary>
-    /// Serializes an object to JSON and writes it to a file.
+    ///     Serializes an object to JSON and writes it to a file.
     /// </summary>
     /// <param name="path">The path of the file to write to.</param>
     /// <param name="obj">The object to serialize.</param>
@@ -95,12 +95,13 @@ public static class JsonHelpers
         {
             DirectoryHelpers.CreateDirectoryIfNotExists(actualPath);
         }
+
         var contents = SerializeToString(obj, options);
         File.WriteAllText(path, contents);
     }
 
     /// <summary>
-    /// Serializes an object to a JSON string.
+    ///     Serializes an object to a JSON string.
     /// </summary>
     /// <param name="obj">The object to serialize.</param>
     /// <param name="options">Optional JSON serializer options.</param>

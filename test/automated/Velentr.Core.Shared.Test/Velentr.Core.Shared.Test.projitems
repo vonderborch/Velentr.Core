@@ -9,6 +9,8 @@
         <Import_RootNamespace>Velentr.Core.Shared.Test</Import_RootNamespace>
     </PropertyGroup>
     <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Colors\TestHexHelpers.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Colors\TestHslHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataStructures\TestArrayHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataStructures\TestCollectionEquivalency.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataStructures\TestListQuickSort.cs" />
@@ -25,6 +27,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Mathematics\TestNumericExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Streams\TestStreamHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Strings\TestFormatting.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Strings\TestReplacement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Strings\TestSimilarity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Strings\TestSplitting.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Threading\TestAtomicOperations.cs" />
