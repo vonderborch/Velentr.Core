@@ -9,6 +9,10 @@
         <Import_RootNamespace>Velentr.Core.Shared.Test</Import_RootNamespace>
     </PropertyGroup>
     <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)DataStructures\TestArrayHelpers.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataStructures\TestCollectionEquivalency.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataStructures\TestListQuickSort.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)General\TestDisposingHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IO\ArchiveHelpers\TestArchiveHelpersArchiveDirectory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IO\ArchiveHelpers\TestArchiveHelpersExtractDirectory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IO\ArchiveHelpers\TestArchiveHelpersGetFileContentsFromArchive.cs" />
@@ -18,7 +22,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)IO\FileHelpers\TestFileHelpersDeleteFileIfExists.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IO\FileHelpers\TestFileHelpersSafeCopyFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Json\TestJsonHelpers.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MyCoreClassTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Mathematics\TestNumericExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Streams\TestStreamHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Strings\TestFormatting.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Strings\TestSimilarity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Strings\TestSplitting.cs" />
@@ -26,12 +31,5 @@
     <Compile Include="$(MSBuildThisFileDirectory)Threading\TestGuard.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Time\TestTimeHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Validation\TestValidations.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)DataStructures\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Extensions\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Logic\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Math\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Streams\" />
   </ItemGroup>
 </Project>

@@ -4,93 +4,92 @@ using System.IO.Compression;
 using NUnit.Framework;
 using Velentr.Core.IO;
 
-namespace Velentr.Core.Test.IO
+namespace Velentr.Core.Test.IO;
+
+[TestFixture]
+public class TestArchiveHelpers
 {
-    [TestFixture]
-    public class TestArchiveHelpers
+    private string sourceDirectory;
+    private string archivePath;
+    private string extractedDirectory;
+
+    [SetUp]
+    public void SetUp()
     {
-        private string sourceDirectory;
-        private string archivePath;
-        private string extractedDirectory;
+        var tempDir = Path.GetTempPath();
+        this.sourceDirectory = Path.Combine(tempDir, Guid.NewGuid().ToString());
+        this.archivePath = Path.Combine(tempDir, Guid.NewGuid().ToString() + ".zip");
+        this.extractedDirectory = Path.Combine(tempDir, Guid.NewGuid().ToString());
 
-        [SetUp]
-        public void SetUp()
+        Directory.CreateDirectory(this.sourceDirectory);
+        File.WriteAllText(Path.Combine(this.sourceDirectory, "test.txt"), "Hello, World!");
+    }
+
+    [TearDown]
+    public void TearDown()
+    {
+        if (Directory.Exists(this.sourceDirectory))
         {
-            var tempDir = Path.GetTempPath();
-            this.sourceDirectory = Path.Combine(tempDir, Guid.NewGuid().ToString());
-            this.archivePath = Path.Combine(tempDir, Guid.NewGuid().ToString() + ".zip");
-            this.extractedDirectory = Path.Combine(tempDir, Guid.NewGuid().ToString());
-
-            Directory.CreateDirectory(this.sourceDirectory);
-            File.WriteAllText(Path.Combine(this.sourceDirectory, "test.txt"), "Hello, World!");
+            Directory.Delete(this.sourceDirectory, true);
         }
 
-        [TearDown]
-        public void TearDown()
+        if (File.Exists(this.archivePath))
         {
-            if (Directory.Exists(this.sourceDirectory))
-            {
-                Directory.Delete(this.sourceDirectory, true);
-            }
-
-            if (File.Exists(this.archivePath))
-            {
-                File.Delete(this.archivePath);
-            }
-
-            if (Directory.Exists(this.extractedDirectory))
-            {
-                Directory.Delete(this.extractedDirectory, true);
-            }
+            File.Delete(this.archivePath);
         }
 
-        [Test]
-        public void TestArchiveDirectory_Success()
+        if (Directory.Exists(this.extractedDirectory))
         {
-            // Act
-            ArchiveHelpers.ArchiveDirectory(this.sourceDirectory, this.archivePath);
-
-            // Assert
-            Assert.That(this.archivePath, Does.Exist);
+            Directory.Delete(this.extractedDirectory, true);
         }
+    }
 
-        [Test]
-        public void TestArchiveDirectory_IncludeBaseDirectory()
+    [Test]
+    public void TestArchiveDirectory_Success()
+    {
+        // Act
+        ArchiveHelpers.ArchiveDirectory(this.sourceDirectory, this.archivePath);
+
+        // Assert
+        Assert.That(this.archivePath, Does.Exist);
+    }
+
+    [Test]
+    public void TestArchiveDirectory_IncludeBaseDirectory()
+    {
+        // Act
+        ArchiveHelpers.ArchiveDirectory(this.sourceDirectory, this.archivePath, includeBaseDirectory: true);
+        ZipFile.ExtractToDirectory(this.archivePath, this.extractedDirectory);
+
+        // Assert
+        Assert.That(Path.Combine(this.extractedDirectory, Path.GetFileName(this.sourceDirectory)), Does.Exist);
+    }
+
+    [Test]
+    public void TestArchiveDirectory_DeleteExistingFile()
+    {
+        // Arrange
+        File.WriteAllText(this.archivePath, "Existing file");
+
+        // Act
+        ArchiveHelpers.ArchiveDirectory(this.sourceDirectory, this.archivePath, deleteExistingFile: true);
+
+        // Assert
+        Assert.That(this.archivePath, Does.Exist);
+        using (var archive = ZipFile.OpenRead(this.archivePath))
         {
-            // Act
-            ArchiveHelpers.ArchiveDirectory(this.sourceDirectory, this.archivePath, includeBaseDirectory: true);
-            ZipFile.ExtractToDirectory(this.archivePath, this.extractedDirectory);
-
-            // Assert
-            Assert.That(Path.Combine(this.extractedDirectory, Path.GetFileName(this.sourceDirectory)), Does.Exist);
+            Assert.That(archive.GetEntry("test.txt"), Is.Not.Null);
         }
+    }
 
-        [Test]
-        public void TestArchiveDirectory_DeleteExistingFile()
-        {
-            // Arrange
-            File.WriteAllText(this.archivePath, "Existing file");
+    [Test]
+    public void TestArchiveDirectory_DeleteSourceDirectory()
+    {
+        // Act
+        ArchiveHelpers.ArchiveDirectory(this.sourceDirectory, this.archivePath, deleteSourceDirectory: true);
 
-            // Act
-            ArchiveHelpers.ArchiveDirectory(this.sourceDirectory, this.archivePath, deleteExistingFile: true);
-
-            // Assert
-            Assert.That(this.archivePath, Does.Exist);
-            using (var archive = ZipFile.OpenRead(this.archivePath))
-            {
-                Assert.That(archive.GetEntry("test.txt"), Is.Not.Null);
-            }
-        }
-
-        [Test]
-        public void TestArchiveDirectory_DeleteSourceDirectory()
-        {
-            // Act
-            ArchiveHelpers.ArchiveDirectory(this.sourceDirectory, this.archivePath, deleteSourceDirectory: true);
-
-            // Assert
-            Assert.That(this.sourceDirectory, Does.Not.Exist);
-            Assert.That(this.archivePath, Does.Exist);
-        }
+        // Assert
+        Assert.That(this.sourceDirectory, Does.Not.Exist);
+        Assert.That(this.archivePath, Does.Exist);
     }
 }
