@@ -9,7 +9,7 @@
     <Import_RootNamespace>Velentr.Core.SharedSupport.Test</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Colors\" />
+    <Compile Include="$(MSBuildThisFileDirectory)Colors\TestColorConvertors.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Time\TestTimeHelpersExtended.cs" />
   </ItemGroup>
  </Project>
