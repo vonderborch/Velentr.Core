@@ -76,13 +76,13 @@ public static class HslHelpers
     /// <param name="red">The red component of the color as a byte.</param>
     /// <param name="green">The green component of the color as a byte.</param>
     /// <param name="blue">The blue component of the color as a byte.</param>
-    public static void ConvertHslToRgb(int hue, double saturation, double lightness, out byte red, out byte green,
+    public static void ConvertHslToRgb(double hue, double saturation, double lightness, out byte red, out byte green,
         out byte blue)
     {
         ConvertHslToRgb(hue, saturation, lightness, out var r, out var g, out double b);
-        red = Maths<byte>.PercentageToByte(r);
-        green = Maths<byte>.PercentageToByte(g);
-        blue = Maths<byte>.PercentageToByte(b);
+        red = FloatingMaths<double>.PercentageToByte(r);
+        green = FloatingMaths<double>.PercentageToByte(g);
+        blue = FloatingMaths<double>.PercentageToByte(b);
     }
 
     /// <summary>
@@ -92,7 +92,7 @@ public static class HslHelpers
     /// <param name="saturation">The saturation component of the color (0-1).</param>
     /// <param name="lightness">The lightness component of the color (0-1).</param>
     /// <returns>A tuple containing the red, green, and blue components of the color as doubles.</returns>
-    public static (double red, double green, double blue) ConvertHslToRgb(int hue, double saturation, double lightness)
+    public static (double red, double green, double blue) ConvertHslToRgb(double hue, double saturation, double lightness)
     {
         ConvertHslToRgb(hue, saturation, lightness, out var red, out var green, out double blue);
         return (red, green, blue);
@@ -105,9 +105,9 @@ public static class HslHelpers
     /// <param name="saturation">The saturation component of the color (0-1).</param>
     /// <param name="lightness">The lightness component of the color (0-1).</param>
     /// <returns>A tuple containing the red, green, and blue components of the color as bytes.</returns>
-    public static (byte red, byte green, byte blue) ConvertHslToRgbBytes(int hue, double saturation, double lightness)
+    public static (byte red, byte green, byte blue) ConvertHslToRgbBytes(double hue, double saturation, double lightness)
     {
-        ConvertHslToRgb(hue, saturation, lightness, out var red, out var green, out byte blue);
+        ConvertHslToRgb(hue, saturation, lightness, out byte red, out byte green, out byte blue);
         return (red, green, blue);
     }
 

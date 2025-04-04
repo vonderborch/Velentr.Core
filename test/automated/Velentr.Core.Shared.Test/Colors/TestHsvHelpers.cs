@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using Velentr.Core.Colors;
 
-namespace Velentr.Core.Test.Velentr.Core.Shared.Test.Colors;
+namespace Velentr.Core.Test.Colors;
 
 [TestFixture]
 public class TestHsvHelpers
@@ -9,7 +9,7 @@ public class TestHsvHelpers
     [Test]
     public void TestConvertHsvToRgb_ValidHsv()
     {
-        int hue = 30;
+        double hue = 30;
         double saturation = 1.0, value = 1.0;
         HsvHelpers.ConvertHsvToRgb(hue, saturation, value, out double red, out double green, out double blue);
         Assert.That(red, Is.EqualTo(1.0).Within(0.01));
@@ -20,7 +20,7 @@ public class TestHsvHelpers
     [Test]
     public void TestConvertHsvToRgb_MinHsv()
     {
-        int hue = 0;
+        double hue = 0;
         double saturation = 0.0, value = 0.0;
         HsvHelpers.ConvertHsvToRgb(hue, saturation, value, out double red, out double green, out double blue);
         Assert.That(red, Is.EqualTo(0.0).Within(0.01));
@@ -31,7 +31,7 @@ public class TestHsvHelpers
     [Test]
     public void TestConvertHsvToRgb_MaxHsv()
     {
-        int hue = 360;
+        double hue = 360;
         double saturation = 1.0, value = 1.0;
         HsvHelpers.ConvertHsvToRgb(hue, saturation, value, out double red, out double green, out double blue);
         Assert.That(red, Is.EqualTo(1.0).Within(0.01));
@@ -42,7 +42,7 @@ public class TestHsvHelpers
     [Test]
     public void TestConvertHsvToRgb_MixedHsv()
     {
-        int hue = 180;
+        double hue = 180;
         double saturation = 0.5, value = 0.5;
         HsvHelpers.ConvertHsvToRgb(hue, saturation, value, out double red, out double green, out double blue);
         Assert.That(red, Is.EqualTo(0.25).Within(0.01));
@@ -54,7 +54,7 @@ public class TestHsvHelpers
     [Test]
     public void TestConvertHsvToRgbBytes_ValidHsv()
     {
-        int hue = 30;
+        double hue = 30;
         double saturation = 1.0, value = 1.0;
         HsvHelpers.ConvertHsvToRgb(hue, saturation, value, out byte red, out byte green, out byte blue);
         Assert.That(red, Is.EqualTo(255));
@@ -65,7 +65,7 @@ public class TestHsvHelpers
     [Test]
     public void TestConvertHsvToRgbBytes_MinHsv()
     {
-        int hue = 0;
+        double hue = 0;
         double saturation = 0.0, value = 0.0;
         HsvHelpers.ConvertHsvToRgb(hue, saturation, value, out byte red, out byte green, out byte blue);
         Assert.That(red, Is.EqualTo(0));
@@ -76,7 +76,7 @@ public class TestHsvHelpers
     [Test]
     public void TestConvertHsvToRgbBytes_MaxHsv()
     {
-        int hue = 360;
+        double hue = 360;
         double saturation = 1.0, value = 1.0;
         HsvHelpers.ConvertHsvToRgb(hue, saturation, value, out byte red, out byte green, out byte blue);
         Assert.That(red, Is.EqualTo(255));
@@ -87,7 +87,7 @@ public class TestHsvHelpers
     [Test]
     public void TestConvertHsvToRgbBytes_MixedHsv()
     {
-        int hue = 180;
+        double hue = 180;
         double saturation = 0.5, value = 0.5;
         HsvHelpers.ConvertHsvToRgb(hue, saturation, value, out byte red, out byte green, out byte blue);
         Assert.That(red, Is.EqualTo(64));
@@ -99,7 +99,7 @@ public class TestHsvHelpers
     [Test]
     public void TestGetDoublesConvertHsvToRgb_ValidHsv()
     {
-        int hue = 30;
+        double hue = 30;
         double saturation = 1.0, value = 1.0;
         (double red, double green, double blue) = HsvHelpers.ConvertHsvToRgb(hue, saturation, value);
         Assert.That(red, Is.EqualTo(1.0).Within(0.01));
@@ -110,7 +110,7 @@ public class TestHsvHelpers
     [Test]
     public void TestGetDoublesConvertHsvToRgb_MinHsv()
     {
-        int hue = 0;
+        double hue = 0;
         double saturation = 0.0, value = 0.0;
         (double red, double green, double blue) = HsvHelpers.ConvertHsvToRgb(hue, saturation, value);
         Assert.That(red, Is.EqualTo(0.0).Within(0.01));
@@ -121,7 +121,7 @@ public class TestHsvHelpers
     [Test]
     public void TestGetDoublesConvertHsvToRgb_MaxHsv()
     {
-        int hue = 360;
+        double hue = 360;
         double saturation = 1.0, value = 1.0;
         (double red, double green, double blue) = HsvHelpers.ConvertHsvToRgb(hue, saturation, value);
         Assert.That(red, Is.EqualTo(1.0).Within(0.01));
@@ -132,7 +132,7 @@ public class TestHsvHelpers
     [Test]
     public void TestGetDoublesConvertHsvToRgb_MixedHsv()
     {
-        int hue = 180;
+        double hue = 180;
         double saturation = 0.5, value = 0.5;
         (double red, double green, double blue) = HsvHelpers.ConvertHsvToRgb(hue, saturation, value);
         Assert.That(red, Is.EqualTo(0.25).Within(0.01));

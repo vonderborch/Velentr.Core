@@ -121,9 +121,9 @@ public static class HsvHelpers
     {
         ConvertHsvToRgb(hue, saturation, value, out double r, out double g, out double b);
 
-        red = Maths<byte>.PercentageToByte(r);
-        green = Maths<byte>.PercentageToByte(g);
-        blue = Maths<byte>.PercentageToByte(b);
+        red = FloatingMaths<double>.PercentageToByte(r);
+        green = FloatingMaths<double>.PercentageToByte(g);
+        blue = FloatingMaths<double>.PercentageToByte(b);
     }
     
     /// <summary>

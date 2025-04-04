@@ -88,20 +88,20 @@ public class TestValidations
     public void TestValidateRange_BelowRange()
     {
         var ex = Assert.Throws<ArgumentOutOfRangeException>(() => Validations.ValidateRange(0, "testParam", 1, 10));
-        Assert.That(ex.Message, Is.EqualTo("The parameter [testParam] is out of the range (min: 1, max:10)! (Parameter 'testParam')"));
+        Assert.That(ex.Message, Is.EqualTo("The parameter [testParam] with range `0` is out of the range (min: 1, max:10)! (Parameter 'testParam')"));
     }
 
     [Test]
     public void TestValidateRange_AboveRange()
     {
         var ex = Assert.Throws<ArgumentOutOfRangeException>(() => Validations.ValidateRange(11, "testParam", 1, 10));
-        Assert.That(ex.Message, Is.EqualTo("The parameter [testParam] is out of the range (min: 1, max:10)! (Parameter 'testParam')"));
+        Assert.That(ex.Message, Is.EqualTo("The parameter [testParam] with range `11` is out of the range (min: 1, max:10)! (Parameter 'testParam')"));
     }
 
     [Test]
     public void TestValidateRange_MinValueGreaterThanMaxValue()
     {
         var ex = Assert.Throws<ArgumentOutOfRangeException>(() => Validations.ValidateRange(5, "testParam", 10, 1));
-        Assert.That(ex.Message, Is.EqualTo("The parameter [testParam] is out of the range (min: 10, max:1)! (Parameter 'testParam')"));
+        Assert.That(ex.Message, Is.EqualTo("The parameter [testParam] with range `5` is out of the range (min: 10, max:1)! (Parameter 'testParam')"));
     }
 }

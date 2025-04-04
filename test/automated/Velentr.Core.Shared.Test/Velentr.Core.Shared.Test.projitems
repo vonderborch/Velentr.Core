@@ -9,11 +9,10 @@
         <Import_RootNamespace>Velentr.Core.Shared.Test</Import_RootNamespace>
     </PropertyGroup>
     <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Colors\TestColorHelpers.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Colors\TestColorThresholds.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Colors\TestHexHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Colors\TestHslHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Colors\TestHsvHelpers.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Colors\TestTslHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataStructures\TestArrayHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataStructures\TestCollectionEquivalency.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataStructures\TestListQuickSort.cs" />

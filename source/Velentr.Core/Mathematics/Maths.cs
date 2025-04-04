@@ -4,38 +4,6 @@ namespace Velentr.Core.Mathematics;
 
 public static class Maths<T> where T : INumber<T>
 {
-    public static bool ApproximatelyEqual(double a, double b, double maxDifference)
-    {
-        var difference = Math.Abs(a - b);
-        return difference <= maxDifference;
-    }
-
-    public static bool IsNegativeZero(float x, float maxDifference = 0.0001f)
-    {
-        return ApproximatelyEqual(x, 0, maxDifference) && float.IsNegativeInfinity(1f / x);
-    }
-
-    public static bool IsNegativeZero(double x, double maxDifference = 0.0001d)
-    {
-        return ApproximatelyEqual(x, 0, maxDifference) && double.IsNegativeInfinity(1d / x);
-    }
-
-    public static bool ApproximatelyEqual(float a, float b, float maxDifference)
-    {
-        var difference = Math.Abs(a - b);
-        return difference <= maxDifference;
-    }
-
-    public static double ByteToDoublePercentage(byte value)
-    {
-        return value / 255.0d;
-    }
-
-    public static float ByteToFloatPercentage(byte value)
-    {
-        return value / 255.0f;
-    }
-
     public static T CircularClamp(T value, T min, T max)
     {
         var actualValue = value;
@@ -131,37 +99,5 @@ public static class Maths<T> where T : INumber<T>
         var max = Maximum(numbers);
         var delta = max - min;
         return delta;
-    }
-
-    public static byte PercentageToByte(double value)
-    {
-        if (value < 0)
-        {
-            return byte.MinValue;
-        }
-
-        if (value > 1)
-        {
-            return byte.MaxValue;
-        }
-
-        var output = (byte)Math.Round(value * byte.MaxValue);
-        return output;
-    }
-
-    public static byte PercentageToByte(float value)
-    {
-        if (value < 0)
-        {
-            return byte.MinValue;
-        }
-
-        if (value > 1)
-        {
-            return byte.MaxValue;
-        }
-
-        var output = (byte)Math.Round(value * byte.MaxValue);
-        return output;
     }
 }

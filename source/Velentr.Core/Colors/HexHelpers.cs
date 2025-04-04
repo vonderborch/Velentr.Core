@@ -44,9 +44,9 @@ public static class HexHelpers
     public static void ConvertHexToRgb(string hex, out double red, out double green, out double blue)
     {
         ConvertHexToRgb(hex, out var r, out var g, out byte b);
-        red = Maths<double>.ByteToDoublePercentage(r);
-        green = Maths<double>.ByteToDoublePercentage(g);
-        blue = Maths<double>.ByteToDoublePercentage(b);
+        red = FloatingMaths<double>.ByteToPercentage(r);
+        green = FloatingMaths<double>.ByteToPercentage(g);
+        blue = FloatingMaths<double>.ByteToPercentage(b);
     }
 
     /// <summary>
@@ -105,9 +105,9 @@ public static class HexHelpers
     /// <param name="hex">The resulting hexadecimal color string.</param>
     public static void ConvertRgbToHex(double red, double green, double blue, out string hex)
     {
-        var r = Maths<double>.PercentageToByte(red);
-        var g = Maths<double>.PercentageToByte(green);
-        var b = Maths<double>.PercentageToByte(blue);
+        var r = FloatingMaths<double>.PercentageToByte(red);
+        var g = FloatingMaths<double>.PercentageToByte(green);
+        var b = FloatingMaths<double>.PercentageToByte(blue);
         ConvertRgbToHex(r, g, b, out hex);
     }
 
