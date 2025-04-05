@@ -1,7 +1,7 @@
 using Velentr.Core.Mathematics;
 using Velentr.Core.Validation;
 
-namespace Velentr.Helpers.Strings;
+namespace Velentr.Core.Strings;
 
 /// <summary>
 ///     Provides methods for calculating string similarity.

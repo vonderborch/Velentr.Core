@@ -65,7 +65,7 @@ public static class JsonHelpers
             return default;
         }
 
-        var actualOptions = options ?? JsonConstants.JsonSerializeOptions;
+        JsonSerializerOptions? actualOptions = options ?? JsonConstants.JsonSerializeOptions;
 
         try
         {
@@ -108,7 +108,7 @@ public static class JsonHelpers
     /// <returns>The JSON string representation of the object.</returns>
     public static string SerializeToString(object obj, JsonSerializerOptions? options = null)
     {
-        var actualOptions = options ?? JsonConstants.JsonSerializeOptions;
+        JsonSerializerOptions? actualOptions = options ?? JsonConstants.JsonSerializeOptions;
         var contents = JsonSerializer.Serialize(obj, actualOptions);
 
         return contents;

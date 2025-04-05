@@ -1,6 +1,6 @@
 using System;
 using NUnit.Framework;
-using Velentr.Helpers.Strings;
+using Velentr.Core.Strings;
 
 namespace Velentr.Core.Test.Strings;
 

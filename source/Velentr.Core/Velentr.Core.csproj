@@ -39,10 +39,6 @@
         </None>
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Mathematics\Random\" />
-    </ItemGroup>
-
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
         <Exec Command="PowerShell Compress-Archive -Path '$(TargetDir)*' -DestinationPath '$(SolutionDir)release\$(ProjectName).zip' -Force" Condition="'$(ConfigurationName)' == 'Release' and '$(OS)' == 'Windows_NT'"/>
         <Exec Command="pwsh -Command Compress-Archive -Path '$(TargetDir)*' -DestinationPath '$(SolutionDir)release/$(ProjectName).zip' -Force" Condition="'$(ConfigurationName)' == 'Release' and '$(OS)' != 'Windows_NT'"/>

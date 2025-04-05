@@ -19,8 +19,8 @@ public static class CollectionEquivalency
             return false;
         }
 
-        using var enumeratorA = a.GetEnumerator();
-        using var enumeratorB = b.GetEnumerator();
+        using IEnumerator<T>? enumeratorA = a.GetEnumerator();
+        using IEnumerator<T>? enumeratorB = b.GetEnumerator();
 
         while (enumeratorA.MoveNext() && enumeratorB.MoveNext())
         {

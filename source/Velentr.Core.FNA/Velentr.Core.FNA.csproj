@@ -38,8 +38,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\.fna\FNA\FNA.Core.csproj" />
-        <ProjectReference Include="..\Velentr.Core\Velentr.Core.csproj" />
+        <ProjectReference Include="..\..\..\.fna\FNA\FNA.Core.csproj"/>
+        <ProjectReference Include="..\Velentr.Core\Velentr.Core.csproj"/>
     </ItemGroup>
 
     <Import Project="..\Velentr.Core.Shared\Velentr.Core.Shared.projitems" Label="Shared"/>

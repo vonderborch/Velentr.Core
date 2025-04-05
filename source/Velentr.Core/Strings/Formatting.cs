@@ -1,7 +1,8 @@
+using System.Reflection;
 using System.Text;
 using Velentr.Core.Json;
 
-namespace Velentr.Helpers.Strings;
+namespace Velentr.Core.Strings;
 
 /// <summary>
 ///     Provides methods for formatting strings with placeholders and parameters.
@@ -32,14 +33,22 @@ public static class Formatting
     /// <param name="param">The parameter value.</param>
     /// <param name="paramMode">Indicates whether the parameter should be serialized.</param>
     /// <returns>The formatted parameter value.</returns>
-    private static object FormatParameter(object? param, bool paramMode)
+    private static object FormatParameter(object? param, bool? paramMode)
     {
         if (param == null)
         {
             return "";
         }
 
-        return paramMode ? JsonHelpers.SerializeToString(param) : param.ToString() ?? "";
+        switch (paramMode)
+        {
+            case true:
+                return JsonHelpers.SerializeToString(param);
+            case false:
+                return param.ToString() ?? "";
+            default:
+                return param;
+        }
     }
 
     /// <summary>
@@ -61,9 +70,9 @@ public static class Formatting
             parameters = [null];
         }
 
-        var finalParameters = new List<object>();
-        var parameterIndexMap = new Dictionary<string, int>();
-        var outputFormatString = new StringBuilder(value.Length);
+        List<object> finalParameters = new();
+        Dictionary<string, int> parameterIndexMap = new();
+        StringBuilder outputFormatString = new(value.Length);
 
         bool? evenBraces = null;
         var i = 0;
@@ -101,7 +110,10 @@ public static class Formatting
             }
         }
 
-        return string.Format(outputFormatString.ToString(), finalParameters.ToArray());
+        var finalFormatString = outputFormatString.ToString();
+        object?[] finalParametersArray = finalParameters.ToArray();
+        var output = string.Format(finalFormatString, finalParametersArray);
+        return output;
     }
 
     /// <summary>
@@ -113,9 +125,9 @@ public static class Formatting
     /// <param name="paramMode">Indicates whether the parameter should be serialized.</param>
     /// <returns>The value of the parameter.</returns>
     private static object GetParameterValue(string paramKey, object[] parameters, out string baseParamKey,
-        out bool paramMode)
+        out bool? paramMode)
     {
-        paramMode = false;
+        paramMode = null;
         baseParamKey = paramKey;
 
         if (paramKey.StartsWith("@"))
@@ -125,6 +137,7 @@ public static class Formatting
         }
         else if (paramKey.StartsWith("$"))
         {
+            paramMode = false;
             paramKey = paramKey.Substring(1);
         }
 
@@ -140,7 +153,7 @@ public static class Formatting
 
         foreach (var parameter in parameters)
         {
-            var property = parameter.GetType().GetProperty(paramKey);
+            PropertyInfo? property = parameter.GetType().GetProperty(paramKey);
             if (property != null)
             {
                 return property.GetValue(parameter);
@@ -187,5 +200,17 @@ public static class Formatting
         }
 
         return i + 1;
+    }
+
+    /// <summary>
+    ///     Formats a string by replacing placeholders with the provided parameters.
+    ///     Based heavily on the rules of: https://messagetemplates.org/
+    /// </summary>
+    /// <param name="value">The format string containing placeholders.</param>
+    /// <param name="parameters">The parameters to replace the placeholders.</param>
+    /// <returns>The formatted string.</returns>
+    public static string TemplateFormat(this string value, params object?[]? parameters)
+    {
+        return FormatString(value, parameters);
     }
 }

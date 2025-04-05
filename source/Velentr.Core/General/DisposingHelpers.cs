@@ -12,7 +12,7 @@ public static class DisposingHelpers
     /// <param name="obj">The object to dispose.</param>
     public static void DisposeIfPossible<T>(T obj)
     {
-        var disposable = obj as IDisposable;
+        IDisposable? disposable = obj as IDisposable;
         disposable?.Dispose();
     }
 
@@ -23,7 +23,7 @@ public static class DisposingHelpers
     /// <param name="obj">The object to dispose.</param>
     public static void DisposeIfPossible(this object obj)
     {
-        var disposable = obj as IDisposable;
+        IDisposable? disposable = obj as IDisposable;
         disposable?.Dispose();
     }
 }

@@ -36,15 +36,15 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Include="..\..\logo.png">
-        <Pack>True</Pack>
-        <PackagePath></PackagePath>
-        <Link>logo.png</Link>
-      </None>
+        <None Include="..\..\logo.png">
+            <Pack>True</Pack>
+            <PackagePath></PackagePath>
+            <Link>logo.png</Link>
+        </None>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Velentr.Core\Velentr.Core.csproj" />
+        <ProjectReference Include="..\Velentr.Core\Velentr.Core.csproj"/>
     </ItemGroup>
     <Import Project="..\Velentr.Core.Shared\Velentr.Core.Shared.projitems" Label="Shared"/>
 

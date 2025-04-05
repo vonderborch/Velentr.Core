@@ -28,11 +28,26 @@
     <Compile Include="$(MSBuildThisFileDirectory)IO\FileHelpers\TestFileHelpersSafeCopyFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Json\TestJsonHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Bound\TestBounds.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Mathematics\FixedPoint\TestFixedPointConversions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Mathematics\FixedPoint\TestFixedPointPrecision2.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Mathematics\FixedPoint\TestFixedPointPrecision2I.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Mathematics\FixedPoint\TestFixedPointPrecision4.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Mathematics\FixedPoint\TestFixedPointPrecision6.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Mathematics\FixedPoint\TestFixedPointPrecision8.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Geometry\TestAngle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Geometry\TestGeometryMath.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Numerics\TestBoundedNumber.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Numerics\TestCircularBoundedNumber.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Numerics\TestNumericExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Mathematics\TestFloatingMaths.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Mathematics\TestFloatingMathsExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Mathematics\TestMaths.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Mathematics\TestNumericExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PerformanceMetrics\TestResourceMetrics.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PerformanceMetrics\TestTickMetric.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Streams\TestStreamHelpers.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Strings\AsciiTables\TestAsciiTable.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Strings\AsciiTables\TestAsciiTableParameters.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Strings\TestFormatting.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Strings\TestReplacement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Strings\TestSimilarity.cs" />
@@ -40,6 +55,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Threading\TestAtomicOperations.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Threading\TestGuard.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Time\TestTimeHelpers.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UnitConversion\Byte\TestBytes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Validation\TestValidations.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Mathematics\Random\" />
   </ItemGroup>
 </Project>

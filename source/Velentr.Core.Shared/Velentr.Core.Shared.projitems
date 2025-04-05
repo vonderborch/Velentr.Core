@@ -9,7 +9,8 @@
         <Import_RootNamespace>Velentr.Core</Import_RootNamespace>
     </PropertyGroup>
     <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Colors\ColorConvertors.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Time\TimeHelpersExtended.cs" />
-  </ItemGroup>
+        <Compile Include="$(MSBuildThisFileDirectory)Colors\ColorConvertors.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Geometry\AngleExtensions.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Time\TimeHelpersExtended.cs"/>
+    </ItemGroup>
 </Project>

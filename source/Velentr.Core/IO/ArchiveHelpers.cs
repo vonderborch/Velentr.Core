@@ -97,15 +97,15 @@ public static class ArchiveHelpers
             throw new FileNotFoundException($"Archive file '{archivePath}' not found.");
         }
 
-        using (var archive = ZipFile.OpenRead(archivePath))
+        using (ZipArchive archive = ZipFile.OpenRead(archivePath))
         {
-            var entry = archive.GetEntry(fileInArchive);
+            ZipArchiveEntry? entry = archive.GetEntry(fileInArchive);
             if (entry == null)
             {
                 throw new FileNotFoundException($"File '{fileInArchive}' not found in archive '{archivePath}'.");
             }
 
-            using (var reader = new StreamReader(entry.Open(), bufferSize: bufferSize))
+            using (StreamReader reader = new(entry.Open(), bufferSize: bufferSize))
             {
                 return reader.ReadToEnd();
             }

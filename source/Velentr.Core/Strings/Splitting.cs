@@ -1,6 +1,6 @@
 using Velentr.Core.Validation;
 
-namespace Velentr.Helpers.Strings;
+namespace Velentr.Core.Strings;
 
 /// <summary>
 ///     Provides methods for splitting strings by chunk size or new lines.

@@ -13,7 +13,7 @@ public class TestDisposingHelpers
 
         public void Dispose()
         {
-            IsDisposed = true;
+            this.IsDisposed = true;
         }
     }
 

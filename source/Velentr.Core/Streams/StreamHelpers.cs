@@ -20,7 +20,7 @@ public class StreamHelpers
         }
 
         byte[] output;
-        using (var ms = new MemoryStream())
+        using (MemoryStream? ms = new())
         {
             stream.CopyTo(ms);
             output = ms.ToArray();

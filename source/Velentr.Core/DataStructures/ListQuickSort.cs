@@ -34,7 +34,7 @@ public static class ListQuickSort
     /// <returns>The index of the pivot element after partitioning.</returns>
     private static int Partition<T>(List<T> list, int low, int high, Func<T, T, int> compareMethod)
     {
-        var pivot = list[high];
+        T? pivot = list[high];
         var index = low - 1;
         T temp;
 

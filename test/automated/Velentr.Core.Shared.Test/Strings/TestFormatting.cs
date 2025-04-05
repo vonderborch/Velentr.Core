@@ -1,6 +1,6 @@
 using NUnit.Framework;
 using Velentr.Core.Json;
-using Velentr.Helpers.Strings;
+using Velentr.Core.Strings;
 
 namespace Velentr.Core.Test.Strings;
 
@@ -273,6 +273,21 @@ public class FormattingTests
 
         // Act
         var result = Formatting.FormatString(format, longParameter);
+
+        // Assert
+        Assert.That(result, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void FormatString_ShouldHandleFormatting()
+    {
+        // Arrange
+        var format = "Value: {0:F2}, Value2: {value2:F5}, Value: {0:F4}, DateValue: {dateValue:yyyy-MM-dd}";
+        DateTime now = DateTime.Now;
+        var expected = $"Value: 123.46, Value2: 123.45679, Value: 123.4568, DateValue: {now:yyyy-MM-dd}";
+
+        // Act
+        var result = Formatting.FormatString(format, 123.456789, new { value2 = 123.456789 }, 123.456789, new { dateValue = now });
 
         // Assert
         Assert.That(result, Is.EqualTo(expected));

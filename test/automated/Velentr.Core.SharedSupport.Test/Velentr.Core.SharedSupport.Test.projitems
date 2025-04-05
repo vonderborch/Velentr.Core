@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Colors\TestColorConvertors.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Geometry\TestAngleExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Time\TestTimeHelpersExtended.cs" />
   </ItemGroup>
  </Project>

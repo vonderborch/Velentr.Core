@@ -4,12 +4,12 @@ using Velentr.Core.Validation;
 namespace Velentr.Core.Colors;
 
 /// <summary>
-/// Provides helper methods for converting between RGB and HSV color spaces.
+///     Provides helper methods for converting between RGB and HSV color spaces.
 /// </summary>
 public static class HsvHelpers
 {
     /// <summary>
-    /// Converts HSV color values to RGB color values.
+    ///     Converts HSV color values to RGB color values.
     /// </summary>
     /// <param name="hue">The hue component of the color (0-360).</param>
     /// <param name="saturation">The saturation component of the color (0-1).</param>
@@ -23,29 +23,29 @@ public static class HsvHelpers
         Validations.ValidateRange(hue, nameof(hue), 0, 360);
         Validations.ValidateRange(saturation, nameof(saturation), 0, 1);
         Validations.ValidateRange(value, nameof(value), 0, 1);
-        
-        double actualHue = Maths<double>.CircularClamp(hue, 0, 360);
-        double actualSaturation = Maths<double>.Clamp(saturation, 0, 1);
-        double actualValue = Maths<double>.Clamp(value, 0, 1);
+
+        var actualHue = Maths<double>.CircularClamp(hue, 0, 360);
+        var actualSaturation = Maths<double>.Clamp(saturation, 0, 1);
+        var actualValue = Maths<double>.Clamp(value, 0, 1);
 
         red = 0;
         green = 0;
         blue = 0;
-        if(actualSaturation == 0)
+        if (actualSaturation == 0)
         {
             red = actualValue;
             green = actualValue;
             blue = actualValue;
         }
-        else if(actualValue > 0)
+        else if (actualValue > 0)
         {
-            double hf = actualHue / 60d;
-            int i = (int)hf;
-            double f = hf - i;
-            double pv = actualValue * (1 - actualSaturation);
-            double qv = actualValue * (1 - actualSaturation * f);
-            double tv = actualValue * (1 - actualSaturation * (1 - f));
-            switch(i)
+            var hf = actualHue / 60d;
+            var i = (int)hf;
+            var f = hf - i;
+            var pv = actualValue * (1 - actualSaturation);
+            var qv = actualValue * (1 - actualSaturation * f);
+            var tv = actualValue * (1 - actualSaturation * (1 - f));
+            switch (i)
             {
                 // Red is dominant
                 case 0:
@@ -109,7 +109,7 @@ public static class HsvHelpers
     }
 
     /// <summary>
-    /// Converts HSV color values to RGB color values.
+    ///     Converts HSV color values to RGB color values.
     /// </summary>
     /// <param name="hue">The hue component of the color (0-360).</param>
     /// <param name="saturation">The saturation component of the color (0-1).</param>
@@ -117,17 +117,18 @@ public static class HsvHelpers
     /// <param name="red">The red component of the color (0-255).</param>
     /// <param name="green">The green component of the color (0-255).</param>
     /// <param name="blue">The blue component of the color (0-255).</param>
-    public static void ConvertHsvToRgb(double hue, double saturation, double value, out byte red, out byte green, out byte blue)
+    public static void ConvertHsvToRgb(double hue, double saturation, double value, out byte red, out byte green,
+        out byte blue)
     {
-        ConvertHsvToRgb(hue, saturation, value, out double r, out double g, out double b);
+        ConvertHsvToRgb(hue, saturation, value, out var r, out var g, out double b);
 
         red = FloatingMaths<double>.PercentageToByte(r);
         green = FloatingMaths<double>.PercentageToByte(g);
         blue = FloatingMaths<double>.PercentageToByte(b);
     }
-    
+
     /// <summary>
-    /// Converts HSV color values to RGB color values and returns them as a tuple.
+    ///     Converts HSV color values to RGB color values and returns them as a tuple.
     /// </summary>
     /// <param name="hue">The hue component of the color (0-360).</param>
     /// <param name="saturation">The saturation component of the color (0-1).</param>
@@ -135,12 +136,12 @@ public static class HsvHelpers
     /// <returns>A tuple containing the red, green, and blue components of the color (0-1).</returns>
     public static (double red, double green, double blue) ConvertHsvToRgb(double hue, double saturation, double value)
     {
-        ConvertHsvToRgb(hue, saturation, value, out double red, out double green, out double blue);
+        ConvertHsvToRgb(hue, saturation, value, out var red, out var green, out double blue);
         return (red, green, blue);
     }
-    
+
     /// <summary>
-    /// Converts HSV color values to RGB color values and returns them as a tuple of bytes.
+    ///     Converts HSV color values to RGB color values and returns them as a tuple of bytes.
     /// </summary>
     /// <param name="hue">The hue component of the color (0-360).</param>
     /// <param name="saturation">The saturation component of the color (0-1).</param>
@@ -148,21 +149,21 @@ public static class HsvHelpers
     /// <returns>A tuple containing the red, green, and blue components of the color (0-255).</returns>
     public static (byte red, byte green, byte blue) ConvertHsvToRgbBytes(double hue, double saturation, double value)
     {
-        ConvertHsvToRgb(hue, saturation, value, out byte red, out byte green, out byte blue);
+        ConvertHsvToRgb(hue, saturation, value, out var red, out var green, out byte blue);
         return (red, green, blue);
     }
 
     public static void ConvertRgbToHsv(byte red, byte green, byte blue, out double hue, out double saturation,
         out double value)
     {
-        double r = red / 255d;
-        double g = green / 255d;
-        double b = blue / 255d;
+        var r = red / 255d;
+        var g = green / 255d;
+        var b = blue / 255d;
         ConvertRgbToHsv(r, g, b, out hue, out saturation, out value);
     }
-    
+
     /// <summary>
-    /// Converts RGB color values to HSV color values.
+    ///     Converts RGB color values to HSV color values.
     /// </summary>
     /// <param name="red">The red component of the color (0-255).</param>
     /// <param name="green">The green component of the color (0-255).</param>
@@ -173,9 +174,9 @@ public static class HsvHelpers
     public static void ConvertRgbToHsv(double red, double green, double blue, out double hue, out double saturation,
         out double value)
     {
-        double min = Maths<double>.Minimum(red, green, blue);
-        double max = Maths<double>.Maximum(red, green, blue);
-        double delta = max - min;
+        var min = Maths<double>.Minimum(red, green, blue);
+        var max = Maths<double>.Maximum(red, green, blue);
+        var delta = max - min;
         value = max;
 
         double h = 0;
@@ -216,9 +217,9 @@ public static class HsvHelpers
             hue = h;
         }
     }
-    
+
     /// <summary>
-    /// Converts RGB color values to HSV color values.
+    ///     Converts RGB color values to HSV color values.
     /// </summary>
     /// <param name="red">The red component of the color (0-1).</param>
     /// <param name="green">The green component of the color (0-1).</param>
@@ -228,12 +229,12 @@ public static class HsvHelpers
     /// <param name="value">The value component of the color (0-1).</param>
     public static (double hue, double saturation, double value) ConvertRgbToHsv(double red, double green, double blue)
     {
-        ConvertRgbToHsv(red, green, blue, out double hue, out double saturation, out double value);
+        ConvertRgbToHsv(red, green, blue, out var hue, out var saturation, out var value);
         return (hue, saturation, value);
     }
-    
+
     /// <summary>
-    /// Converts RGB color values to HSV color values and returns them as a tuple.
+    ///     Converts RGB color values to HSV color values and returns them as a tuple.
     /// </summary>
     /// <param name="red">The red component of the color (0-1).</param>
     /// <param name="green">The green component of the color (0-1).</param>
@@ -241,7 +242,7 @@ public static class HsvHelpers
     /// <returns>A tuple containing the hue, saturation, and value components of the color (0-360, 0-1, 0-1).</returns>
     public static (double hue, double saturation, double value) ConvertRgbToHsv(byte red, byte green, byte blue)
     {
-        ConvertRgbToHsv(red, green, blue, out double hue, out double saturation, out double value);
+        ConvertRgbToHsv(red, green, blue, out var hue, out var saturation, out var value);
         return (hue, saturation, value);
     }
 }

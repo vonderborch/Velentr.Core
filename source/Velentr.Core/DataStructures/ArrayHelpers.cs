@@ -20,7 +20,7 @@ public static class ArrayHelpers
             throw new ArgumentException("The provided dimensions do not match the length of the 1D array.");
         }
 
-        var array = new T[width, height];
+        T[,]? array = new T[width, height];
         Buffer.BlockCopy(baseArray, 0, array, 0, Buffer.ByteLength(baseArray));
         return array;
     }
@@ -39,7 +39,7 @@ public static class ArrayHelpers
             throw new ArgumentException("The provided dimensions do not match the actual dimensions of the 2D array.");
         }
 
-        var array = new T[width * height];
+        T[] array = new T[width * height];
         Buffer.BlockCopy(baseArray, 0, array, 0, Buffer.ByteLength(baseArray));
         return array;
     }

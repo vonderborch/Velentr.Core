@@ -1,6 +1,6 @@
 using Velentr.Core.Mathematics;
+using Velentr.Core.Strings;
 using Velentr.Core.Validation;
-using Velentr.Helpers.Strings;
 
 namespace Velentr.Core.Colors;
 
@@ -23,7 +23,7 @@ public static class HexHelpers
         Validations.NotNullOrEmptyCheck(hex, nameof(hex));
         var cleanedHexCode = hex.ReplaceAny(string.Empty, HexReplacements);
         Validations.ValidateRange(cleanedHexCode.Length, nameof(hex), 6, 6);
-        
+
         var hexColor = Convert.ToInt32(cleanedHexCode, 16);
         var r = (hexColor >> 16) & 0xFF;
         var g = (hexColor >> 8) & 0xFF;
