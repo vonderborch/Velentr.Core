@@ -18,202 +18,202 @@ namespace Velentr.Core.Mathematics.FixedPoint;
 public static class FixedPointConversions
 {
     /// <summary>
-    /// Converts a FixedPointPrecision2I value to a FixedPointPrecision2 value.
+    /// Converts a FP2I value to a FixedPointPrecision2 value.
     /// </summary>
-    /// <param name="value">The FixedPointPrecision2I value to convert.</param>
+    /// <param name="value">The FP2I value to convert.</param>
     /// <returns>A FixedPointPrecision2 value.</returns>
-    public static FixedPointPrecision2 ToFixedPointPrecision2(this FixedPointPrecision2I value)
+    public static FP2 ToFixedPointPrecision2(this FP2I value)
     {
-        return FixedPointPrecision2.CreateFromDouble(value.ToDouble());
+        return FP2.CreateFromDouble(value.ToDouble());
     }
 
     /// <summary>
-    /// Converts a FixedPointPrecision4 value to a FixedPointPrecision2 value.
+    /// Converts a FP4 value to a FixedPointPrecision2 value.
     /// </summary>
-    /// <param name="value">The FixedPointPrecision4 value to convert.</param>
+    /// <param name="value">The FP4 value to convert.</param>
     /// <returns>A FixedPointPrecision2 value.</returns>
-    public static FixedPointPrecision2 ToFixedPointPrecision2(this FixedPointPrecision4 value)
+    public static FP2 ToFixedPointPrecision2(this FP4 value)
     {
-        return FixedPointPrecision2.CreateFromDouble(value.ToDouble());
+        return FP2.CreateFromDouble(value.ToDouble());
     }
 
     /// <summary>
-    /// Converts a FixedPointPrecision6 value to a FixedPointPrecision2 value.
+    /// Converts a FP6 value to a FixedPointPrecision2 value.
     /// </summary>
-    /// <param name="value">The FixedPointPrecision6 value to convert.</param>
+    /// <param name="value">The FP6 value to convert.</param>
     /// <returns>A FixedPointPrecision2 value.</returns>
-    public static FixedPointPrecision2 ToFixedPointPrecision2(this FixedPointPrecision6 value)
+    public static FP2 ToFixedPointPrecision2(this FP6 value)
     {
-        return FixedPointPrecision2.CreateFromDouble(value.ToDouble());
+        return FP2.CreateFromDouble(value.ToDouble());
     }
 
     /// <summary>
-    /// Converts a FixedPointPrecision8 value to a FixedPointPrecision2 value.
+    /// Converts a FP8 value to a FixedPointPrecision2 value.
     /// </summary>
-    /// <param name="value">The FixedPointPrecision8 value to convert.</param>
+    /// <param name="value">The FP8 value to convert.</param>
     /// <returns>A FixedPointPrecision2 value.</returns>
-    public static FixedPointPrecision2 ToFixedPointPrecision2(this FixedPointPrecision8 value)
+    public static FP2 ToFixedPointPrecision2(this FP8 value)
     {
-        return FixedPointPrecision2.CreateFromDouble(value.ToDouble());
+        return FP2.CreateFromDouble(value.ToDouble());
     }
 
     /// <summary>
-    /// Converts a FixedPointPrecision2 value to a FixedPointPrecision2I value.
+    /// Converts a FixedPointPrecision2 value to a FP2I value.
     /// </summary>
     /// <param name="value">The FixedPointPrecision2 value to convert.</param>
-    /// <returns>A FixedPointPrecision2I value.</returns>
-    public static FixedPointPrecision2I ToFixedPointPrecision2I(this FixedPointPrecision2 value)
+    /// <returns>A FP2I value.</returns>
+    public static FP2I ToFixedPointPrecision2I(this FP2 value)
     {
-        return FixedPointPrecision2I.CreateFromDouble(value.ToDouble());
+        return FP2I.CreateFromDouble(value.ToDouble());
     }
 
     /// <summary>
-    /// Converts a FixedPointPrecision4 value to a FixedPointPrecision2I value.
+    /// Converts a FP4 value to a FP2I value.
     /// </summary>
-    /// <param name="value">The FixedPointPrecision4 value to convert.</param>
-    /// <returns>A FixedPointPrecision2I value.</returns>
-    public static FixedPointPrecision2I ToFixedPointPrecision2I(this FixedPointPrecision4 value)
+    /// <param name="value">The FP4 value to convert.</param>
+    /// <returns>A FP2I value.</returns>
+    public static FP2I ToFixedPointPrecision2I(this FP4 value)
     {
-        return FixedPointPrecision2I.CreateFromDouble(value.ToDouble());
+        return FP2I.CreateFromDouble(value.ToDouble());
     }
 
     /// <summary>
-    /// Converts a FixedPointPrecision6 value to a FixedPointPrecision2I value.
+    /// Converts a FP6 value to a FP2I value.
     /// </summary>
-    /// <param name="value">The FixedPointPrecision6 value to convert.</param>
-    /// <returns>A FixedPointPrecision2I value.</returns>
-    public static FixedPointPrecision2I ToFixedPointPrecision2I(this FixedPointPrecision6 value)
+    /// <param name="value">The FP6 value to convert.</param>
+    /// <returns>A FP2I value.</returns>
+    public static FP2I ToFixedPointPrecision2I(this FP6 value)
     {
-        return FixedPointPrecision2I.CreateFromDouble(value.ToDouble());
+        return FP2I.CreateFromDouble(value.ToDouble());
     }
 
     /// <summary>
-    /// Converts a FixedPointPrecision8 value to a FixedPointPrecision2I value.
+    /// Converts a FP8 value to a FP2I value.
     /// </summary>
-    /// <param name="value">The FixedPointPrecision8 value to convert.</param>
-    /// <returns>A FixedPointPrecision2I value.</returns>
-    public static FixedPointPrecision2I ToFixedPointPrecision2I(this FixedPointPrecision8 value)
+    /// <param name="value">The FP8 value to convert.</param>
+    /// <returns>A FP2I value.</returns>
+    public static FP2I ToFixedPointPrecision2I(this FP8 value)
     {
-        return FixedPointPrecision2I.CreateFromDouble(value.ToDouble());
+        return FP2I.CreateFromDouble(value.ToDouble());
     }
 
     /// <summary>
-    /// Converts a FixedPointPrecision2 value to a FixedPointPrecision4 value.
-    /// </summary>
-    /// <param name="value">The FixedPointPrecision2 value to convert.</param>
-    /// <returns>A FixedPointPrecision4 value.</returns>
-    public static FixedPointPrecision4 ToFixedPointPrecision4(this FixedPointPrecision2 value)
-    {
-        return FixedPointPrecision4.CreateFromDouble(value.ToDouble());
-    }
-
-    /// <summary>
-    /// Converts a FixedPointPrecision2I value to a FixedPointPrecision4 value.
-    /// </summary>
-    /// <param name="value">The FixedPointPrecision2I value to convert.</param>
-    /// <returns>A FixedPointPrecision4 value.</returns>
-    public static FixedPointPrecision4 ToFixedPointPrecision4(this FixedPointPrecision2I value)
-    {
-        return FixedPointPrecision4.CreateFromDouble(value.ToDouble());
-    }
-
-    /// <summary>
-    /// Converts a FixedPointPrecision6 value to a FixedPointPrecision4 value.
-    /// </summary>
-    /// <param name="value">The FixedPointPrecision6 value to convert.</param>
-    /// <returns>A FixedPointPrecision4 value.</returns>
-    public static FixedPointPrecision4 ToFixedPointPrecision4(this FixedPointPrecision6 value)
-    {
-        return FixedPointPrecision4.CreateFromDouble(value.ToDouble());
-    }
-
-    /// <summary>
-    /// Converts a FixedPointPrecision8 value to a FixedPointPrecision4 value.
-    /// </summary>
-    /// <param name="value">The FixedPointPrecision8 value to convert.</param>
-    /// <returns>A FixedPointPrecision4 value.</returns>
-    public static FixedPointPrecision4 ToFixedPointPrecision4(this FixedPointPrecision8 value)
-    {
-        return FixedPointPrecision4.CreateFromDouble(value.ToDouble());
-    }
-
-    /// <summary>
-    /// Converts a FixedPointPrecision2 value to a FixedPointPrecision6 value.
+    /// Converts a FixedPointPrecision2 value to a FP4 value.
     /// </summary>
     /// <param name="value">The FixedPointPrecision2 value to convert.</param>
-    /// <returns>A FixedPointPrecision6 value.</returns>
-    public static FixedPointPrecision6 ToFixedPointPrecision6(this FixedPointPrecision2 value)
+    /// <returns>A FP4 value.</returns>
+    public static FP4 ToFixedPointPrecision4(this FP2 value)
     {
-        return FixedPointPrecision6.CreateFromDouble(value.ToDouble());
+        return FP4.CreateFromDouble(value.ToDouble());
     }
 
     /// <summary>
-    /// Converts a FixedPointPrecision2I value to a FixedPointPrecision6 value.
+    /// Converts a FP2I value to a FP4 value.
     /// </summary>
-    /// <param name="value">The FixedPointPrecision2I value to convert.</param>
-    /// <returns>A FixedPointPrecision6 value.</returns>
-    public static FixedPointPrecision6 ToFixedPointPrecision6(this FixedPointPrecision2I value)
+    /// <param name="value">The FP2I value to convert.</param>
+    /// <returns>A FP4 value.</returns>
+    public static FP4 ToFixedPointPrecision4(this FP2I value)
     {
-        return FixedPointPrecision6.CreateFromDouble(value.ToDouble());
+        return FP4.CreateFromDouble(value.ToDouble());
     }
 
     /// <summary>
-    /// Converts a FixedPointPrecision4 value to a FixedPointPrecision6 value.
+    /// Converts a FP6 value to a FP4 value.
     /// </summary>
-    /// <param name="value">The FixedPointPrecision4 value to convert.</param>
-    /// <returns>A FixedPointPrecision6 value.</returns>
-    public static FixedPointPrecision6 ToFixedPointPrecision6(this FixedPointPrecision4 value)
+    /// <param name="value">The FP6 value to convert.</param>
+    /// <returns>A FP4 value.</returns>
+    public static FP4 ToFixedPointPrecision4(this FP6 value)
     {
-        return FixedPointPrecision6.CreateFromDouble(value.ToDouble());
+        return FP4.CreateFromDouble(value.ToDouble());
     }
 
     /// <summary>
-    /// Converts a FixedPointPrecision8 value to a FixedPointPrecision6 value.
+    /// Converts a FP8 value to a FP4 value.
     /// </summary>
-    /// <param name="value">The FixedPointPrecision8 value to convert.</param>
-    /// <returns>A FixedPointPrecision6 value.</returns>
-    public static FixedPointPrecision6 ToFixedPointPrecision6(this FixedPointPrecision8 value)
+    /// <param name="value">The FP8 value to convert.</param>
+    /// <returns>A FP4 value.</returns>
+    public static FP4 ToFixedPointPrecision4(this FP8 value)
     {
-        return FixedPointPrecision6.CreateFromDouble(value.ToDouble());
+        return FP4.CreateFromDouble(value.ToDouble());
     }
 
     /// <summary>
-    /// Converts a FixedPointPrecision2 value to a FixedPointPrecision8 value.
+    /// Converts a FixedPointPrecision2 value to a FP6 value.
     /// </summary>
     /// <param name="value">The FixedPointPrecision2 value to convert.</param>
-    /// <returns>A FixedPointPrecision8 value.</returns>
-    public static FixedPointPrecision8 ToFixedPointPrecision8(this FixedPointPrecision2 value)
+    /// <returns>A FP6 value.</returns>
+    public static FP6 ToFixedPointPrecision6(this FP2 value)
     {
-        return FixedPointPrecision8.CreateFromDouble(value.ToDouble());
+        return FP6.CreateFromDouble(value.ToDouble());
     }
 
     /// <summary>
-    /// Converts a FixedPointPrecision2I value to a FixedPointPrecision8 value.
+    /// Converts a FP2I value to a FP6 value.
     /// </summary>
-    /// <param name="value">The FixedPointPrecision2I value to convert.</param>
-    /// <returns>A FixedPointPrecision8 value.</returns>
-    public static FixedPointPrecision8 ToFixedPointPrecision8(this FixedPointPrecision2I value)
+    /// <param name="value">The FP2I value to convert.</param>
+    /// <returns>A FP6 value.</returns>
+    public static FP6 ToFixedPointPrecision6(this FP2I value)
     {
-        return FixedPointPrecision8.CreateFromDouble(value.ToDouble());
+        return FP6.CreateFromDouble(value.ToDouble());
     }
 
     /// <summary>
-    /// Converts a FixedPointPrecision4 value to a FixedPointPrecision8 value.
+    /// Converts a FP4 value to a FP6 value.
     /// </summary>
-    /// <param name="value">The FixedPointPrecision4 value to convert.</param>
-    /// <returns>A FixedPointPrecision8 value.</returns>
-    public static FixedPointPrecision8 ToFixedPointPrecision8(this FixedPointPrecision4 value)
+    /// <param name="value">The FP4 value to convert.</param>
+    /// <returns>A FP6 value.</returns>
+    public static FP6 ToFixedPointPrecision6(this FP4 value)
     {
-        return FixedPointPrecision8.CreateFromDouble(value.ToDouble());
+        return FP6.CreateFromDouble(value.ToDouble());
     }
 
     /// <summary>
-    /// Converts a FixedPointPrecision6 value to a FixedPointPrecision8 value.
+    /// Converts a FP8 value to a FP6 value.
     /// </summary>
-    /// <param name="value">The FixedPointPrecision6 value to convert.</param>
-    /// <returns>A FixedPointPrecision8 value.</returns>
-    public static FixedPointPrecision8 ToFixedPointPrecision8(this FixedPointPrecision6 value)
+    /// <param name="value">The FP8 value to convert.</param>
+    /// <returns>A FP6 value.</returns>
+    public static FP6 ToFixedPointPrecision6(this FP8 value)
     {
-        return FixedPointPrecision8.CreateFromDouble(value.ToDouble());
+        return FP6.CreateFromDouble(value.ToDouble());
+    }
+
+    /// <summary>
+    /// Converts a FixedPointPrecision2 value to a FP8 value.
+    /// </summary>
+    /// <param name="value">The FixedPointPrecision2 value to convert.</param>
+    /// <returns>A FP8 value.</returns>
+    public static FP8 ToFixedPointPrecision8(this FP2 value)
+    {
+        return FP8.CreateFromDouble(value.ToDouble());
+    }
+
+    /// <summary>
+    /// Converts a FP2I value to a FP8 value.
+    /// </summary>
+    /// <param name="value">The FP2I value to convert.</param>
+    /// <returns>A FP8 value.</returns>
+    public static FP8 ToFixedPointPrecision8(this FP2I value)
+    {
+        return FP8.CreateFromDouble(value.ToDouble());
+    }
+
+    /// <summary>
+    /// Converts a FP4 value to a FP8 value.
+    /// </summary>
+    /// <param name="value">The FP4 value to convert.</param>
+    /// <returns>A FP8 value.</returns>
+    public static FP8 ToFixedPointPrecision8(this FP4 value)
+    {
+        return FP8.CreateFromDouble(value.ToDouble());
+    }
+
+    /// <summary>
+    /// Converts a FP6 value to a FP8 value.
+    /// </summary>
+    /// <param name="value">The FP6 value to convert.</param>
+    /// <returns>A FP8 value.</returns>
+    public static FP8 ToFixedPointPrecision8(this FP6 value)
+    {
+        return FP8.CreateFromDouble(value.ToDouble());
     }
 }

@@ -7,17 +7,18 @@ namespace Velentr.Core.Mathematics.FixedPoint;
 /// <summary>
 ///     Represents a fixed-point number with 4 decimal places of precision.
 /// </summary>
-public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFixedPoint<long>
+// ReSharper disable once InconsistentNaming
+public struct FP4 : IFixedPoint<FP4>, IBaseFixedPoint<long>
 {
     /// <summary>
     ///     Gets the precision of the fixed-point number.
     /// </summary>
-    public static ushort Precision => 2;
+    public static ushort Precision => 4;
     
     /// <summary>
     ///     Gets the shift value used for fixed-point calculations.
     /// </summary>
-    public static ushort Shift => 7;
+    public static ushort Shift => 14;
     
     /// <summary>
     ///     Gets the format string used for converting the fixed-point number to a string.
@@ -32,32 +33,32 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     /// <summary>
     /// Represents the maximum value of the fixed-point number.
     /// </summary>
-    public static FixedPointPrecision2 MaxValue { get; } = new() { RawValue = long.MaxValue };
+    public static FP4 MaxValue { get; } = new() { RawValue = long.MaxValue };
     
     /// <summary>
     /// Represents the minimum value of the fixed-point number.
     /// </summary>
-    public static FixedPointPrecision2 MinValue { get; } = new() { RawValue = long.MinValue };
+    public static FP4 MinValue { get; } = new() { RawValue = long.MinValue };
     
     /// <summary>
     ///     Represents the fixed-point number zero.
     /// </summary>
-    public static FixedPointPrecision2 Zero { get; } = new() { RawValue = 0 };
+    public static FP4 Zero { get; } = new() { RawValue = 0 };
     
     /// <summary>
     ///     Represents the fixed-point number one.
     /// </summary>
-    public static FixedPointPrecision2 One { get; } = new() { RawValue = 1 << Shift };
+    public static FP4 One { get; } = new() { RawValue = 1 << Shift };
     
     /// <summary>
     ///     Gets the additive identity for the fixed-point number.
     /// </summary>
-    public static FixedPointPrecision2 AdditiveIdentity => Zero;
+    public static FP4 AdditiveIdentity => Zero;
     
     /// <summary>
     ///     Gets the multiplicative identity for the fixed-point number.
     /// </summary>
-    public static FixedPointPrecision2 MultiplicativeIdentity => One;
+    public static FP4 MultiplicativeIdentity => One;
     
     /// <summary>
     ///     Gets the radix (base) of the fixed-point number.
@@ -69,12 +70,12 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     /// </summary>
     public long RawValue { get; set; }
 
-    private FixedPointPrecision2(long rawValue)
+    private FP4(long rawValue)
     {
         this.RawValue = rawValue;
     }
 
-    private FixedPointPrecision2(int value)
+    private FP4(int value)
     {
         this.RawValue = value * BaseOne;
     }
@@ -84,9 +85,9 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     /// </summary>
     /// <param name="value">The double value to convert.</param>
     /// <returns>A fixed-point number representing the double value.</returns>
-    public static FixedPointPrecision2 CreateFromDouble(double value)
+    public static FP4 CreateFromDouble(double value)
     {
-        return new FixedPointPrecision2 { RawValue = (long)Math.Round(value * BaseOne) };
+        return new FP4 { RawValue = (long)Math.Round(value * BaseOne) };
     }
 
     /// <summary>
@@ -94,9 +95,9 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     /// </summary>
     /// <param name="value">The float value to convert.</param>
     /// <returns>A fixed-point number representing the float value.</returns>
-    public static FixedPointPrecision2 CreateFromFloat(float value)
+    public static FP4 CreateFromFloat(float value)
     {
-        return new FixedPointPrecision2 { RawValue = (long)(value * BaseOne) };
+        return new FP4 { RawValue = (long)(value * BaseOne) };
     }
 
     /// <summary>
@@ -120,7 +121,7 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     // Comparison methods
     public int CompareTo(object? obj)
     {
-        if (obj is FixedPointPrecision2 other)
+        if (obj is FP4 other)
         {
             return CompareTo(other);
         }
@@ -128,24 +129,24 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
         throw new ArgumentException("Object is not an FPL4");
     }
 
-    public int CompareTo(FixedPointPrecision2 other)
+    public int CompareTo(FP4 other)
     {
         return this.RawValue.CompareTo(other.RawValue);
     }
 
-    public bool Equals(FixedPointPrecision2 other)
+    public bool Equals(FP4 other)
     {
         return this.RawValue == other.RawValue;
     }
 
     public override bool Equals(object? obj)
     {
-        return obj is FixedPointPrecision2 other && Equals(other);
+        return obj is FP4 other && Equals(other);
     }
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(nameof(FixedPointPrecision2), this.RawValue);
+        return HashCode.Combine(nameof(FP4), this.RawValue);
     }
 
     // Formatting
@@ -174,16 +175,16 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
         return true;
     }
     
-    public static FixedPointPrecision2 Parse(string s, IFormatProvider? provider)
+    public static FP4 Parse(string s, IFormatProvider? provider)
     {
-        return (FixedPointPrecision2)CreateFromDouble(double.Parse(s, provider));
+        return (FP4)CreateFromDouble(double.Parse(s, provider));
     }
 
-    public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out FixedPointPrecision2 result)
+    public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out FP4 result)
     {
         if (double.TryParse(s, provider, out var value))
         {
-            result = (FixedPointPrecision2)CreateFromDouble(value);
+            result = (FP4)CreateFromDouble(value);
             return true;
         }
 
@@ -191,16 +192,16 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
         return false;
     }
 
-    public static FixedPointPrecision2 Parse(ReadOnlySpan<char> s, IFormatProvider? provider)
+    public static FP4 Parse(ReadOnlySpan<char> s, IFormatProvider? provider)
     {
-        return (FixedPointPrecision2)CreateFromDouble(double.Parse(s, provider));
+        return (FP4)CreateFromDouble(double.Parse(s, provider));
     }
 
-    public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out FixedPointPrecision2 result)
+    public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out FP4 result)
     {
         if (double.TryParse(s, provider, out var value))
         {
-            result = (FixedPointPrecision2)CreateFromDouble(value);
+            result = (FP4)CreateFromDouble(value);
             return true;
         }
 
@@ -208,21 +209,21 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
         return false;
     }
 
-    public static FixedPointPrecision2 Parse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider)
+    public static FP4 Parse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider)
     {
-        return (FixedPointPrecision2)CreateFromDouble(double.Parse(s, style, provider));
+        return (FP4)CreateFromDouble(double.Parse(s, style, provider));
     }
 
-    public static FixedPointPrecision2 Parse(string s, NumberStyles style, IFormatProvider? provider)
+    public static FP4 Parse(string s, NumberStyles style, IFormatProvider? provider)
     {
-        return (FixedPointPrecision2)CreateFromDouble(double.Parse(s, style, provider));
+        return (FP4)CreateFromDouble(double.Parse(s, style, provider));
     }
 
-    public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out FixedPointPrecision2 result)
+    public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out FP4 result)
     {
         if (double.TryParse(s, style, provider, out var value))
         {
-            result = (FixedPointPrecision2)CreateFromDouble(value);
+            result = (FP4)CreateFromDouble(value);
             return true;
         }
 
@@ -231,11 +232,11 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     }
 
     public static bool TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider,
-        out FixedPointPrecision2 result)
+        out FP4 result)
     {
         if (double.TryParse(s, style, provider, out var value))
         {
-            result = (FixedPointPrecision2)CreateFromDouble(value);
+            result = (FP4)CreateFromDouble(value);
             return true;
         }
 
@@ -246,57 +247,57 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     /// <summary>
     ///     Adds two fixed-point numbers.
     /// </summary>
-    public static FixedPointPrecision2 operator +(FixedPointPrecision2 left, FixedPointPrecision2 right)
+    public static FP4 operator +(FP4 left, FP4 right)
     {
-        return new FixedPointPrecision2 { RawValue = left.RawValue + right.RawValue };
+        return new FP4 { RawValue = left.RawValue + right.RawValue };
     }
 
     /// <summary>
     ///     Subtracts the second fixed-point number from the first.
     /// </summary>
-    public static FixedPointPrecision2 operator -(FixedPointPrecision2 left, FixedPointPrecision2 right)
+    public static FP4 operator -(FP4 left, FP4 right)
     {
-        return new FixedPointPrecision2 { RawValue = left.RawValue - right.RawValue };
+        return new FP4 { RawValue = left.RawValue - right.RawValue };
     }
 
     /// <summary>
     ///     Multiplies two fixed-point numbers.
     /// </summary>
-    public static FixedPointPrecision2 operator *(FixedPointPrecision2 left, FixedPointPrecision2 right)
+    public static FP4 operator *(FP4 left, FP4 right)
     {
         // Multiply and then divide by BaseOne (shift right by Shift)
-        return new FixedPointPrecision2 { RawValue = (left.RawValue * right.RawValue) >> Shift };
+        return new FP4 { RawValue = (left.RawValue * right.RawValue) >> Shift };
     }
 
     /// <summary>
     ///     Divides the first fixed-point number by the second.
     /// </summary>
-    public static FixedPointPrecision2 operator /(FixedPointPrecision2 left, FixedPointPrecision2 right)
+    public static FP4 operator /(FP4 left, FP4 right)
     {
         // Shift left first to maintain precision, then divide
-        return new FixedPointPrecision2 { RawValue = (left.RawValue << Shift) / right.RawValue };
+        return new FP4 { RawValue = (left.RawValue << Shift) / right.RawValue };
     }
 
     /// <summary>
     ///     Returns the remainder after dividing the first fixed-point number by the second.
     /// </summary>
-    public static FixedPointPrecision2 operator %(FixedPointPrecision2 left, FixedPointPrecision2 right)
+    public static FP4 operator %(FP4 left, FP4 right)
     {
-        return new FixedPointPrecision2 { RawValue = left.RawValue % right.RawValue };
+        return new FP4 { RawValue = left.RawValue % right.RawValue };
     }
 
     /// <summary>
     ///     Returns the negation of the fixed-point number.
     /// </summary>
-    public static FixedPointPrecision2 operator -(FixedPointPrecision2 value)
+    public static FP4 operator -(FP4 value)
     {
-        return new FixedPointPrecision2 { RawValue = -value.RawValue };
+        return new FP4 { RawValue = -value.RawValue };
     }
 
     /// <summary>
     ///     Returns the fixed-point number unchanged (unary plus).
     /// </summary>
-    public static FixedPointPrecision2 operator +(FixedPointPrecision2 value)
+    public static FP4 operator +(FP4 value)
     {
         return value;
     }
@@ -304,45 +305,45 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     /// <summary>
     ///     Increments the fixed-point number by one.
     /// </summary>
-    public static FixedPointPrecision2 operator ++(FixedPointPrecision2 value)
+    public static FP4 operator ++(FP4 value)
     {
-        return new FixedPointPrecision2 { RawValue = value.RawValue + BaseOne };
+        return new FP4 { RawValue = value.RawValue + BaseOne };
     }
 
     /// <summary>
     ///     Decrements the fixed-point number by one.
     /// </summary>
-    public static FixedPointPrecision2 operator --(FixedPointPrecision2 value)
+    public static FP4 operator --(FP4 value)
     {
-        return new FixedPointPrecision2 { RawValue = value.RawValue - BaseOne };
+        return new FP4 { RawValue = value.RawValue - BaseOne };
     }
     
-    public static bool operator ==(FixedPointPrecision2 left, FixedPointPrecision2 right)
+    public static bool operator ==(FP4 left, FP4 right)
     {
         return left.RawValue == right.RawValue;
     }
 
-    public static bool operator !=(FixedPointPrecision2 left, FixedPointPrecision2 right)
+    public static bool operator !=(FP4 left, FP4 right)
     {
         return left.RawValue != right.RawValue;
     }
 
-    public static bool operator >(FixedPointPrecision2 left, FixedPointPrecision2 right)
+    public static bool operator >(FP4 left, FP4 right)
     {
         return left.RawValue > right.RawValue;
     }
 
-    public static bool operator >=(FixedPointPrecision2 left, FixedPointPrecision2 right)
+    public static bool operator >=(FP4 left, FP4 right)
     {
         return left.RawValue >= right.RawValue;
     }
 
-    public static bool operator <(FixedPointPrecision2 left, FixedPointPrecision2 right)
+    public static bool operator <(FP4 left, FP4 right)
     {
         return left.RawValue < right.RawValue;
     }
 
-    public static bool operator <=(FixedPointPrecision2 left, FixedPointPrecision2 right)
+    public static bool operator <=(FP4 left, FP4 right)
     {
         return left.RawValue <= right.RawValue;
     }
@@ -352,9 +353,9 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number.</param>
     /// <returns>The absolute value of the fixed-point number.</returns>
-    public static FixedPointPrecision2 Abs(FixedPointPrecision2 value)
+    public static FP4 Abs(FP4 value)
     {
-        return new FixedPointPrecision2 { RawValue = Math.Abs(value.RawValue) };
+        return new FP4 { RawValue = Math.Abs(value.RawValue) };
     }
 
     /// <summary>
@@ -362,7 +363,7 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>Always true for this implementation.</returns>
-    public static bool IsCanonical(FixedPointPrecision2 value)
+    public static bool IsCanonical(FP4 value)
     {
         return true; // All values are canonical in this implementation
     }
@@ -372,7 +373,7 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>Always false for this implementation.</returns>
-    public static bool IsComplexNumber(FixedPointPrecision2 value)
+    public static bool IsComplexNumber(FP4 value)
     {
         return false; // Fixed-point numbers are not complex
     }
@@ -382,7 +383,7 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>True if the fixed-point number is an even integer; otherwise, false.</returns>
-    public static bool IsEvenInteger(FixedPointPrecision2 value)
+    public static bool IsEvenInteger(FP4 value)
     {
         // Check if it's an integer and if it's even
         if (value.RawValue % BaseOne != 0)
@@ -398,7 +399,7 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>Always true for this implementation.</returns>
-    public static bool IsFinite(FixedPointPrecision2 value)
+    public static bool IsFinite(FP4 value)
     {
         return true; // Fixed-point numbers are always finite
     }
@@ -408,7 +409,7 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>Always false for this implementation.</returns>
-    public static bool IsImaginaryNumber(FixedPointPrecision2 value)
+    public static bool IsImaginaryNumber(FP4 value)
     {
         return false; // Fixed-point numbers are not imaginary
     }
@@ -418,7 +419,7 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>Always false for this implementation.</returns>
-    public static bool IsInfinity(FixedPointPrecision2 value)
+    public static bool IsInfinity(FP4 value)
     {
         return false; // Fixed-point numbers cannot be infinite
     }
@@ -428,7 +429,7 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>True if the fixed-point number is an integer; otherwise, false.</returns>
-    public static bool IsInteger(FixedPointPrecision2 value)
+    public static bool IsInteger(FP4 value)
     {
         // Check if there's any fractional part
         return value.RawValue % BaseOne == 0;
@@ -439,7 +440,7 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>Always false for this implementation.</returns>
-    public static bool IsNaN(FixedPointPrecision2 value)
+    public static bool IsNaN(FP4 value)
     {
         return false; // Fixed-point numbers cannot be NaN
     }
@@ -449,7 +450,7 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>True if the fixed-point number is negative; otherwise, false.</returns>
-    public static bool IsNegative(FixedPointPrecision2 value)
+    public static bool IsNegative(FP4 value)
     {
         return value.RawValue < 0;
     }
@@ -459,7 +460,7 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>Always false for this implementation.</returns>
-    public static bool IsNegativeInfinity(FixedPointPrecision2 value)
+    public static bool IsNegativeInfinity(FP4 value)
     {
         return false; // Fixed-point numbers cannot be infinite
     }
@@ -469,7 +470,7 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>True if the fixed-point number is not zero; otherwise, false.</returns>
-    public static bool IsNormal(FixedPointPrecision2 value)
+    public static bool IsNormal(FP4 value)
     {
         return value.RawValue != 0; // All non-zero values are normal
     }
@@ -479,7 +480,7 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>True if the fixed-point number is an odd integer; otherwise, false.</returns>
-    public static bool IsOddInteger(FixedPointPrecision2 value)
+    public static bool IsOddInteger(FP4 value)
     {
         // Check if it's an integer and if it's odd
         if (value.RawValue % BaseOne != 0)
@@ -495,7 +496,7 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>True if the fixed-point number is positive; otherwise, false.</returns>
-    public static bool IsPositive(FixedPointPrecision2 value)
+    public static bool IsPositive(FP4 value)
     {
         return value.RawValue > 0;
     }
@@ -505,7 +506,7 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>Always false for this implementation.</returns>
-    public static bool IsPositiveInfinity(FixedPointPrecision2 value)
+    public static bool IsPositiveInfinity(FP4 value)
     {
         return false; // Fixed-point numbers cannot be infinite
     }
@@ -515,7 +516,7 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>Always true for this implementation.</returns>
-    public static bool IsRealNumber(FixedPointPrecision2 value)
+    public static bool IsRealNumber(FP4 value)
     {
         return true; // All fixed-point numbers are real
     }
@@ -525,7 +526,7 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>Always false for this implementation.</returns>
-    public static bool IsSubnormal(FixedPointPrecision2 value)
+    public static bool IsSubnormal(FP4 value)
     {
         return false; // Fixed-point numbers don't have subnormal representation
     }
@@ -535,7 +536,7 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>True if the fixed-point number is zero; otherwise, false.</returns>
-    public static bool IsZero(FixedPointPrecision2 value)
+    public static bool IsZero(FP4 value)
     {
         return value.RawValue == 0;
     }
@@ -546,7 +547,7 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     /// <param name="x">The first fixed-point number.</param>
     /// <param name="y">The second fixed-point number.</param>
     /// <returns>The fixed-point number with the larger magnitude.</returns>
-    public static FixedPointPrecision2 MaxMagnitude(FixedPointPrecision2 x, FixedPointPrecision2 y)
+    public static FP4 MaxMagnitude(FP4 x, FP4 y)
     {
         var absX = Math.Abs(x.RawValue);
         var absY = Math.Abs(y.RawValue);
@@ -559,7 +560,7 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     /// <param name="x">The first fixed-point number.</param>
     /// <param name="y">The second fixed-point number.</param>
     /// <returns>The fixed-point number with the larger magnitude.</returns>
-    public static FixedPointPrecision2 MaxMagnitudeNumber(FixedPointPrecision2 x, FixedPointPrecision2 y)
+    public static FP4 MaxMagnitudeNumber(FP4 x, FP4 y)
     {
         return MaxMagnitude(x, y);
     }
@@ -570,7 +571,7 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     /// <param name="x">The first fixed-point number.</param>
     /// <param name="y">The second fixed-point number.</param>
     /// <returns>The fixed-point number with the smaller magnitude.</returns>
-    public static FixedPointPrecision2 MinMagnitude(FixedPointPrecision2 x, FixedPointPrecision2 y)
+    public static FP4 MinMagnitude(FP4 x, FP4 y)
     {
         var absX = Math.Abs(x.RawValue);
         var absY = Math.Abs(y.RawValue);
@@ -583,69 +584,69 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     /// <param name="x">The first fixed-point number.</param>
     /// <param name="y">The second fixed-point number.</param>
     /// <returns>The fixed-point number with the smaller magnitude.</returns>
-    public static FixedPointPrecision2 MinMagnitudeNumber(FixedPointPrecision2 x, FixedPointPrecision2 y)
+    public static FP4 MinMagnitudeNumber(FP4 x, FP4 y)
     {
         return MinMagnitude(x, y);
     }
 
     // Conversion methods
-    public static bool TryConvertFromChecked<TOther>(TOther value, out FixedPointPrecision2 result) where TOther : INumberBase<TOther>
+    public static bool TryConvertFromChecked<TOther>(TOther value, out FP4 result) where TOther : INumberBase<TOther>
     {
         result = default;
 
         if (typeof(TOther) == typeof(double))
         {
             var doubleValue = (double)(object)value;
-            result = (FixedPointPrecision2)CreateFromDouble(doubleValue);
+            result = (FP4)CreateFromDouble(doubleValue);
             return true;
         }
 
         if (typeof(TOther) == typeof(float))
         {
             var floatValue = (float)(object)value;
-            result = (FixedPointPrecision2)CreateFromFloat(floatValue);
+            result = (FP4)CreateFromFloat(floatValue);
             return true;
         }
 
         if (typeof(TOther) == typeof(decimal))
         {
             var decimalValue = (decimal)(object)value;
-            result = (FixedPointPrecision2)CreateFromDouble((double)decimalValue);
+            result = (FP4)CreateFromDouble((double)decimalValue);
             return true;
         }
 
         if (typeof(TOther) == typeof(int))
         {
             var intValue = (int)(object)value;
-            result = new FixedPointPrecision2(intValue);
+            result = new FP4(intValue);
             return true;
         }
 
         if (typeof(TOther) == typeof(long))
         {
             var longValue = (long)(object)value;
-            result = new FixedPointPrecision2 { RawValue = longValue * BaseOne };
+            result = new FP4 { RawValue = longValue * BaseOne };
             return true;
         }
 
         return false;
     }
 
-    public static bool TryConvertFromSaturating<TOther>(TOther value, out FixedPointPrecision2 result)
+    public static bool TryConvertFromSaturating<TOther>(TOther value, out FP4 result)
         where TOther : INumberBase<TOther>
     {
         // For simplicity, using the same implementation as checked conversion
         return TryConvertFromChecked(value, out result);
     }
 
-    public static bool TryConvertFromTruncating<TOther>(TOther value, out FixedPointPrecision2 result)
+    public static bool TryConvertFromTruncating<TOther>(TOther value, out FP4 result)
         where TOther : INumberBase<TOther>
     {
         // For simplicity, using the same implementation as checked conversion
         return TryConvertFromChecked(value, out result);
     }
 
-    public static bool TryConvertToChecked<TOther>(FixedPointPrecision2 value, [MaybeNullWhen(false)] out TOther result)
+    public static bool TryConvertToChecked<TOther>(FP4 value, [MaybeNullWhen(false)] out TOther result)
         where TOther : INumberBase<TOther>
     {
         result = default;
@@ -688,14 +689,14 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
         return false;
     }
 
-    public static bool TryConvertToSaturating<TOther>(FixedPointPrecision2 value, [MaybeNullWhen(false)] out TOther result)
+    public static bool TryConvertToSaturating<TOther>(FP4 value, [MaybeNullWhen(false)] out TOther result)
         where TOther : INumberBase<TOther>
     {
         // For simplicity, using the same implementation as checked conversion
         return TryConvertToChecked(value, out result);
     }
 
-    public static bool TryConvertToTruncating<TOther>(FixedPointPrecision2 value, [MaybeNullWhen(false)] out TOther result)
+    public static bool TryConvertToTruncating<TOther>(FP4 value, [MaybeNullWhen(false)] out TOther result)
         where TOther : INumberBase<TOther>
     {
         // For simplicity, using the same implementation as checked conversion
@@ -705,55 +706,55 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     /// <summary>
     ///     Converts an integer to a fixed-point number.
     /// </summary>
-    public static implicit operator FixedPointPrecision2(int value)
+    public static implicit operator FP4(int value)
     {
-        return new FixedPointPrecision2(value);
+        return new FP4(value);
     }
     
     /// <summary>
     ///     Converts a short to a fixed-point number.
     /// </summary>
-    public static implicit operator FixedPointPrecision2(short value)
+    public static implicit operator FP4(short value)
     {
-        return new FixedPointPrecision2(value);
+        return new FP4(value);
     }
     
     /// <summary>
     ///     Converts a long to a fixed-point number.
     /// </summary>
-    public static implicit operator FixedPointPrecision2(long value)
+    public static implicit operator FP4(long value)
     {
-        return new FixedPointPrecision2 { RawValue = value * BaseOne };
+        return new FP4 { RawValue = value * BaseOne };
     }
     
     /// <summary>
     ///     Converts a decimal to a fixed-point number.
     /// </summary>
-    public static implicit operator FixedPointPrecision2(decimal value)
+    public static implicit operator FP4(decimal value)
     {
-        return (FixedPointPrecision2)CreateFromDouble((double)value);
+        return (FP4)CreateFromDouble((double)value);
     }
     
     /// <summary>
     ///     Converts a double to a fixed-point number.
     /// </summary>
-    public static implicit operator FixedPointPrecision2(double value)
+    public static implicit operator FP4(double value)
     {
-        return (FixedPointPrecision2)CreateFromDouble(value);
+        return (FP4)CreateFromDouble(value);
     }
     
     /// <summary>
     ///     Converts a float to a fixed-point number.
     /// </summary>
-    public static implicit operator FixedPointPrecision2(float value)
+    public static implicit operator FP4(float value)
     {
-        return (FixedPointPrecision2)CreateFromFloat(value);
+        return (FP4)CreateFromFloat(value);
     }
 
     /// <summary>
     ///     Converts a fixed-point number to a double.
     /// </summary>
-    public static explicit operator double(FixedPointPrecision2 value)
+    public static explicit operator double(FP4 value)
     {
         return value.ToDouble();
     }
@@ -761,7 +762,7 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     /// <summary>
     ///     Converts a fixed-point number to a float.
     /// </summary>
-    public static explicit operator float(FixedPointPrecision2 value)
+    public static explicit operator float(FP4 value)
     {
         return value.ToFloat();
     }
@@ -769,7 +770,7 @@ public struct FixedPointPrecision2 : IFixedPoint<FixedPointPrecision2>, IBaseFix
     /// <summary>
     ///     Converts a fixed-point number to an integer by truncating its fractional part.
     /// </summary>
-    public static explicit operator int(FixedPointPrecision2 value)
+    public static explicit operator int(FP4 value)
     {
         return (int)(value.RawValue / BaseOne);
     }

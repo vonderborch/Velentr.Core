@@ -5,19 +5,20 @@ using System.Numerics;
 namespace Velentr.Core.Mathematics.FixedPoint;
 
 /// <summary>
-///     Represents a fixed-point number with 8 decimal places of precision.
+///     Represents a fixed-point number with 2 decimal places of precision.
 /// </summary>
-public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFixedPoint<long>
+// ReSharper disable once InconsistentNaming
+public struct FP2I : IFixedPoint<FP2I>, IBaseFixedPoint<int>
 {
     /// <summary>
     ///     Gets the precision of the fixed-point number.
     /// </summary>
-    public static ushort Precision => 8;
+    public static ushort Precision => 2;
     
     /// <summary>
     ///     Gets the shift value used for fixed-point calculations.
     /// </summary>
-    public static ushort Shift => 27;
+    public static ushort Shift => 7;
     
     /// <summary>
     ///     Gets the format string used for converting the fixed-point number to a string.
@@ -27,37 +28,37 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     /// <summary>
     ///     Gets the base value representing one in the fixed-point format.
     /// </summary>
-    public static long BaseOne { get; } = 1 << Shift;
+    public static int BaseOne { get; } = 1 << Shift;
     
     /// <summary>
     /// Represents the maximum value of the fixed-point number.
     /// </summary>
-    public static FixedPointPrecision8 MaxValue { get; } = new() { RawValue = long.MaxValue };
+    public static FP2I MaxValue { get; } = new() { RawValue = int.MaxValue };
     
     /// <summary>
     /// Represents the minimum value of the fixed-point number.
     /// </summary>
-    public static FixedPointPrecision8 MinValue { get; } = new() { RawValue = long.MinValue };
+    public static FP2I MinValue { get; } = new() { RawValue = int.MinValue };
     
     /// <summary>
     ///     Represents the fixed-point number zero.
     /// </summary>
-    public static FixedPointPrecision8 Zero { get; } = new() { RawValue = 0 };
+    public static FP2I Zero { get; } = new() { RawValue = 0 };
     
     /// <summary>
     ///     Represents the fixed-point number one.
     /// </summary>
-    public static FixedPointPrecision8 One { get; } = new() { RawValue = 1 << Shift };
+    public static FP2I One { get; } = new() { RawValue = 1 << Shift };
     
     /// <summary>
     ///     Gets the additive identity for the fixed-point number.
     /// </summary>
-    public static FixedPointPrecision8 AdditiveIdentity => Zero;
+    public static FP2I AdditiveIdentity => Zero;
     
     /// <summary>
     ///     Gets the multiplicative identity for the fixed-point number.
     /// </summary>
-    public static FixedPointPrecision8 MultiplicativeIdentity => One;
+    public static FP2I MultiplicativeIdentity => One;
     
     /// <summary>
     ///     Gets the radix (base) of the fixed-point number.
@@ -67,16 +68,11 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     /// <summary>
     ///     Gets or sets the raw value of the fixed-point number.
     /// </summary>
-    public long RawValue { get; set; }
+    public int RawValue { get; set; }
 
-    private FixedPointPrecision8(long rawValue)
+    private FP2I(int rawValue)
     {
         this.RawValue = rawValue;
-    }
-
-    private FixedPointPrecision8(int value)
-    {
-        this.RawValue = value * BaseOne;
     }
     
     /// <summary>
@@ -84,9 +80,9 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     /// </summary>
     /// <param name="value">The double value to convert.</param>
     /// <returns>A fixed-point number representing the double value.</returns>
-    public static FixedPointPrecision8 CreateFromDouble(double value)
+    public static FP2I CreateFromDouble(double value)
     {
-        return new FixedPointPrecision8 { RawValue = (long)Math.Round(value * BaseOne) };
+        return new FP2I { RawValue = (int)Math.Round(value * BaseOne) };
     }
 
     /// <summary>
@@ -94,9 +90,9 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     /// </summary>
     /// <param name="value">The float value to convert.</param>
     /// <returns>A fixed-point number representing the float value.</returns>
-    public static FixedPointPrecision8 CreateFromFloat(float value)
+    public static FP2I CreateFromFloat(float value)
     {
-        return new FixedPointPrecision8 { RawValue = (long)(value * BaseOne) };
+        return new FP2I { RawValue = (int)(value * BaseOne) };
     }
 
     /// <summary>
@@ -120,7 +116,7 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     // Comparison methods
     public int CompareTo(object? obj)
     {
-        if (obj is FixedPointPrecision8 other)
+        if (obj is FP2I other)
         {
             return CompareTo(other);
         }
@@ -128,24 +124,24 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
         throw new ArgumentException("Object is not an FPL4");
     }
 
-    public int CompareTo(FixedPointPrecision8 other)
+    public int CompareTo(FP2I other)
     {
         return this.RawValue.CompareTo(other.RawValue);
     }
 
-    public bool Equals(FixedPointPrecision8 other)
+    public bool Equals(FP2I other)
     {
         return this.RawValue == other.RawValue;
     }
 
     public override bool Equals(object? obj)
     {
-        return obj is FixedPointPrecision8 other && Equals(other);
+        return obj is FP2I other && Equals(other);
     }
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(nameof(FixedPointPrecision8), this.RawValue);
+        return HashCode.Combine(nameof(FP2I), this.RawValue);
     }
 
     // Formatting
@@ -174,16 +170,16 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
         return true;
     }
     
-    public static FixedPointPrecision8 Parse(string s, IFormatProvider? provider)
+    public static FP2I Parse(string s, IFormatProvider? provider)
     {
-        return (FixedPointPrecision8)CreateFromDouble(double.Parse(s, provider));
+        return (FP2I)CreateFromDouble(double.Parse(s, provider));
     }
 
-    public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out FixedPointPrecision8 result)
+    public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out FP2I result)
     {
         if (double.TryParse(s, provider, out var value))
         {
-            result = (FixedPointPrecision8)CreateFromDouble(value);
+            result = (FP2I)CreateFromDouble(value);
             return true;
         }
 
@@ -191,16 +187,16 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
         return false;
     }
 
-    public static FixedPointPrecision8 Parse(ReadOnlySpan<char> s, IFormatProvider? provider)
+    public static FP2I Parse(ReadOnlySpan<char> s, IFormatProvider? provider)
     {
-        return (FixedPointPrecision8)CreateFromDouble(double.Parse(s, provider));
+        return (FP2I)CreateFromDouble(double.Parse(s, provider));
     }
 
-    public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out FixedPointPrecision8 result)
+    public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out FP2I result)
     {
         if (double.TryParse(s, provider, out var value))
         {
-            result = (FixedPointPrecision8)CreateFromDouble(value);
+            result = (FP2I)CreateFromDouble(value);
             return true;
         }
 
@@ -208,21 +204,21 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
         return false;
     }
 
-    public static FixedPointPrecision8 Parse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider)
+    public static FP2I Parse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider)
     {
-        return (FixedPointPrecision8)CreateFromDouble(double.Parse(s, style, provider));
+        return (FP2I)CreateFromDouble(double.Parse(s, style, provider));
     }
 
-    public static FixedPointPrecision8 Parse(string s, NumberStyles style, IFormatProvider? provider)
+    public static FP2I Parse(string s, NumberStyles style, IFormatProvider? provider)
     {
-        return (FixedPointPrecision8)CreateFromDouble(double.Parse(s, style, provider));
+        return (FP2I)CreateFromDouble(double.Parse(s, style, provider));
     }
 
-    public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out FixedPointPrecision8 result)
+    public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out FP2I result)
     {
         if (double.TryParse(s, style, provider, out var value))
         {
-            result = (FixedPointPrecision8)CreateFromDouble(value);
+            result = (FP2I)CreateFromDouble(value);
             return true;
         }
 
@@ -231,11 +227,11 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     }
 
     public static bool TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider,
-        out FixedPointPrecision8 result)
+        out FP2I result)
     {
         if (double.TryParse(s, style, provider, out var value))
         {
-            result = (FixedPointPrecision8)CreateFromDouble(value);
+            result = (FP2I)CreateFromDouble(value);
             return true;
         }
 
@@ -246,57 +242,57 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     /// <summary>
     ///     Adds two fixed-point numbers.
     /// </summary>
-    public static FixedPointPrecision8 operator +(FixedPointPrecision8 left, FixedPointPrecision8 right)
+    public static FP2I operator +(FP2I left, FP2I right)
     {
-        return new FixedPointPrecision8 { RawValue = left.RawValue + right.RawValue };
+        return new FP2I { RawValue = left.RawValue + right.RawValue };
     }
 
     /// <summary>
     ///     Subtracts the second fixed-point number from the first.
     /// </summary>
-    public static FixedPointPrecision8 operator -(FixedPointPrecision8 left, FixedPointPrecision8 right)
+    public static FP2I operator -(FP2I left, FP2I right)
     {
-        return new FixedPointPrecision8 { RawValue = left.RawValue - right.RawValue };
+        return new FP2I { RawValue = left.RawValue - right.RawValue };
     }
 
     /// <summary>
     ///     Multiplies two fixed-point numbers.
     /// </summary>
-    public static FixedPointPrecision8 operator *(FixedPointPrecision8 left, FixedPointPrecision8 right)
+    public static FP2I operator *(FP2I left, FP2I right)
     {
         // Multiply and then divide by BaseOne (shift right by Shift)
-        return new FixedPointPrecision8 { RawValue = (left.RawValue * right.RawValue) >> Shift };
+        return new FP2I { RawValue = (left.RawValue * right.RawValue) >> Shift };
     }
 
     /// <summary>
     ///     Divides the first fixed-point number by the second.
     /// </summary>
-    public static FixedPointPrecision8 operator /(FixedPointPrecision8 left, FixedPointPrecision8 right)
+    public static FP2I operator /(FP2I left, FP2I right)
     {
         // Shift left first to maintain precision, then divide
-        return new FixedPointPrecision8 { RawValue = (left.RawValue << Shift) / right.RawValue };
+        return new FP2I { RawValue = (left.RawValue << Shift) / right.RawValue };
     }
 
     /// <summary>
     ///     Returns the remainder after dividing the first fixed-point number by the second.
     /// </summary>
-    public static FixedPointPrecision8 operator %(FixedPointPrecision8 left, FixedPointPrecision8 right)
+    public static FP2I operator %(FP2I left, FP2I right)
     {
-        return new FixedPointPrecision8 { RawValue = left.RawValue % right.RawValue };
+        return new FP2I { RawValue = left.RawValue % right.RawValue };
     }
 
     /// <summary>
     ///     Returns the negation of the fixed-point number.
     /// </summary>
-    public static FixedPointPrecision8 operator -(FixedPointPrecision8 value)
+    public static FP2I operator -(FP2I value)
     {
-        return new FixedPointPrecision8 { RawValue = -value.RawValue };
+        return new FP2I { RawValue = -value.RawValue };
     }
 
     /// <summary>
     ///     Returns the fixed-point number unchanged (unary plus).
     /// </summary>
-    public static FixedPointPrecision8 operator +(FixedPointPrecision8 value)
+    public static FP2I operator +(FP2I value)
     {
         return value;
     }
@@ -304,45 +300,45 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     /// <summary>
     ///     Increments the fixed-point number by one.
     /// </summary>
-    public static FixedPointPrecision8 operator ++(FixedPointPrecision8 value)
+    public static FP2I operator ++(FP2I value)
     {
-        return new FixedPointPrecision8 { RawValue = value.RawValue + BaseOne };
+        return new FP2I { RawValue = value.RawValue + BaseOne };
     }
 
     /// <summary>
     ///     Decrements the fixed-point number by one.
     /// </summary>
-    public static FixedPointPrecision8 operator --(FixedPointPrecision8 value)
+    public static FP2I operator --(FP2I value)
     {
-        return new FixedPointPrecision8 { RawValue = value.RawValue - BaseOne };
+        return new FP2I { RawValue = value.RawValue - BaseOne };
     }
     
-    public static bool operator ==(FixedPointPrecision8 left, FixedPointPrecision8 right)
+    public static bool operator ==(FP2I left, FP2I right)
     {
         return left.RawValue == right.RawValue;
     }
 
-    public static bool operator !=(FixedPointPrecision8 left, FixedPointPrecision8 right)
+    public static bool operator !=(FP2I left, FP2I right)
     {
         return left.RawValue != right.RawValue;
     }
 
-    public static bool operator >(FixedPointPrecision8 left, FixedPointPrecision8 right)
+    public static bool operator >(FP2I left, FP2I right)
     {
         return left.RawValue > right.RawValue;
     }
 
-    public static bool operator >=(FixedPointPrecision8 left, FixedPointPrecision8 right)
+    public static bool operator >=(FP2I left, FP2I right)
     {
         return left.RawValue >= right.RawValue;
     }
 
-    public static bool operator <(FixedPointPrecision8 left, FixedPointPrecision8 right)
+    public static bool operator <(FP2I left, FP2I right)
     {
         return left.RawValue < right.RawValue;
     }
 
-    public static bool operator <=(FixedPointPrecision8 left, FixedPointPrecision8 right)
+    public static bool operator <=(FP2I left, FP2I right)
     {
         return left.RawValue <= right.RawValue;
     }
@@ -352,9 +348,9 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number.</param>
     /// <returns>The absolute value of the fixed-point number.</returns>
-    public static FixedPointPrecision8 Abs(FixedPointPrecision8 value)
+    public static FP2I Abs(FP2I value)
     {
-        return new FixedPointPrecision8 { RawValue = Math.Abs(value.RawValue) };
+        return new FP2I { RawValue = Math.Abs(value.RawValue) };
     }
 
     /// <summary>
@@ -362,7 +358,7 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>Always true for this implementation.</returns>
-    public static bool IsCanonical(FixedPointPrecision8 value)
+    public static bool IsCanonical(FP2I value)
     {
         return true; // All values are canonical in this implementation
     }
@@ -372,7 +368,7 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>Always false for this implementation.</returns>
-    public static bool IsComplexNumber(FixedPointPrecision8 value)
+    public static bool IsComplexNumber(FP2I value)
     {
         return false; // Fixed-point numbers are not complex
     }
@@ -382,7 +378,7 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>True if the fixed-point number is an even integer; otherwise, false.</returns>
-    public static bool IsEvenInteger(FixedPointPrecision8 value)
+    public static bool IsEvenInteger(FP2I value)
     {
         // Check if it's an integer and if it's even
         if (value.RawValue % BaseOne != 0)
@@ -398,7 +394,7 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>Always true for this implementation.</returns>
-    public static bool IsFinite(FixedPointPrecision8 value)
+    public static bool IsFinite(FP2I value)
     {
         return true; // Fixed-point numbers are always finite
     }
@@ -408,7 +404,7 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>Always false for this implementation.</returns>
-    public static bool IsImaginaryNumber(FixedPointPrecision8 value)
+    public static bool IsImaginaryNumber(FP2I value)
     {
         return false; // Fixed-point numbers are not imaginary
     }
@@ -418,7 +414,7 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>Always false for this implementation.</returns>
-    public static bool IsInfinity(FixedPointPrecision8 value)
+    public static bool IsInfinity(FP2I value)
     {
         return false; // Fixed-point numbers cannot be infinite
     }
@@ -428,7 +424,7 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>True if the fixed-point number is an integer; otherwise, false.</returns>
-    public static bool IsInteger(FixedPointPrecision8 value)
+    public static bool IsInteger(FP2I value)
     {
         // Check if there's any fractional part
         return value.RawValue % BaseOne == 0;
@@ -439,7 +435,7 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>Always false for this implementation.</returns>
-    public static bool IsNaN(FixedPointPrecision8 value)
+    public static bool IsNaN(FP2I value)
     {
         return false; // Fixed-point numbers cannot be NaN
     }
@@ -449,7 +445,7 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>True if the fixed-point number is negative; otherwise, false.</returns>
-    public static bool IsNegative(FixedPointPrecision8 value)
+    public static bool IsNegative(FP2I value)
     {
         return value.RawValue < 0;
     }
@@ -459,7 +455,7 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>Always false for this implementation.</returns>
-    public static bool IsNegativeInfinity(FixedPointPrecision8 value)
+    public static bool IsNegativeInfinity(FP2I value)
     {
         return false; // Fixed-point numbers cannot be infinite
     }
@@ -469,7 +465,7 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>True if the fixed-point number is not zero; otherwise, false.</returns>
-    public static bool IsNormal(FixedPointPrecision8 value)
+    public static bool IsNormal(FP2I value)
     {
         return value.RawValue != 0; // All non-zero values are normal
     }
@@ -479,7 +475,7 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>True if the fixed-point number is an odd integer; otherwise, false.</returns>
-    public static bool IsOddInteger(FixedPointPrecision8 value)
+    public static bool IsOddInteger(FP2I value)
     {
         // Check if it's an integer and if it's odd
         if (value.RawValue % BaseOne != 0)
@@ -495,7 +491,7 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>True if the fixed-point number is positive; otherwise, false.</returns>
-    public static bool IsPositive(FixedPointPrecision8 value)
+    public static bool IsPositive(FP2I value)
     {
         return value.RawValue > 0;
     }
@@ -505,7 +501,7 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>Always false for this implementation.</returns>
-    public static bool IsPositiveInfinity(FixedPointPrecision8 value)
+    public static bool IsPositiveInfinity(FP2I value)
     {
         return false; // Fixed-point numbers cannot be infinite
     }
@@ -515,7 +511,7 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>Always true for this implementation.</returns>
-    public static bool IsRealNumber(FixedPointPrecision8 value)
+    public static bool IsRealNumber(FP2I value)
     {
         return true; // All fixed-point numbers are real
     }
@@ -525,7 +521,7 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>Always false for this implementation.</returns>
-    public static bool IsSubnormal(FixedPointPrecision8 value)
+    public static bool IsSubnormal(FP2I value)
     {
         return false; // Fixed-point numbers don't have subnormal representation
     }
@@ -535,7 +531,7 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     /// </summary>
     /// <param name="value">The fixed-point number to check.</param>
     /// <returns>True if the fixed-point number is zero; otherwise, false.</returns>
-    public static bool IsZero(FixedPointPrecision8 value)
+    public static bool IsZero(FP2I value)
     {
         return value.RawValue == 0;
     }
@@ -546,7 +542,7 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     /// <param name="x">The first fixed-point number.</param>
     /// <param name="y">The second fixed-point number.</param>
     /// <returns>The fixed-point number with the larger magnitude.</returns>
-    public static FixedPointPrecision8 MaxMagnitude(FixedPointPrecision8 x, FixedPointPrecision8 y)
+    public static FP2I MaxMagnitude(FP2I x, FP2I y)
     {
         var absX = Math.Abs(x.RawValue);
         var absY = Math.Abs(y.RawValue);
@@ -559,7 +555,7 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     /// <param name="x">The first fixed-point number.</param>
     /// <param name="y">The second fixed-point number.</param>
     /// <returns>The fixed-point number with the larger magnitude.</returns>
-    public static FixedPointPrecision8 MaxMagnitudeNumber(FixedPointPrecision8 x, FixedPointPrecision8 y)
+    public static FP2I MaxMagnitudeNumber(FP2I x, FP2I y)
     {
         return MaxMagnitude(x, y);
     }
@@ -570,7 +566,7 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     /// <param name="x">The first fixed-point number.</param>
     /// <param name="y">The second fixed-point number.</param>
     /// <returns>The fixed-point number with the smaller magnitude.</returns>
-    public static FixedPointPrecision8 MinMagnitude(FixedPointPrecision8 x, FixedPointPrecision8 y)
+    public static FP2I MinMagnitude(FP2I x, FP2I y)
     {
         var absX = Math.Abs(x.RawValue);
         var absY = Math.Abs(y.RawValue);
@@ -583,69 +579,69 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     /// <param name="x">The first fixed-point number.</param>
     /// <param name="y">The second fixed-point number.</param>
     /// <returns>The fixed-point number with the smaller magnitude.</returns>
-    public static FixedPointPrecision8 MinMagnitudeNumber(FixedPointPrecision8 x, FixedPointPrecision8 y)
+    public static FP2I MinMagnitudeNumber(FP2I x, FP2I y)
     {
         return MinMagnitude(x, y);
     }
 
     // Conversion methods
-    public static bool TryConvertFromChecked<TOther>(TOther value, out FixedPointPrecision8 result) where TOther : INumberBase<TOther>
+    public static bool TryConvertFromChecked<TOther>(TOther value, out FP2I result) where TOther : INumberBase<TOther>
     {
         result = default;
 
         if (typeof(TOther) == typeof(double))
         {
             var doubleValue = (double)(object)value;
-            result = (FixedPointPrecision8)CreateFromDouble(doubleValue);
+            result = (FP2I)CreateFromDouble(doubleValue);
             return true;
         }
 
         if (typeof(TOther) == typeof(float))
         {
             var floatValue = (float)(object)value;
-            result = (FixedPointPrecision8)CreateFromFloat(floatValue);
+            result = (FP2I)CreateFromFloat(floatValue);
             return true;
         }
 
         if (typeof(TOther) == typeof(decimal))
         {
             var decimalValue = (decimal)(object)value;
-            result = (FixedPointPrecision8)CreateFromDouble((double)decimalValue);
+            result = (FP2I)CreateFromDouble((double)decimalValue);
             return true;
         }
 
         if (typeof(TOther) == typeof(int))
         {
             var intValue = (int)(object)value;
-            result = new FixedPointPrecision8(intValue);
+            result = new FP2I(intValue);
             return true;
         }
 
         if (typeof(TOther) == typeof(long))
         {
             var longValue = (long)(object)value;
-            result = new FixedPointPrecision8 { RawValue = longValue * BaseOne };
+            result = new FP2I((int)longValue);
             return true;
         }
 
         return false;
     }
 
-    public static bool TryConvertFromSaturating<TOther>(TOther value, out FixedPointPrecision8 result)
+    public static bool TryConvertFromSaturating<TOther>(TOther value, out FP2I result)
         where TOther : INumberBase<TOther>
     {
         // For simplicity, using the same implementation as checked conversion
         return TryConvertFromChecked(value, out result);
     }
 
-    public static bool TryConvertFromTruncating<TOther>(TOther value, out FixedPointPrecision8 result)
+    public static bool TryConvertFromTruncating<TOther>(TOther value, out FP2I result)
         where TOther : INumberBase<TOther>
     {
         // For simplicity, using the same implementation as checked conversion
         return TryConvertFromChecked(value, out result);
     }
 
-    public static bool TryConvertToChecked<TOther>(FixedPointPrecision8 value, [MaybeNullWhen(false)] out TOther result)
+    public static bool TryConvertToChecked<TOther>(FP2I value, [MaybeNullWhen(false)] out TOther result)
         where TOther : INumberBase<TOther>
     {
         result = default;
@@ -688,14 +684,14 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
         return false;
     }
 
-    public static bool TryConvertToSaturating<TOther>(FixedPointPrecision8 value, [MaybeNullWhen(false)] out TOther result)
+    public static bool TryConvertToSaturating<TOther>(FP2I value, [MaybeNullWhen(false)] out TOther result)
         where TOther : INumberBase<TOther>
     {
         // For simplicity, using the same implementation as checked conversion
         return TryConvertToChecked(value, out result);
     }
 
-    public static bool TryConvertToTruncating<TOther>(FixedPointPrecision8 value, [MaybeNullWhen(false)] out TOther result)
+    public static bool TryConvertToTruncating<TOther>(FP2I value, [MaybeNullWhen(false)] out TOther result)
         where TOther : INumberBase<TOther>
     {
         // For simplicity, using the same implementation as checked conversion
@@ -705,55 +701,55 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     /// <summary>
     ///     Converts an integer to a fixed-point number.
     /// </summary>
-    public static implicit operator FixedPointPrecision8(int value)
+    public static implicit operator FP2I(int value)
     {
-        return new FixedPointPrecision8(value);
+        return new FP2I { RawValue = value * BaseOne };
     }
     
     /// <summary>
     ///     Converts a short to a fixed-point number.
     /// </summary>
-    public static implicit operator FixedPointPrecision8(short value)
+    public static implicit operator FP2I(short value)
     {
-        return new FixedPointPrecision8(value);
+        return new FP2I(value);
     }
     
     /// <summary>
     ///     Converts a long to a fixed-point number.
     /// </summary>
-    public static implicit operator FixedPointPrecision8(long value)
+    public static implicit operator FP2I(long value)
     {
-        return new FixedPointPrecision8 { RawValue = value * BaseOne };
+        return new FP2I { RawValue = (int)value * BaseOne };
     }
     
     /// <summary>
     ///     Converts a decimal to a fixed-point number.
     /// </summary>
-    public static implicit operator FixedPointPrecision8(decimal value)
+    public static implicit operator FP2I(decimal value)
     {
-        return (FixedPointPrecision8)CreateFromDouble((double)value);
+        return (FP2I)CreateFromDouble((double)value);
     }
     
     /// <summary>
     ///     Converts a double to a fixed-point number.
     /// </summary>
-    public static implicit operator FixedPointPrecision8(double value)
+    public static implicit operator FP2I(double value)
     {
-        return (FixedPointPrecision8)CreateFromDouble(value);
+        return (FP2I)CreateFromDouble(value);
     }
     
     /// <summary>
     ///     Converts a float to a fixed-point number.
     /// </summary>
-    public static implicit operator FixedPointPrecision8(float value)
+    public static implicit operator FP2I(float value)
     {
-        return (FixedPointPrecision8)CreateFromFloat(value);
+        return (FP2I)CreateFromFloat(value);
     }
 
     /// <summary>
     ///     Converts a fixed-point number to a double.
     /// </summary>
-    public static explicit operator double(FixedPointPrecision8 value)
+    public static explicit operator double(FP2I value)
     {
         return value.ToDouble();
     }
@@ -761,7 +757,7 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     /// <summary>
     ///     Converts a fixed-point number to a float.
     /// </summary>
-    public static explicit operator float(FixedPointPrecision8 value)
+    public static explicit operator float(FP2I value)
     {
         return value.ToFloat();
     }
@@ -769,7 +765,7 @@ public struct FixedPointPrecision8 : IFixedPoint<FixedPointPrecision8>, IBaseFix
     /// <summary>
     ///     Converts a fixed-point number to an integer by truncating its fractional part.
     /// </summary>
-    public static explicit operator int(FixedPointPrecision8 value)
+    public static explicit operator int(FP2I value)
     {
         return (int)(value.RawValue / BaseOne);
     }

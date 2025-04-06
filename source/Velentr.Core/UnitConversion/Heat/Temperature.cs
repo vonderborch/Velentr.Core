@@ -89,7 +89,7 @@ public struct Temperature
         return new Temperature(b.InScale(b.scale) * a, b.scale);
     }
     
-    public static override bool Equals(object? obj)
+    public override bool Equals(object? obj)
     {
         if (obj is Temperature other)
         {

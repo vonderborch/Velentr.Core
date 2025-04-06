@@ -15,7 +15,7 @@ public class TestFixedPointConversions
     public void ToFixedPointPrecision2_FromFixedPointPrecision2I_ShouldConvertCorrectly(double value)
     {
         // Arrange
-        var fp2i = FixedPointPrecision2I.CreateFromDouble(value);
+        var fp2i = FP2I.CreateFromDouble(value);
             
         // Act
         var result = fp2i.ToFixedPointPrecision2();
@@ -33,7 +33,7 @@ public class TestFixedPointConversions
     public void ToFixedPointPrecision2_FromFixedPointPrecision4_ShouldConvertCorrectly(double value)
     {
         // Arrange
-        var fp4 = FixedPointPrecision4.CreateFromDouble(value);
+        var fp4 = FP4.CreateFromDouble(value);
             
         // Act
         var result = fp4.ToFixedPointPrecision2();
@@ -51,7 +51,7 @@ public class TestFixedPointConversions
     public void ToFixedPointPrecision2_FromFixedPointPrecision6_ShouldConvertCorrectly(double value)
     {
         // Arrange
-        var fp6 = FixedPointPrecision6.CreateFromDouble(value);
+        var fp6 = FP6.CreateFromDouble(value);
             
         // Act
         var result = fp6.ToFixedPointPrecision2();
@@ -69,7 +69,7 @@ public class TestFixedPointConversions
     public void ToFixedPointPrecision2_FromFixedPointPrecision8_ShouldConvertCorrectly(double value)
     {
         // Arrange
-        var fp8 = FixedPointPrecision8.CreateFromDouble(value);
+        var fp8 = FP8.CreateFromDouble(value);
             
         // Act
         var result = fp8.ToFixedPointPrecision2();
@@ -87,7 +87,7 @@ public class TestFixedPointConversions
     public void ToFixedPointPrecision2I_FromFixedPointPrecision2_ShouldConvertCorrectly(double value)
     {
         // Arrange
-        var fp2 = FixedPointPrecision2.CreateFromDouble(value);
+        var fp2 = FP2.CreateFromDouble(value);
             
         // Act
         var result = fp2.ToFixedPointPrecision2I();
@@ -105,7 +105,7 @@ public class TestFixedPointConversions
     public void ToFixedPointPrecision2I_FromFixedPointPrecision4_ShouldConvertCorrectly(double value)
     {
         // Arrange
-        var fp4 = FixedPointPrecision4.CreateFromDouble(value);
+        var fp4 = FP4.CreateFromDouble(value);
             
         // Act
         var result = fp4.ToFixedPointPrecision2I();
@@ -123,7 +123,7 @@ public class TestFixedPointConversions
     public void ToFixedPointPrecision2I_FromFixedPointPrecision6_ShouldConvertCorrectly(double value)
     {
         // Arrange
-        var fp6 = FixedPointPrecision6.CreateFromDouble(value);
+        var fp6 = FP6.CreateFromDouble(value);
             
         // Act
         var result = fp6.ToFixedPointPrecision2I();
@@ -141,7 +141,7 @@ public class TestFixedPointConversions
     public void ToFixedPointPrecision2I_FromFixedPointPrecision8_ShouldConvertCorrectly(double value)
     {
         // Arrange
-        var fp8 = FixedPointPrecision8.CreateFromDouble(value);
+        var fp8 = FP8.CreateFromDouble(value);
             
         // Act
         var result = fp8.ToFixedPointPrecision2I();
@@ -159,7 +159,7 @@ public class TestFixedPointConversions
     public void ToFixedPointPrecision4_FromFixedPointPrecision2_ShouldConvertCorrectly(double value)
     {
         // Arrange
-        var fp2 = FixedPointPrecision2.CreateFromDouble(value);
+        var fp2 = FP2.CreateFromDouble(value);
             
         // Act
         var result = fp2.ToFixedPointPrecision4();
@@ -177,7 +177,7 @@ public class TestFixedPointConversions
     public void ToFixedPointPrecision4_FromFixedPointPrecision2I_ShouldConvertCorrectly(double value)
     {
         // Arrange
-        var fp2i = FixedPointPrecision2I.CreateFromDouble(value);
+        var fp2i = FP2I.CreateFromDouble(value);
             
         // Act
         var result = fp2i.ToFixedPointPrecision4();
@@ -195,7 +195,7 @@ public class TestFixedPointConversions
     public void ToFixedPointPrecision4_FromFixedPointPrecision6_ShouldConvertCorrectly(double value)
     {
         // Arrange
-        var fp6 = FixedPointPrecision6.CreateFromDouble(value);
+        var fp6 = FP6.CreateFromDouble(value);
             
         // Act
         var result = fp6.ToFixedPointPrecision4();
@@ -213,7 +213,7 @@ public class TestFixedPointConversions
     public void ToFixedPointPrecision4_FromFixedPointPrecision8_ShouldConvertCorrectly(double value)
     {
         // Arrange
-        var fp8 = FixedPointPrecision8.CreateFromDouble(value);
+        var fp8 = FP8.CreateFromDouble(value);
             
         // Act
         var result = fp8.ToFixedPointPrecision4();
@@ -231,7 +231,7 @@ public class TestFixedPointConversions
     public void ToFixedPointPrecision6_FromFixedPointPrecision2_ShouldConvertCorrectly(double value)
     {
         // Arrange
-        var fp2 = FixedPointPrecision2.CreateFromDouble(value);
+        var fp2 = FP2.CreateFromDouble(value);
             
         // Act
         var result = fp2.ToFixedPointPrecision6();
@@ -249,7 +249,7 @@ public class TestFixedPointConversions
     public void ToFixedPointPrecision6_FromFixedPointPrecision2I_ShouldConvertCorrectly(double value)
     {
         // Arrange
-        var fp2i = FixedPointPrecision2I.CreateFromDouble(value);
+        var fp2i = FP2I.CreateFromDouble(value);
             
         // Act
         var result = fp2i.ToFixedPointPrecision6();
@@ -267,7 +267,7 @@ public class TestFixedPointConversions
     public void ToFixedPointPrecision6_FromFixedPointPrecision4_ShouldConvertCorrectly(double value)
     {
         // Arrange
-        var fp4 = FixedPointPrecision4.CreateFromDouble(value);
+        var fp4 = FP4.CreateFromDouble(value);
             
         // Act
         var result = fp4.ToFixedPointPrecision6();
@@ -285,7 +285,7 @@ public class TestFixedPointConversions
     public void ToFixedPointPrecision6_FromFixedPointPrecision8_ShouldConvertCorrectly(double value)
     {
         // Arrange
-        var fp8 = FixedPointPrecision8.CreateFromDouble(value);
+        var fp8 = FP8.CreateFromDouble(value);
             
         // Act
         var result = fp8.ToFixedPointPrecision6();
@@ -303,7 +303,7 @@ public class TestFixedPointConversions
     public void ToFixedPointPrecision8_FromFixedPointPrecision2_ShouldConvertCorrectly(double value)
     {
         // Arrange
-        var fp2 = FixedPointPrecision2.CreateFromDouble(value);
+        var fp2 = FP2.CreateFromDouble(value);
             
         // Act
         var result = fp2.ToFixedPointPrecision8();
@@ -321,7 +321,7 @@ public class TestFixedPointConversions
     public void ToFixedPointPrecision8_FromFixedPointPrecision2I_ShouldConvertCorrectly(double value)
     {
         // Arrange
-        var fp2i = FixedPointPrecision2I.CreateFromDouble(value);
+        var fp2i = FP2I.CreateFromDouble(value);
             
         // Act
         var result = fp2i.ToFixedPointPrecision8();
@@ -339,7 +339,7 @@ public class TestFixedPointConversions
     public void ToFixedPointPrecision8_FromFixedPointPrecision4_ShouldConvertCorrectly(double value)
     {
         // Arrange
-        var fp4 = FixedPointPrecision4.CreateFromDouble(value);
+        var fp4 = FP4.CreateFromDouble(value);
             
         // Act
         var result = fp4.ToFixedPointPrecision8();
@@ -357,7 +357,7 @@ public class TestFixedPointConversions
     public void ToFixedPointPrecision8_FromFixedPointPrecision6_ShouldConvertCorrectly(double value)
     {
         // Arrange
-        var fp6 = FixedPointPrecision6.CreateFromDouble(value);
+        var fp6 = FP6.CreateFromDouble(value);
             
         // Act
         var result = fp6.ToFixedPointPrecision8();
@@ -375,7 +375,7 @@ public class TestFixedPointConversions
     public void RoundTrip_FixedPointPrecision2_ThroughAllTypes_ShouldPreserveValue(double value)
     {
         // Arrange
-        var original = FixedPointPrecision2.CreateFromDouble(value);
+        var original = FP2.CreateFromDouble(value);
             
         // Act
         var fp2i = original.ToFixedPointPrecision2I();
@@ -397,12 +397,12 @@ public class TestFixedPointConversions
         const double smallValue = 0.000001;
             
         // Large values
-        var fp2Large = FixedPointPrecision2.CreateFromDouble(largeValue);
+        var fp2Large = FP2.CreateFromDouble(largeValue);
         var fp8Large = fp2Large.ToFixedPointPrecision8();
         Assert.That(fp8Large.ToDouble(), Is.EqualTo(largeValue).Within(0.01));
             
         // Small values
-        var fp8Small = FixedPointPrecision8.CreateFromDouble(smallValue);
+        var fp8Small = FP8.CreateFromDouble(smallValue);
         var fp2Small = fp8Small.ToFixedPointPrecision2();
         // Here we expect limited precision due to the conversion
         Assert.That(fp2Small.ToDouble(), Is.EqualTo(0).Within(0.01));

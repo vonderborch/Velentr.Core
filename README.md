@@ -46,3 +46,10 @@ Alternatively, you can clone this repo and reference the Velentr.Core project in
 ## Future Plans
 
 See list of issues under the Milestones: https://github.com/vonderborch/Velentr.Core/milestones
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+Certain portions of this project are licensed under other licenses. See individual files for specific licenses as they
+apply.

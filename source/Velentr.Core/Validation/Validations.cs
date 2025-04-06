@@ -66,4 +66,40 @@ public static class Validations
                 $"The parameter [{parameterName}] with range `{value}` is out of the range (min: {minValue}, max:{maxValue})!");
         }
     }
+    
+    public static void ValidateGreaterThan<T>(T value, string parameterName, T minValue) where T : INumber<T>
+    {
+        if (value <= minValue)
+        {
+            throw new ArgumentOutOfRangeException(parameterName,
+                $"The parameter [{parameterName}] with range `{value}` is out of the range (min: {minValue})!");
+        }
+    }
+    
+    public static void ValidateLessThan<T>(T value, string parameterName, T maxValue) where T : INumber<T>
+    {
+        if (value >= maxValue)
+        {
+            throw new ArgumentOutOfRangeException(parameterName,
+                $"The parameter [{parameterName}] with range `{value}` is out of the range (max: {maxValue})!");
+        }
+    }
+    
+    public static void ValidateGreaterThanOrEqual<T>(T value, string parameterName, T minValue) where T : INumber<T>
+    {
+        if (value < minValue)
+        {
+            throw new ArgumentOutOfRangeException(parameterName,
+                $"The parameter [{parameterName}] with range `{value}` is out of the range (min: {minValue})!");
+        }
+    }
+    
+    public static void ValidateLessThanOrEqual<T>(T value, string parameterName, T maxValue) where T : INumber<T>
+    {
+        if (value > maxValue)
+        {
+            throw new ArgumentOutOfRangeException(parameterName,
+                $"The parameter [{parameterName}] with range `{value}` is out of the range (max: {maxValue})!");
+        }
+    }
 }
