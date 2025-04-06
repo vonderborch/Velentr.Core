@@ -1,7 +1,7 @@
 namespace Velentr.Core.UnitConversions;
 
 [AttributeUsage(AttributeTargets.Class, Inherited = false)]
-public class UnitsAttribute<TUnit> : Attribute where TUnit : Enum
+public class MeasurementUnitAttribute : Attribute
 {
     public Type Scale;
     
@@ -9,16 +9,21 @@ public class UnitsAttribute<TUnit> : Attribute where TUnit : Enum
 
     public string Abbreviation;
 
-    public TUnit Unit;
+    public string UnitName;
+
+    public object Unit;
 
     public string MeasurementStringFormat;
     
-    public UnitsAttribute(string name, string abbreviation, TUnit unit, string measurementStringFormat)
+    public MeasurementUnitAttribute(string name, string abbreviation, Type scale, string unit, string measurementStringFormat)
     {
-        Scale = typeof(TUnit);
+        Scale = scale;
         Name = name;
         Abbreviation = abbreviation;
-        Unit = unit;
+        UnitName = unit;
+        Unit = Enum.Parse(scale, unit);
         MeasurementStringFormat = measurementStringFormat;
     }
+    
+    
 }

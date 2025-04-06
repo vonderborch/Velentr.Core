@@ -1,8 +1,12 @@
 namespace Velentr.Core.UnitConversions.ComputerBits.Bits;
 
-[UnitsAttribute<BitScale>(name: "Bit", abbreviation: "b", unit: BitScale.Bit, measurementStringFormat: "{0} {1}")]
-public class Bit : Unit
+[MeasurementUnit(name: "Bit", abbreviation: "b", scale: typeof(BitScale), unit: "Bit", measurementStringFormat: "{0} {1}")]
+public class Bit : MeasurementUnit
 {
+    protected internal Bit(string name, string abbreviation, string measurementStringFormat) : base(name, abbreviation, measurementStringFormat)
+    {
+    }
+    
     public override double ToBaseUnit(double value)
     {
         return value;
