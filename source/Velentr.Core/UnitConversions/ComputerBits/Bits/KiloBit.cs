@@ -1,19 +1,19 @@
-namespace Velentr.Core.UnitConversions.ComputerBits.Bytes;
+namespace Velentr.Core.UnitConversions.ComputerBits.Bits;
 
 /// <summary>
-/// Represents the Byte unit of measurement.
+/// Represents the KiloBit unit of measurement.
 /// </summary>
-public class Byte : Singleton<Byte>, IComputerBit
+public class KiloBit : Singleton<KiloBit>, IComputerBit
 {
     /// <summary>
     /// Gets the name of the unit.
     /// </summary>
-    public string Name => "Byte";
+    public string Name => "KiloBit";
 
     /// <summary>
     /// Gets the abbreviation of the unit.
     /// </summary>
-    public string Abbreviation => "B";
+    public string Abbreviation => "Kb";
     
     /// <summary>
     /// Gets the format string for displaying the measurement.
@@ -23,12 +23,12 @@ public class Byte : Singleton<Byte>, IComputerBit
     /// <summary>
     /// Gets the scale type of the unit.
     /// </summary>
-    public Type Scale => typeof(ByteScale);
+    public Type Scale => typeof(BitScale);
 
     /// <summary>
-    /// Gets the full name of the unit.
+    /// Gets the unit name.
     /// </summary>
-    public string UnitName => "Byte";
+    public string UnitName => "KiloBit";
     
     /// <summary>
     /// Gets a value indicating whether this unit is the base unit in the scale.
@@ -38,7 +38,7 @@ public class Byte : Singleton<Byte>, IComputerBit
     /// <summary>
     /// Gets the base size of the unit.
     /// </summary>
-    public int BaseSize => ComputerBitConstants.ByteBaseSize;
+    public int BaseSize => ComputerBitConstants.BitBaseSize;
 
     /// <summary>
     /// Converts the specified value to the base unit.
@@ -47,7 +47,7 @@ public class Byte : Singleton<Byte>, IComputerBit
     /// <returns>The converted value in the base unit.</returns>
     public double ToBaseUnit(double value)
     {
-        return value;
+        return ((IComputerBit)this).Convert(value, true);
     }
 
     /// <summary>
@@ -57,12 +57,11 @@ public class Byte : Singleton<Byte>, IComputerBit
     /// <returns>The converted value from the base unit.</returns>
     public double FromBaseUnit(double value)
     {
-        return value;
+        return ((IComputerBit)this).Convert(value, false);
     }
 
     /// <summary>
-    /// Gets the singleton instance of the unit.
+    /// Gets the singleton instance of the KiloBit unit.
     /// </summary>
     public IMeasurementUnit SingletonInstance => Instance;
 }
-

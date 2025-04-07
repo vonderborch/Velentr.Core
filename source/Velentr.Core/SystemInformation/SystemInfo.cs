@@ -129,40 +129,40 @@ public sealed class SystemInfo
         // Determine operating system
         if (IsAndroid())
         {
-            OperatingSystem = OS.Android;
+            this.OperatingSystem = OS.Android;
         }
         else if (IsIOS())
         {
-            OperatingSystem = OS.iOS;
+            this.OperatingSystem = OS.iOS;
         }
         else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
-            OperatingSystem = OS.Windows;
+            this.OperatingSystem = OS.Windows;
         }
         else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
         {
-            OperatingSystem = OS.MacOS;
+            this.OperatingSystem = OS.MacOS;
         }
         else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
         {
-            OperatingSystem = OS.Linux;
+            this.OperatingSystem = OS.Linux;
         }
         else if (RuntimeInformation.IsOSPlatform(OSPlatform.FreeBSD))
         {
-            OperatingSystem = OS.FreeBSD;
+            this.OperatingSystem = OS.FreeBSD;
         }
         else
         {
-            OperatingSystem = OS.Unknown;
+            this.OperatingSystem = OS.Unknown;
         }
 
         // Get total memory
-        TotalMemory = GetTotalSystemMemory();
+        this.TotalMemory = GetTotalSystemMemory();
 
         // Estimate number of GPUs
         // This is a simplified detection and would need to be improved
         // for accurate GPU detection
-        TotalGpus = EstimateNumberOfGpus();
+        this.TotalGpus = EstimateNumberOfGpus();
     }
 
     /// <summary>
@@ -340,7 +340,7 @@ public sealed class SystemInfo
         
         public MEMORYSTATUSEX()
         {
-            dwLength = (uint)Marshal.SizeOf(typeof(MEMORYSTATUSEX));
+            this.dwLength = (uint)Marshal.SizeOf(typeof(MEMORYSTATUSEX));
         }
     }
 

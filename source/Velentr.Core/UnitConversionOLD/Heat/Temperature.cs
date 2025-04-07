@@ -46,8 +46,8 @@ public struct Temperature : IEquatable<Temperature>
     [JsonPropertyName("value")]
     public double Value
     {
-        get => temperature;
-        set => temperature = value;
+        get => this.temperature;
+        set => this.temperature = value;
     }
     
     /// <summary>
@@ -56,7 +56,7 @@ public struct Temperature : IEquatable<Temperature>
     [JsonPropertyName("scale")]
     public TemperatureScale Scale
     {
-        get => scale;
+        get => this.scale;
     }
     
     /// <summary>

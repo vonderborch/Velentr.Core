@@ -58,8 +58,8 @@ public abstract class ARandomGenerator : IRandomGenerator<ARandomGenerator>
     /// <param name="seed">The seed for the random number generator.</param>
     public ARandomGenerator(long seed)
     {
-        Seed = seed;
-        StartingSeed = seed;
+        this.Seed = seed;
+        this.StartingSeed = seed;
         // ReSharper disable once VirtualMemberCallInConstructor
         SetSeed(seed);
     }

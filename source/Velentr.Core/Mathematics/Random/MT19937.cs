@@ -119,11 +119,11 @@ public class MT19937 : ARandomGenerator
     /// <param name="seed">The seed value to set.</param>
     public override void SetSeed(long seed)
     {
-        StartingSeed = seed;
-        mt[0] = unchecked((uint)(seed >> 32) ^ (uint)seed);
-        for (mti = 1; mti < N; mti++)
+        this.StartingSeed = seed;
+        this.mt[0] = unchecked((uint)(seed >> 32) ^ (uint)seed);
+        for (this.mti = 1; this.mti < N; this.mti++)
         {
-            mt[mti] = 1812433253U * (this.mt[this.mti - 1] ^ (this.mt[this.mti - 1] >> 30)) + this.mti;
+            this.mt[this.mti] = 1812433253U * (this.mt[this.mti - 1] ^ (this.mt[this.mti - 1] >> 30)) + this.mti;
         }
     }
 
@@ -136,27 +136,27 @@ public class MT19937 : ARandomGenerator
         uint y;
         uint[] mag01 = new uint[] { 0x0U, MatrixA };
         
-        if (mti >= N)
+        if (this.mti >= N)
         {
             int kk;
 
             for (kk = 0; kk < N - M; kk++)
             {
-                y = (mt[kk] & UpperMask) | (mt[kk + 1] & LowerMask);
-                mt[kk] = mt[kk + M] ^ (y >> 1) ^ mag01[y & 0x1U];
+                y = (this.mt[kk] & UpperMask) | (this.mt[kk + 1] & LowerMask);
+                this.mt[kk] = this.mt[kk + M] ^ (y >> 1) ^ mag01[y & 0x1U];
             }
             for (; kk < N - 1; kk++)
             {
-                y = (mt[kk] & UpperMask) | (mt[kk + 1] & LowerMask);
-                mt[kk] = mt[kk + (M - N)] ^ (y >> 1) ^ mag01[y & 0x1U];
+                y = (this.mt[kk] & UpperMask) | (this.mt[kk + 1] & LowerMask);
+                this.mt[kk] = this.mt[kk + (M - N)] ^ (y >> 1) ^ mag01[y & 0x1U];
             }
-            y = (mt[N - 1] & UpperMask) | (mt[0] & LowerMask);
-            mt[N - 1] = mt[M - 1] ^ (y >> 1) ^ mag01[y & 0x1U];
+            y = (this.mt[N - 1] & UpperMask) | (this.mt[0] & LowerMask);
+            this.mt[N - 1] = this.mt[M - 1] ^ (y >> 1) ^ mag01[y & 0x1U];
 
-            mti = 0;
+            this.mti = 0;
         }
 
-        y = mt[mti++];
+        y = this.mt[this.mti++];
 
         y ^= y >> 11;
         y ^= (y << 7) & 0x9d2c5680U;

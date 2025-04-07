@@ -76,7 +76,7 @@ public class SimpleRng : ARandomGenerator
     /// <param name="seed">The seed value.</param>
     public override void SetSeed(long seed)
     {
-        Seed = seed;
+        this.Seed = seed;
         this.stateA = (uint)(seed & 0xFFFFFFFF);         // Take the low 32 bits
         this.stateB = (uint)((seed >> 32) & 0xFFFFFFFF); // Take the high 32 bits
         if (this.stateA == 0 && this.stateB == 0)
@@ -86,8 +86,8 @@ public class SimpleRng : ARandomGenerator
             this.stateA = DefaultStateA;
             this.stateB = DefaultStateB;
         }
-        
-        Seed = ((long)this.stateB << 32) | this.stateA;
+
+        this.Seed = ((long)this.stateB << 32) | this.stateA;
     }
 
     /// <summary>
@@ -104,7 +104,7 @@ public class SimpleRng : ARandomGenerator
         uint result = (this.stateB << 16) + this.stateA;
         
         // Update the seed
-        Seed = ((long)this.stateB << 32) | this.stateA;
+        this.Seed = ((long)this.stateB << 32) | this.stateA;
         
         return result;
     }
