@@ -14,9 +14,9 @@ script_path = os.path.join(current_file_directory, ".build", "generate_project_l
 
 project_name = os.path.basename(current_file_directory)
 if "." in project_name:
-    font_sizes = "52, 166"
+    font_sizes = "26, 84"
 else:
-    font_sizes = "166"
+    font_sizes = "84"
 
 command = [
     "python",
@@ -28,7 +28,7 @@ command = [
     project_name,
     os.path.join(build_directory, "font", "copperplate_gothic_bold.otf"),
     font_sizes,
-    str(560),
+    str(280),
     "white",
 ]
 

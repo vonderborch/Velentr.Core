@@ -27,7 +27,7 @@
     <File Path="update_or_install_fna.py" />
     <File Path="logo.ico" />
     <File Path="setup_repo.py" />
-    <File Path="generate_ico.py" />
+    <File Path="generate_logo.py" />
   </Folder>
   <Folder Name="/source/">
     <Project Path="source\Velentr.Core.FNA\Velentr.Core.FNA.csproj" Type="Classic C#" />
