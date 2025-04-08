@@ -12,8 +12,8 @@
         <IsPackable>false</IsPackable>
         <Configurations>Debug;Release</Configurations>
         <Platforms>AnyCPU</Platforms>
-        <AssemblyVersion>3.0.0.3</AssemblyVersion>
-        <FileVersion>3.0.0.3</FileVersion>
+        <AssemblyVersion>3.0.0.4</AssemblyVersion>
+        <FileVersion>3.0.0.4</FileVersion>
         <Nullable>enable</Nullable>
     </PropertyGroup>
     <PropertyGroup>
