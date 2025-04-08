@@ -11,8 +11,8 @@
         <AssemblyName>Velentr.Core.Test</AssemblyName>
         <RootNamespace>Velentr.Core.Test</RootNamespace>
         <ApplicationIcon>..\..\..\logo.ico</ApplicationIcon>
-        <AssemblyVersion>3.0.0.6</AssemblyVersion>
-        <FileVersion>3.0.0.6</FileVersion>
+        <AssemblyVersion>3.0.0.7</AssemblyVersion>
+        <FileVersion>3.0.0.7</FileVersion>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

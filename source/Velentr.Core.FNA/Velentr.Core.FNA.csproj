@@ -3,7 +3,7 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <Version>3.0.0.6</Version>
+        <Version>3.0.0.7</Version>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>Velentr.Core.FNA</Title>
         <Authors>Christian Webber</Authors>
@@ -15,8 +15,8 @@
         <PackageIcon>logo.png</PackageIcon>
         <RepositoryUrl>https://github.com/vonderborch/Velentr.Core</RepositoryUrl>
         <PackageTags>Velentr, FNA, Monogame</PackageTags>
-        <AssemblyVersion>3.0.0.6</AssemblyVersion>
-        <FileVersion>3.0.0.6</FileVersion>
+        <AssemblyVersion>3.0.0.7</AssemblyVersion>
+        <FileVersion>3.0.0.7</FileVersion>
         <Company>Christian Webber</Company>
     </PropertyGroup>
 
