@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+        <HasSharedItems>true</HasSharedItems>
+        <SharedGUID>6efba8a9-a407-4029-bdd0-651d22a87386</SharedGUID>
+    </PropertyGroup>
+    <PropertyGroup Label="Configuration">
+        <Import_RootNamespace>Velentr.Core.Shared.Test</Import_RootNamespace>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="$(MSBuildThisFileDirectory)Colors\TestColorThresholds.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Colors\TestHexHelpers.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Colors\TestHslHelpers.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Colors\TestHsvHelpers.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)DataStructures\TestArrayHelpers.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)DataStructures\TestCollectionEquivalency.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)DataStructures\TestListHelpers.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)DataStructures\TestListQuickSort.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)General\TestDisposingHelpers.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)IO\ArchiveHelpers\TestArchiveHelpersArchiveDirectory.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)IO\ArchiveHelpers\TestArchiveHelpersExtractDirectory.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)IO\ArchiveHelpers\TestArchiveHelpersGetFileContentsFromArchive.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)IO\DirectoryHelpers\TestDirectoryHelpersCopyDirectory.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)IO\DirectoryHelpers\TestDirectoryHelpersCreateDirectoryIfNotExists.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)IO\DirectoryHelpers\TestDirectoryHelpersDeleteDirectoryIfExists.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)IO\FileHelpers\TestFileHelpersDeleteFileIfExists.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)IO\FileHelpers\TestFileHelpersSafeCopyFile.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Json\TestJsonHelpers.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Bound\TestBounds.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Mathematics\FixedPoint\TestFixedPointConversions.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Mathematics\FixedPoint\TestFixedPointMath.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Mathematics\FixedPoint\TestFp2.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Mathematics\FixedPoint\TestFp2I.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Mathematics\FixedPoint\TestFp4.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Mathematics\FixedPoint\TestFp6.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Mathematics\FixedPoint\TestFp8.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Geometry\TestAngle.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Geometry\TestGeometryMath.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Numerics\TestBoundedNumber.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Numerics\TestCircularBoundedNumber.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Numerics\TestNumericExtensions.cs"/>
+    <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Random\TestFastRandom.cs" />
+        <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Random\TestRandomness.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Random\TestMT19937.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Random\TestSimpleRng.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Mathematics\TestFloatingMaths.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Mathematics\TestFloatingMathsExtensions.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Mathematics\TestMaths.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Mathematics\TestNumericExtensions.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)PerformanceMetrics\TestResourceMetrics.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)PerformanceMetrics\TestTickMetric.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Streams\TestStreamHelpers.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Strings\AsciiTables\TestAsciiTable.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Strings\AsciiTables\TestAsciiTableParameters.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Strings\TestFormatting.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Strings\TestReplacement.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Strings\TestSimilarity.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Strings\TestSplitting.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Threading\TestAtomicOperations.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Threading\TestGuard.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Time\TestTimeHelpers.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Validation\TestValidations.cs"/>
+    </ItemGroup>
+</Project>

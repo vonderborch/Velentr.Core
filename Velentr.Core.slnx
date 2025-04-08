@@ -1,0 +1,52 @@
+<Solution>
+  <Folder Name="/.build/">
+    <Project Path=".build\post_solution_build.csproj" Type="Classic C#">
+      <BuildDependency Project=".build\pre_solution_build.csproj" />
+      <BuildDependency Project="source\Velentr.Core.FNA\Velentr.Core.FNA.csproj" />
+      <BuildDependency Project="source\Velentr.Core.Monogame\Velentr.Core.Monogame.csproj" />
+      <BuildDependency Project="test\automated\Velentr.Core.Test\Velentr.Core.Test.csproj" />
+    </Project>
+    <Project Path=".build\pre_solution_build.csproj" Type="Classic C#" />
+    <File Path=".build\version_bump.ps1" />
+    <File Path=".build\version_bump_common.ps1" />
+    <File Path=".build\version_bump_dialog.ps1" />
+    <File Path=".build\fna_updator.py" />
+    <File Path=".build\generate_virtual_environment.py" />
+    <File Path=".build\generate_project_logo.py" />
+  </Folder>
+  <Folder Name="/.fna/">
+    <Project Path="..\.fna\FNA\FNA.Core.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/SolutionFiles/">
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+    <File Path="CODEOWNERS" />
+    <File Path="LICENSE" />
+    <File Path="logo.png" />
+    <File Path="README.md" />
+    <File Path="update_or_install_fna.py" />
+    <File Path="logo.ico" />
+    <File Path="setup_repo.py" />
+    <File Path="generate_logo.py" />
+  </Folder>
+  <Folder Name="/source/">
+    <Project Path="source\Velentr.Core.FNA\Velentr.Core.FNA.csproj" Type="Classic C#" />
+    <Project Path="source\Velentr.Core.Monogame\Velentr.Core.Monogame.csproj" Type="Classic C#" />
+    <Project Path="source\Velentr.Core.Shared\Velentr.Core.Shared.shproj" />
+    <Project Path="source\Velentr.Core\Velentr.Core.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/test/" />
+  <Folder Name="/test/automated/">
+    <Project Path="test\automated\Velentr.Core.FNA.Test\Velentr.Core.FNA.Test.csproj" Type="Classic C#" />
+    <Project Path="test\automated\Velentr.Core.Monogame.Test\Velentr.Core.Monogame.Test.csproj" Type="Classic C#" />
+    <Project Path="test\automated\Velentr.Core.Shared.Test\Velentr.Core.Shared.Test.shproj" />
+    <Project Path="test\automated\Velentr.Core.SharedSupport.Test\Velentr.Core.SharedSupport.Test.shproj" />
+    <Project Path="test\automated\Velentr.Core.Test\Velentr.Core.Test.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/test/manual/">
+    <Project Path="test\manual\Velentr.Core.Core.TestApp\Velentr.Core.Core.TestApp.csproj" Type="Classic C#" />
+    <Project Path="test\manual\Velentr.Core.FNA.TestApp\Velentr.Core.FNA.TestApp.csproj" Type="Classic C#" />
+    <Project Path="test\manual\Velentr.Core.Monogame.TestApp\Velentr.Core.Monogame.TestApp.csproj" Type="Classic C#" />
+    <Project Path="test\manual\Velentr.Core.Shared.TestApp\Velentr.Core.Shared.TestApp.shproj" />
+  </Folder>
+</Solution>
