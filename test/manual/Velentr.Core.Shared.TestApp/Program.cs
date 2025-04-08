@@ -1,7 +1,8 @@
+using Velentr.Core.TestApp;
 #if FNA
-Velentr.Core.TestApp.FnaDependencyHelper.HandleDependencies();
+FnaDependencyHelper.HandleDependencies();
 
 #endif
 
-using Velentr.Core.TestApp.TestGame game = new();
+using TestGame game = new();
 game.Run();

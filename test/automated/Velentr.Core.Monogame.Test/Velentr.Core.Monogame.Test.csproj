@@ -27,7 +27,7 @@
     <ItemGroup>
         <PackageReference Include="coverlet.collector" Version="6.0.2"/>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1"/>
-        <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.3" />
+        <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.3"/>
         <PackageReference Include="NUnit" Version="4.2.2"/>
         <PackageReference Include="NUnit.Analyzers" Version="4.3.0"/>
         <PackageReference Include="NUnit3TestAdapter" Version="4.6.0"/>
@@ -43,6 +43,6 @@
 
     <Import Project="..\Velentr.Core.Shared.Test\Velentr.Core.Shared.Test.projitems" Label="Shared"/>
 
-    <Import Project="..\Velentr.Core.SharedSupport.Test\Velentr.Core.SharedSupport.Test.projitems" Label="Shared" />
+    <Import Project="..\Velentr.Core.SharedSupport.Test\Velentr.Core.SharedSupport.Test.projitems" Label="Shared"/>
 
 </Project>

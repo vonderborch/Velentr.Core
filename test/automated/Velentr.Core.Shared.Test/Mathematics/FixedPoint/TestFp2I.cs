@@ -1,6 +1,4 @@
-using System;
 using System.Globalization;
-using NUnit.Framework;
 using Velentr.Core.Mathematics.FixedPoint;
 
 namespace Velentr.Core.Test.Mathematics.FixedPoint;
@@ -11,14 +9,14 @@ public class TestFp2I
     [Test]
     public void TestToString()
     {
-        var value = new FP2I { RawValue = 12345 };
+        FP2I value = new() { RawValue = 12345 };
         Assert.That(value.ToString(), Is.EqualTo("96.45"));
     }
-        
+
     [Test]
     public void TestToString_FromDouble()
     {
-        var value = FP2I.CreateFromDouble(3.57);
+        FP2I value = FP2I.CreateFromDouble(3.57);
         Assert.That(value.ToString(), Is.EqualTo("3.57"));
         value += 1;
         Assert.That(value.ToString(), Is.EqualTo("4.57"));
@@ -27,11 +25,11 @@ public class TestFp2I
         value += 55.01d;
         Assert.That(value.ToString(), Is.EqualTo("61.38"));
     }
-        
+
     [Test]
     public void TestToString_FromDoubleWeird()
     {
-        var value = FP2I.CreateFromDouble(7d / 3);
+        FP2I value = FP2I.CreateFromDouble(7d / 3);
         Assert.That(value.ToString(), Is.EqualTo("2.34"));
         value += 1;
         Assert.That(value.ToString(), Is.EqualTo("3.34"));
@@ -44,78 +42,78 @@ public class TestFp2I
     [Test]
     public void TestCreateFromDouble()
     {
-        var value = FP2I.CreateFromDouble(3.57);
+        FP2I value = FP2I.CreateFromDouble(3.57);
         Assert.That(value.RawValue, Is.EqualTo(457));
     }
 
     [Test]
     public void TestCreateFromFloat()
     {
-        var value = FP2I.CreateFromFloat(3.57f);
+        FP2I value = FP2I.CreateFromFloat(3.57f);
         Assert.That(value.RawValue, Is.EqualTo(456));
     }
 
     [Test]
     public void TestToDouble()
     {
-        var value = new FP2I { RawValue = 12345 };
+        FP2I value = new() { RawValue = 12345 };
         Assert.That(value.ToDouble(), Is.EqualTo(96.445).Within(0.001));
     }
 
     [Test]
     public void TestToFloat()
     {
-        var value = new FP2I { RawValue = 12345 };
+        FP2I value = new() { RawValue = 12345 };
         Assert.That(value.ToFloat(), Is.EqualTo(96.445f).Within(0.001f));
     }
 
     [Test]
     public void TestAddition()
     {
-        var value1 = new FP2I { RawValue = 12345 };
-        var value2 = new FP2I { RawValue = 67890 };
-        var result = value1 + value2;
+        FP2I value1 = new() { RawValue = 12345 };
+        FP2I value2 = new() { RawValue = 67890 };
+        FP2I result = value1 + value2;
         Assert.That(result.RawValue, Is.EqualTo(80235));
     }
 
     [Test]
     public void TestSubtraction()
     {
-        var value1 = new FP2I { RawValue = 67890 };
-        var value2 = new FP2I { RawValue = 12345 };
-        var result = value1 - value2;
+        FP2I value1 = new() { RawValue = 67890 };
+        FP2I value2 = new() { RawValue = 12345 };
+        FP2I result = value1 - value2;
         Assert.That(result.RawValue, Is.EqualTo(55545));
     }
 
     [Test]
     public void TestMultiplication()
     {
-        var value1 = new FP2I { RawValue = 12345 };
-        var value2 = new FP2I { RawValue = 2 << FP2I.Shift };
-        var result = value1 * value2;
+        FP2I value1 = new() { RawValue = 12345 };
+        FP2I value2 = new() { RawValue = 2 << FP2I.Shift };
+        FP2I result = value1 * value2;
         Assert.That(result.RawValue, Is.EqualTo(24690));
     }
 
     [Test]
     public void TestDivision()
     {
-        var value1 = new FP2I { RawValue = 24690 };
-        var value2 = new FP2I { RawValue = 2 << FP2I.Shift };
-        var result = value1 / value2;
+        FP2I value1 = new() { RawValue = 24690 };
+        FP2I value2 = new() { RawValue = 2 << FP2I.Shift };
+        FP2I result = value1 / value2;
         Assert.That(result.RawValue, Is.EqualTo(12345));
     }
 
     [Test]
     public void TestParse()
     {
-        var value = FP2I.Parse("3.57", CultureInfo.InvariantCulture);
+        FP2I value = FP2I.Parse("3.57", CultureInfo.InvariantCulture);
         Assert.That(value.RawValue, Is.EqualTo(457));
     }
 
     [Test]
     public void TestTryParse()
     {
-        var success = FP2I.TryParse("3.57", CultureInfo.InvariantCulture, out var value);
+        var success = FP2I.TryParse("3.57", CultureInfo.InvariantCulture, out FP2I value);
         Assert.That(success, Is.True);
         Assert.That(value.RawValue, Is.EqualTo(457));
     }

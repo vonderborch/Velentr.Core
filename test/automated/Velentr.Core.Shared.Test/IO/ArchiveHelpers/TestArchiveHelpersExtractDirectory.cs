@@ -1,7 +1,3 @@
-using System;
-using System.IO;
-using System.IO.Compression;
-using NUnit.Framework;
 using Velentr.Core.IO;
 
 namespace Velentr.Core.Test.IO;
@@ -9,16 +5,12 @@ namespace Velentr.Core.Test.IO;
 [TestFixture]
 public class TestArchiveHelpersExtractDirectory
 {
-    private string sourceDirectory;
-    private string archivePath;
-    private string destinationDirectory;
-
     [SetUp]
     public void SetUp()
     {
         var tempDir = Path.GetTempPath();
         this.sourceDirectory = Path.Combine(tempDir, Guid.NewGuid().ToString());
-        this.archivePath = Path.Combine(tempDir, Guid.NewGuid().ToString() + ".zip");
+        this.archivePath = Path.Combine(tempDir, Guid.NewGuid() + ".zip");
         this.destinationDirectory = Path.Combine(tempDir, Guid.NewGuid().ToString());
 
         Directory.CreateDirectory(this.sourceDirectory);
@@ -45,6 +37,10 @@ public class TestArchiveHelpersExtractDirectory
         }
     }
 
+    private string sourceDirectory;
+    private string archivePath;
+    private string destinationDirectory;
+
     [Test]
     public void TestExtractDirectory_Success()
     {
@@ -64,7 +60,7 @@ public class TestArchiveHelpersExtractDirectory
         File.WriteAllText(Path.Combine(this.destinationDirectory, "existing.txt"), "Existing file");
 
         // Act
-        ArchiveHelpers.ExtractDirectory(this.archivePath, this.destinationDirectory, deleteExistingDestinationDirectory: true);
+        ArchiveHelpers.ExtractDirectory(this.archivePath, this.destinationDirectory, true);
 
         // Assert
         Assert.That(this.destinationDirectory, Does.Exist);
@@ -79,7 +75,8 @@ public class TestArchiveHelpersExtractDirectory
         Directory.CreateDirectory(this.destinationDirectory);
 
         // Act & Assert
-        var ex = Assert.Throws<IOException>(() => ArchiveHelpers.ExtractDirectory(this.archivePath, this.destinationDirectory));
+        IOException? ex = Assert.Throws<IOException>(() =>
+            ArchiveHelpers.ExtractDirectory(this.archivePath, this.destinationDirectory));
         Assert.That(ex.Message, Is.EqualTo($"Directory already exists at {this.destinationDirectory}!"));
     }
 
@@ -90,7 +87,8 @@ public class TestArchiveHelpersExtractDirectory
         var nonExistentArchivePath = Path.Combine(Path.GetTempPath(), Guid.NewGuid() + ".zip");
 
         // Act & Assert
-        var ex = Assert.Throws<FileNotFoundException>(() => ArchiveHelpers.ExtractDirectory(nonExistentArchivePath, this.destinationDirectory));
+        FileNotFoundException? ex = Assert.Throws<FileNotFoundException>(() =>
+            ArchiveHelpers.ExtractDirectory(nonExistentArchivePath, this.destinationDirectory));
         Assert.That(ex.Message, Is.EqualTo($"Archive file '{nonExistentArchivePath}' not found."));
     }
 }

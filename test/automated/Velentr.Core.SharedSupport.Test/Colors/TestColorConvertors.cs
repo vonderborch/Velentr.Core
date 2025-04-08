@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using Microsoft.Xna.Framework;
 using Velentr.Core.FNA.Colors;
 
@@ -10,21 +9,21 @@ public class TestColorConvertors
     [Test]
     public void TestColorFromHex()
     {
-        var color = ColorConvertors.ColorFromHex("#FF5733");
+        Color color = ColorConvertors.ColorFromHex("#FF5733");
         Assert.That(color, Is.EqualTo(new Color(1f, 0.345f, 0.2f, 1f)));
     }
 
     [Test]
     public void TestColorFromHsv()
     {
-        var color = ColorConvertors.ColorFromHsv(0f, 1f, 1f);
+        Color color = ColorConvertors.ColorFromHsv(0f, 1f, 1f);
         Assert.That(color, Is.EqualTo(new Color(1f, 0f, 0f, 1f)));
     }
 
     [Test]
     public void TestColorFromHsl()
     {
-        var color = ColorConvertors.ColorFromHsl(0f, 1f, 0.5f);
+        Color color = ColorConvertors.ColorFromHsl(0f, 1f, 0.5f);
         Assert.That(color, Is.EqualTo(new Color(1f, 0f, 0f, 1f)));
     }
 

@@ -11,7 +11,7 @@ public class TestStreamHelpers
     {
         // Arrange
         var expected = Encoding.UTF8.GetBytes("Hello, World!");
-        using var stream = new MemoryStream(expected);
+        using MemoryStream? stream = new(expected);
 
         // Act
         var result = StreamHelpers.ReadStream(stream);
@@ -25,7 +25,7 @@ public class TestStreamHelpers
     {
         // Arrange
         var expected = "Hello, World!";
-        using var stream = new MemoryStream(Encoding.UTF8.GetBytes(expected));
+        using MemoryStream? stream = new(Encoding.UTF8.GetBytes(expected));
 
         // Act
         var result = StreamHelpers.ReadStream(stream, Encoding.UTF8);
@@ -38,7 +38,7 @@ public class TestStreamHelpers
     public void ReadStream_ShouldHandleEmptyStream()
     {
         // Arrange
-        using var stream = new MemoryStream();
+        using MemoryStream? stream = new();
 
         // Act
         var result = StreamHelpers.ReadStream(stream);

@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using Velentr.Core.DataStructures;
 
 namespace Velentr.Core.Test.DataStructures;
@@ -105,6 +104,7 @@ public class TestArrayHelpers
         Assert.That(result[0], Is.EqualTo(1));
         Assert.That(result[5], Is.EqualTo(6));
     }
+
     [Test]
     public void ConvertTo2DArray_ShouldHandleEmptyArray()
     {
@@ -168,6 +168,7 @@ public class TestArrayHelpers
         Assert.That(result[0, 0], Is.EqualTo(1));
         Assert.That(result[2, 3], Is.EqualTo(12));
     }
+
     [Test]
     public void ConvertTo1DArray_ShouldHandleEmptyArray()
     {

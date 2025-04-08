@@ -1,6 +1,3 @@
-using System;
-using System.IO;
-using NUnit.Framework;
 using Velentr.Core.IO;
 
 namespace Velentr.Core.Test.IO;
@@ -8,8 +5,6 @@ namespace Velentr.Core.Test.IO;
 [TestFixture]
 public class TestDirectoryHelpersCreateDirectoryIfNotExists
 {
-    private string testDir;
-
     [SetUp]
     public void SetUp()
     {
@@ -24,6 +19,8 @@ public class TestDirectoryHelpersCreateDirectoryIfNotExists
             Directory.Delete(this.testDir, true);
         }
     }
+
+    private string testDir;
 
     [Test]
     public void TestCreateDirectoryIfNotExists_DirectoryDoesNotExist()

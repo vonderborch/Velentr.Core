@@ -1,7 +1,4 @@
-using NUnit.Framework;
 using Velentr.Core.DataStructures;
-using System;
-using System.Collections.Generic;
 
 namespace Velentr.Core.Test.DataStructures;
 
@@ -12,7 +9,7 @@ public class TestListQuickSort
     public void Sort_ShouldHandleEmptyList()
     {
         // Arrange
-        var list = new List<int>();
+        List<int>? list = new();
 
         // Act
         ListQuickSort.Sort(list, (x, y) => x.CompareTo(y));
@@ -25,7 +22,7 @@ public class TestListQuickSort
     public void Sort_ShouldHandleSingleElementList()
     {
         // Arrange
-        var list = new List<int> { 1 };
+        List<int>? list = new() { 1 };
 
         // Act
         ListQuickSort.Sort(list, (x, y) => x.CompareTo(y));
@@ -38,7 +35,7 @@ public class TestListQuickSort
     public void Sort_ShouldSortListInAscendingOrder()
     {
         // Arrange
-        var list = new List<int> { 3, 1, 2 };
+        List<int>? list = new() { 3, 1, 2 };
 
         // Act
         ListQuickSort.Sort(list, (x, y) => x.CompareTo(y));
@@ -51,7 +48,7 @@ public class TestListQuickSort
     public void Sort_ShouldSortListInDescendingOrder()
     {
         // Arrange
-        var list = new List<int> { 1, 3, 2 };
+        List<int>? list = new() { 1, 3, 2 };
 
         // Act
         ListQuickSort.Sort(list, (x, y) => y.CompareTo(x));
@@ -59,12 +56,12 @@ public class TestListQuickSort
         // Assert
         Assert.That(list, Is.EqualTo(new List<int> { 3, 2, 1 }));
     }
-    
+
     [Test]
     public void QuickSort_ShouldHandleEmptyList()
     {
         // Arrange
-        var list = new List<int>();
+        List<int>? list = new();
 
         // Act
         list.QuickSort((x, y) => x.CompareTo(y));
@@ -77,7 +74,7 @@ public class TestListQuickSort
     public void QuickSort_ShouldHandleSingleElementList()
     {
         // Arrange
-        var list = new List<int> { 1 };
+        List<int>? list = new() { 1 };
 
         // Act
         list.QuickSort((x, y) => x.CompareTo(y));
@@ -90,7 +87,7 @@ public class TestListQuickSort
     public void QuickSort_ShouldSortListInAscendingOrder()
     {
         // Arrange
-        var list = new List<int> { 3, 1, 2 };
+        List<int>? list = new() { 3, 1, 2 };
 
         // Act
         list.QuickSort((x, y) => x.CompareTo(y));
@@ -103,7 +100,7 @@ public class TestListQuickSort
     public void QuickSort_ShouldSortListInDescendingOrder()
     {
         // Arrange
-        var list = new List<int> { 1, 3, 2 };
+        List<int>? list = new() { 1, 3, 2 };
 
         // Act
         list.QuickSort((x, y) => y.CompareTo(x));
@@ -116,7 +113,7 @@ public class TestListQuickSort
     public void QuickSort_ShouldSortListWithDuplicateElements()
     {
         // Arrange
-        var list = new List<int> { 3, 1, 2, 1, 3 };
+        List<int>? list = new() { 3, 1, 2, 1, 3 };
 
         // Act
         list.QuickSort((x, y) => x.CompareTo(y));

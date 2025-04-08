@@ -1,5 +1,3 @@
-using System;
-using NUnit.Framework;
 using Velentr.Core.Strings;
 
 namespace Velentr.Core.Test.Strings;
@@ -46,7 +44,7 @@ public class TestSimilarity
     public void TestSimilarityTo_NullFirstString()
     {
         string stringA = null;
-        var ex = Assert.Throws<ArgumentNullException>(() => stringA.SimilarityTo("sitting"));
+        ArgumentNullException? ex = Assert.Throws<ArgumentNullException>(() => stringA.SimilarityTo("sitting"));
         Assert.That(ex.Message, Is.EqualTo("Value cannot be null. (Parameter 'stringA')"));
     }
 
@@ -54,10 +52,10 @@ public class TestSimilarity
     public void TestSimilarityTo_NullSecondString()
     {
         string stringB = null;
-        var ex = Assert.Throws<ArgumentNullException>(() => "kitten".SimilarityTo(stringB));
+        ArgumentNullException? ex = Assert.Throws<ArgumentNullException>(() => "kitten".SimilarityTo(stringB));
         Assert.That(ex.Message, Is.EqualTo("Value cannot be null. (Parameter 'stringB')"));
     }
-        
+
     [Test]
     public void TestComputeSimilarity_ValidStrings()
     {
@@ -96,14 +94,16 @@ public class TestSimilarity
     [Test]
     public void TestComputeSimilarity_NullFirstString()
     {
-        var ex = Assert.Throws<ArgumentNullException>(() => Similarity.ComputeSimilarity(null, "sitting"));
+        ArgumentNullException? ex =
+            Assert.Throws<ArgumentNullException>(() => Similarity.ComputeSimilarity(null, "sitting"));
         Assert.That(ex.Message, Is.EqualTo("Value cannot be null. (Parameter 'stringA')"));
     }
 
     [Test]
     public void TestComputeSimilarity_NullSecondString()
     {
-        var ex = Assert.Throws<ArgumentNullException>(() => Similarity.ComputeSimilarity("kitten", null));
+        ArgumentNullException? ex =
+            Assert.Throws<ArgumentNullException>(() => Similarity.ComputeSimilarity("kitten", null));
         Assert.That(ex.Message, Is.EqualTo("Value cannot be null. (Parameter 'stringB')"));
     }
 }

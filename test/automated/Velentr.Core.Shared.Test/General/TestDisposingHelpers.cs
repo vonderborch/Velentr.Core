@@ -1,5 +1,3 @@
-using NUnit.Framework;
-using System;
 using Velentr.Core.General;
 
 namespace Velentr.Core.Test.General;
@@ -21,7 +19,7 @@ public class TestDisposingHelpers
     public void DisposeIfPossible_ShouldDisposeDisposableObject()
     {
         // Arrange
-        var disposable = new TestDisposable();
+        TestDisposable? disposable = new();
 
         // Act
         DisposingHelpers.DisposeIfPossible(disposable);
@@ -37,14 +35,14 @@ public class TestDisposingHelpers
         var nonDisposable = new object();
 
         // Act & Assert
-        Assert.DoesNotThrow(() => DisposingHelpers.DisposeIfPossible(nonDisposable));
+        Assert.DoesNotThrow(() => nonDisposable.DisposeIfPossible());
     }
 
     [Test]
     public void DisposeIfPossible_ShouldDisposeDisposableObject_ExtensionMethod()
     {
         // Arrange
-        var disposable = new TestDisposable();
+        TestDisposable? disposable = new();
 
         // Act
         disposable.DisposeIfPossible();

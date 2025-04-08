@@ -1,6 +1,5 @@
-using NUnit.Framework;
-using Velentr.Core.Mathematics;
 using System.Numerics;
+using Velentr.Core.Mathematics;
 
 namespace Velentr.Core.Test.Mathematics;
 
@@ -141,10 +140,10 @@ public class TestNumericExtensions
     public void ToBigInteger_ShouldHandleMinValue()
     {
         // Arrange
-        var value = BigInteger.MinusOne;
+        BigInteger value = BigInteger.MinusOne;
 
         // Act
-        var result = value.ToBigInteger();
+        BigInteger result = value.ToBigInteger();
 
         // Assert
         Assert.That(result, Is.EqualTo(BigInteger.MinusOne));
@@ -154,15 +153,15 @@ public class TestNumericExtensions
     public void ToBigInteger_ShouldHandleMaxValue()
     {
         // Arrange
-        var value = BigInteger.One;
+        BigInteger value = BigInteger.One;
 
         // Act
-        var result = value.ToBigInteger();
+        BigInteger result = value.ToBigInteger();
 
         // Assert
         Assert.That(result, Is.EqualTo(BigInteger.One));
     }
-    
+
     [Test]
     public void ToShort_ShouldHandleMinValue()
     {

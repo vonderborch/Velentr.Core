@@ -37,7 +37,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\..\.fna\FNA\FNA.Core.csproj" />
+        <ProjectReference Include="..\..\..\..\.fna\FNA\FNA.Core.csproj"/>
         <ProjectReference Include="..\..\..\source\Velentr.Core.FNA\Velentr.Core.FNA.csproj"/>
     </ItemGroup>
 
@@ -52,6 +52,6 @@
 
     <Import Project="..\Velentr.Core.Shared.Test\Velentr.Core.Shared.Test.projitems" Label="Shared"/>
 
-    <Import Project="..\Velentr.Core.SharedSupport.Test\Velentr.Core.SharedSupport.Test.projitems" Label="Shared" />
+    <Import Project="..\Velentr.Core.SharedSupport.Test\Velentr.Core.SharedSupport.Test.projitems" Label="Shared"/>
 
 </Project>

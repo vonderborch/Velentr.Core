@@ -1,7 +1,4 @@
-using System;
-using System.IO;
 using System.IO.Compression;
-using NUnit.Framework;
 using Velentr.Core.IO;
 
 namespace Velentr.Core.Test.IO;
@@ -9,16 +6,12 @@ namespace Velentr.Core.Test.IO;
 [TestFixture]
 public class TestArchiveHelpers
 {
-    private string sourceDirectory;
-    private string archivePath;
-    private string extractedDirectory;
-
     [SetUp]
     public void SetUp()
     {
         var tempDir = Path.GetTempPath();
         this.sourceDirectory = Path.Combine(tempDir, Guid.NewGuid().ToString());
-        this.archivePath = Path.Combine(tempDir, Guid.NewGuid().ToString() + ".zip");
+        this.archivePath = Path.Combine(tempDir, Guid.NewGuid() + ".zip");
         this.extractedDirectory = Path.Combine(tempDir, Guid.NewGuid().ToString());
 
         Directory.CreateDirectory(this.sourceDirectory);
@@ -43,6 +36,10 @@ public class TestArchiveHelpers
             Directory.Delete(this.extractedDirectory, true);
         }
     }
+
+    private string sourceDirectory;
+    private string archivePath;
+    private string extractedDirectory;
 
     [Test]
     public void TestArchiveDirectory_Success()
@@ -76,7 +73,7 @@ public class TestArchiveHelpers
 
         // Assert
         Assert.That(this.archivePath, Does.Exist);
-        using (var archive = ZipFile.OpenRead(this.archivePath))
+        using (ZipArchive? archive = ZipFile.OpenRead(this.archivePath))
         {
             Assert.That(archive.GetEntry("test.txt"), Is.Not.Null);
         }

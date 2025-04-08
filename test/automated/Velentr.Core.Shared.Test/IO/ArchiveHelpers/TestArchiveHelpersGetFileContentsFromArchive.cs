@@ -1,7 +1,3 @@
-using System;
-using System.IO;
-using System.IO.Compression;
-using NUnit.Framework;
 using Velentr.Core.IO;
 
 namespace Velentr.Core.Test.IO;
@@ -9,11 +5,6 @@ namespace Velentr.Core.Test.IO;
 [TestFixture]
 public class TestArchiveHelpersGetFileContentsFromArchive
 {
-    private string sourceDirectory;
-    private string archivePath;
-    private string fileName;
-    private string fileContent;
-
     [SetUp]
     public void SetUp()
     {
@@ -42,6 +33,11 @@ public class TestArchiveHelpersGetFileContentsFromArchive
         }
     }
 
+    private string sourceDirectory;
+    private string archivePath;
+    private string fileName;
+    private string fileContent;
+
     [Test]
     public void TestGetFileContentsFromArchive_Success()
     {
@@ -56,7 +52,8 @@ public class TestArchiveHelpersGetFileContentsFromArchive
     public void TestGetFileContentsFromArchive_FileNotFound()
     {
         // Act & Assert
-        var ex = Assert.Throws<FileNotFoundException>(() => ArchiveHelpers.GetFileContentsFromArchive(this.archivePath, "nonexistent.txt"));
+        FileNotFoundException? ex = Assert.Throws<FileNotFoundException>(() =>
+            ArchiveHelpers.GetFileContentsFromArchive(this.archivePath, "nonexistent.txt"));
         Assert.That(ex.Message, Is.EqualTo($"File 'nonexistent.txt' not found in archive '{this.archivePath}'."));
     }
 
@@ -65,9 +62,10 @@ public class TestArchiveHelpersGetFileContentsFromArchive
     {
         // Arrange
         var nonExistentArchivePath = Path.Combine(Path.GetTempPath(), Guid.NewGuid() + ".zip");
- 
+
         // Act & Assert
-        var ex = Assert.Throws<FileNotFoundException>(() => ArchiveHelpers.GetFileContentsFromArchive(nonExistentArchivePath, this.fileName));
+        FileNotFoundException? ex = Assert.Throws<FileNotFoundException>(() =>
+            ArchiveHelpers.GetFileContentsFromArchive(nonExistentArchivePath, this.fileName));
         Assert.That(ex.Message, Is.EqualTo($"Archive file '{nonExistentArchivePath}' not found."));
     }
 

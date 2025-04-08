@@ -1,5 +1,3 @@
-using NUnit.Framework;
-using System.Numerics;
 using Velentr.Core.Mathematics;
 
 namespace Velentr.Core.Test.Mathematics;

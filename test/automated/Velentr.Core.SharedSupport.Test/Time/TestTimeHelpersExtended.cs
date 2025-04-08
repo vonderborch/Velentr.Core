@@ -10,8 +10,8 @@ public class TestTimeHelpersExtended
     public void ElapsedMilliSeconds_ShouldReturnCorrectValue()
     {
         // Arrange
-        var startTime = TimeSpan.FromMilliseconds(1000);
-        var endTime = new GameTime(TimeSpan.Zero, TimeSpan.FromMilliseconds(2000));
+        TimeSpan startTime = TimeSpan.FromMilliseconds(1000);
+        GameTime? endTime = new(TimeSpan.Zero, TimeSpan.FromMilliseconds(2000));
 
         // Act
         var result = TimeHelpersExtended.ElapsedMilliSeconds(startTime, endTime);
@@ -24,8 +24,8 @@ public class TestTimeHelpersExtended
     public void ElapsedSeconds_ShouldReturnCorrectValue()
     {
         // Arrange
-        var startTime = TimeSpan.FromSeconds(1);
-        var endTime = new GameTime(TimeSpan.Zero, TimeSpan.FromSeconds(2));
+        TimeSpan startTime = TimeSpan.FromSeconds(1);
+        GameTime? endTime = new(TimeSpan.Zero, TimeSpan.FromSeconds(2));
 
         // Act
         var result = TimeHelpersExtended.ElapsedSeconds(startTime, endTime);
@@ -38,8 +38,8 @@ public class TestTimeHelpersExtended
     public void ElapsedMilliSeconds_ShouldHandleZeroElapsedTime()
     {
         // Arrange
-        var startTime = TimeSpan.FromMilliseconds(1000);
-        var endTime = new GameTime(TimeSpan.Zero, TimeSpan.FromMilliseconds(1000));
+        TimeSpan startTime = TimeSpan.FromMilliseconds(1000);
+        GameTime? endTime = new(TimeSpan.Zero, TimeSpan.FromMilliseconds(1000));
 
         // Act
         var result = TimeHelpersExtended.ElapsedMilliSeconds(startTime, endTime);
@@ -52,8 +52,8 @@ public class TestTimeHelpersExtended
     public void ElapsedSeconds_ShouldHandleZeroElapsedTime()
     {
         // Arrange
-        var startTime = TimeSpan.FromSeconds(1);
-        var endTime = new GameTime(TimeSpan.Zero, TimeSpan.FromSeconds(1));
+        TimeSpan startTime = TimeSpan.FromSeconds(1);
+        GameTime? endTime = new(TimeSpan.Zero, TimeSpan.FromSeconds(1));
 
         // Act
         var result = TimeHelpersExtended.ElapsedSeconds(startTime, endTime);
@@ -66,8 +66,8 @@ public class TestTimeHelpersExtended
     public void ElapsedMilliSeconds_ShouldHandleNegativeElapsedTime()
     {
         // Arrange
-        var startTime = TimeSpan.FromMilliseconds(2000);
-        var endTime = new GameTime(TimeSpan.Zero, TimeSpan.FromMilliseconds(1000));
+        TimeSpan startTime = TimeSpan.FromMilliseconds(2000);
+        GameTime? endTime = new(TimeSpan.Zero, TimeSpan.FromMilliseconds(1000));
 
         // Act
         var result = TimeHelpersExtended.ElapsedMilliSeconds(startTime, endTime);
@@ -80,8 +80,8 @@ public class TestTimeHelpersExtended
     public void ElapsedSeconds_ShouldHandleNegativeElapsedTime()
     {
         // Arrange
-        var startTime = TimeSpan.FromSeconds(2);
-        var endTime = new GameTime(TimeSpan.Zero, TimeSpan.FromSeconds(1));
+        TimeSpan startTime = TimeSpan.FromSeconds(2);
+        GameTime? endTime = new(TimeSpan.Zero, TimeSpan.FromSeconds(1));
 
         // Act
         var result = TimeHelpersExtended.ElapsedSeconds(startTime, endTime);

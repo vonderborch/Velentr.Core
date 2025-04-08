@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using Velentr.Core.Mathematics.Geometry;
 
 namespace Velentr.Core.Test.Mathematics.Geometry;
@@ -9,7 +8,7 @@ public class TestAngle
     [Test]
     public void TestAngleFromDegrees()
     {
-        double degrees = 180.0;
+        var degrees = 180.0;
         Angle angle = Angle.FromDegrees(degrees);
         Assert.That(angle.Degrees, Is.EqualTo(degrees).Within(1e-10));
         Assert.That(angle.Radians, Is.EqualTo(GeometryConstants.Pi).Within(1e-10));
@@ -18,7 +17,7 @@ public class TestAngle
     [Test]
     public void TestAngleFromRadians()
     {
-        double radians = GeometryConstants.Pi;
+        var radians = GeometryConstants.Pi;
         Angle angle = Angle.FromRadians(radians);
         Assert.That(angle.Radians, Is.EqualTo(radians).Within(1e-10));
         Assert.That(angle.Degrees, Is.EqualTo(180.0).Within(1e-10));

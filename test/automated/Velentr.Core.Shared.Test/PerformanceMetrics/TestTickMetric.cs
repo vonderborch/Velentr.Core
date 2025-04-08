@@ -1,5 +1,3 @@
-using NUnit.Framework;
-using System;
 using Velentr.Core.PerformanceMetrics;
 
 namespace Velentr.Core.Test.PerformanceMetrics;
@@ -10,7 +8,7 @@ public class TestTickMetric
     [Test]
     public void TestAddTick()
     {
-        var tickMetric = new TickMetric(10);
+        TickMetric? tickMetric = new(10);
         tickMetric.AddTick(TimeSpan.FromSeconds(1));
         Assert.That(tickMetric.AverageTicksPerSecond, Is.EqualTo(1).Within(0.0001));
 
@@ -24,7 +22,7 @@ public class TestTickMetric
     [Test]
     public void TestAverageTicksPerSecond()
     {
-        var tickMetric = new TickMetric(5);
+        TickMetric? tickMetric = new(5);
         tickMetric.AddTick(TimeSpan.FromSeconds(1));
         tickMetric.AddTick(TimeSpan.FromSeconds(1));
         tickMetric.AddTick(TimeSpan.FromSeconds(1));
@@ -39,7 +37,7 @@ public class TestTickMetric
     [Test]
     public void TestMaximumSamples()
     {
-        var tickMetric = new TickMetric(3);
+        TickMetric? tickMetric = new(3);
         tickMetric.AddTick(TimeSpan.FromSeconds(1));
         tickMetric.AddTick(TimeSpan.FromSeconds(1));
         tickMetric.AddTick(TimeSpan.FromSeconds(1));

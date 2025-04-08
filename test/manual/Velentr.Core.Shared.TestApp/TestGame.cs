@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using System.Net.Mime;
 using System.Reflection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -9,7 +8,7 @@ namespace Velentr.Core.TestApp;
 
 public class TestGame : PerformanceMonitoredGame
 {
-    private GraphicsDeviceManager _graphics;
+    private readonly GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
 
     public TestGame() : base(
@@ -34,12 +33,16 @@ public class TestGame : PerformanceMonitoredGame
         this.IsMouseVisible = true;
     }
 
-    private void UpdateResolution(int width, int height, bool fullscreen, GraphicsDeviceManager graphics)
+    protected override void Draw(GameTime gameTime)
     {
-        graphics.IsFullScreen = fullscreen;
-        graphics.PreferredBackBufferWidth = width;
-        graphics.PreferredBackBufferHeight = height;
-        graphics.ApplyChanges();
+        this.GraphicsDevice.Clear(Color.CornflowerBlue);
+        this._spriteBatch.Begin();
+        RenderMetrics(gameTime, this._spriteBatch);
+
+        // TODO: Add your drawing code here
+
+        this._spriteBatch.End();
+        base.Draw(gameTime);
     }
 
     protected override void Initialize()
@@ -72,15 +75,11 @@ public class TestGame : PerformanceMonitoredGame
         base.Update(gameTime);
     }
 
-    protected override void Draw(GameTime gameTime)
+    private void UpdateResolution(int width, int height, bool fullscreen, GraphicsDeviceManager graphics)
     {
-        this.GraphicsDevice.Clear(Color.CornflowerBlue);
-        this._spriteBatch.Begin();
-        RenderMetrics(gameTime, this._spriteBatch);
-
-        // TODO: Add your drawing code here
-
-        this._spriteBatch.End();
-        base.Draw(gameTime);
+        graphics.IsFullScreen = fullscreen;
+        graphics.PreferredBackBufferWidth = width;
+        graphics.PreferredBackBufferHeight = height;
+        graphics.ApplyChanges();
     }
 }

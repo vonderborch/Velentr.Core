@@ -1,6 +1,3 @@
-using NUnit.Framework;
-using System;
-using System.Threading;
 using Velentr.Core.PerformanceMetrics;
 
 namespace Velentr.Core.Test.PerformanceMetrics;
@@ -11,7 +8,7 @@ public class TestResourceMetrics
     [Test]
     public void TestUpdate()
     {
-        var resourceMetrics = new ResourceMetrics(5, 100);
+        ResourceMetrics resourceMetrics = new(5, 100);
         resourceMetrics.Update();
         Thread.Sleep(200); // Allow some time for the update thread to run
 
@@ -24,7 +21,7 @@ public class TestResourceMetrics
     [Test]
     public void TestDispose()
     {
-        var resourceMetrics = new ResourceMetrics(5, 100);
+        ResourceMetrics resourceMetrics = new(5, 100);
         resourceMetrics.Update();
         Thread.Sleep(200); // Allow some time for the update thread to run
 
@@ -35,7 +32,7 @@ public class TestResourceMetrics
     [Test]
     public void TestMaximumSamples()
     {
-        var resourceMetrics = new ResourceMetrics(3, 100);
+        ResourceMetrics resourceMetrics = new(3, 100);
         resourceMetrics.Update();
         Thread.Sleep(400); // Allow some time for the update thread to run
 

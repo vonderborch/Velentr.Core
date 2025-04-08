@@ -14,52 +14,52 @@ public struct FP2I : IFixedPoint<FP2I>, IBaseFixedPoint<int>
     ///     Gets the precision of the fixed-point number.
     /// </summary>
     public static ushort Precision => 2;
-    
+
     /// <summary>
     ///     Gets the shift value used for fixed-point calculations.
     /// </summary>
     public static ushort Shift => 7;
-    
+
     /// <summary>
     ///     Gets the format string used for converting the fixed-point number to a string.
     /// </summary>
     public static string StringFormat => $"{{0:F{Precision}}}";
-    
+
     /// <summary>
     ///     Gets the base value representing one in the fixed-point format.
     /// </summary>
     public static int BaseOne { get; } = 1 << Shift;
-    
+
     /// <summary>
-    /// Represents the maximum value of the fixed-point number.
+    ///     Represents the maximum value of the fixed-point number.
     /// </summary>
     public static FP2I MaxValue { get; } = new() { RawValue = int.MaxValue };
-    
+
     /// <summary>
-    /// Represents the minimum value of the fixed-point number.
+    ///     Represents the minimum value of the fixed-point number.
     /// </summary>
     public static FP2I MinValue { get; } = new() { RawValue = int.MinValue };
-    
+
     /// <summary>
     ///     Represents the fixed-point number zero.
     /// </summary>
     public static FP2I Zero { get; } = new() { RawValue = 0 };
-    
+
     /// <summary>
     ///     Represents the fixed-point number one.
     /// </summary>
     public static FP2I One { get; } = new() { RawValue = 1 << Shift };
-    
+
     /// <summary>
     ///     Gets the additive identity for the fixed-point number.
     /// </summary>
     public static FP2I AdditiveIdentity => Zero;
-    
+
     /// <summary>
     ///     Gets the multiplicative identity for the fixed-point number.
     /// </summary>
     public static FP2I MultiplicativeIdentity => One;
-    
+
     /// <summary>
     ///     Gets the radix (base) of the fixed-point number.
     /// </summary>
@@ -74,7 +74,7 @@ public struct FP2I : IFixedPoint<FP2I>, IBaseFixedPoint<int>
     {
         this.RawValue = rawValue;
     }
-    
+
     /// <summary>
     ///     Creates a fixed-point number from a double value.
     /// </summary>
@@ -169,17 +169,17 @@ public struct FP2I : IFixedPoint<FP2I>, IBaseFixedPoint<int>
         charsWritten = formattedValue.Length;
         return true;
     }
-    
+
     public static FP2I Parse(string s, IFormatProvider? provider)
     {
-        return (FP2I)CreateFromDouble(double.Parse(s, provider));
+        return CreateFromDouble(double.Parse(s, provider));
     }
 
     public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out FP2I result)
     {
         if (double.TryParse(s, provider, out var value))
         {
-            result = (FP2I)CreateFromDouble(value);
+            result = CreateFromDouble(value);
             return true;
         }
 
@@ -189,14 +189,14 @@ public struct FP2I : IFixedPoint<FP2I>, IBaseFixedPoint<int>
 
     public static FP2I Parse(ReadOnlySpan<char> s, IFormatProvider? provider)
     {
-        return (FP2I)CreateFromDouble(double.Parse(s, provider));
+        return CreateFromDouble(double.Parse(s, provider));
     }
 
     public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out FP2I result)
     {
         if (double.TryParse(s, provider, out var value))
         {
-            result = (FP2I)CreateFromDouble(value);
+            result = CreateFromDouble(value);
             return true;
         }
 
@@ -206,19 +206,19 @@ public struct FP2I : IFixedPoint<FP2I>, IBaseFixedPoint<int>
 
     public static FP2I Parse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider)
     {
-        return (FP2I)CreateFromDouble(double.Parse(s, style, provider));
+        return CreateFromDouble(double.Parse(s, style, provider));
     }
 
     public static FP2I Parse(string s, NumberStyles style, IFormatProvider? provider)
     {
-        return (FP2I)CreateFromDouble(double.Parse(s, style, provider));
+        return CreateFromDouble(double.Parse(s, style, provider));
     }
 
     public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out FP2I result)
     {
         if (double.TryParse(s, style, provider, out var value))
         {
-            result = (FP2I)CreateFromDouble(value);
+            result = CreateFromDouble(value);
             return true;
         }
 
@@ -231,14 +231,14 @@ public struct FP2I : IFixedPoint<FP2I>, IBaseFixedPoint<int>
     {
         if (double.TryParse(s, style, provider, out var value))
         {
-            result = (FP2I)CreateFromDouble(value);
+            result = CreateFromDouble(value);
             return true;
         }
 
         result = default;
         return false;
     }
-    
+
     /// <summary>
     ///     Adds two fixed-point numbers.
     /// </summary>
@@ -312,7 +312,7 @@ public struct FP2I : IFixedPoint<FP2I>, IBaseFixedPoint<int>
     {
         return new FP2I { RawValue = value.RawValue - BaseOne };
     }
-    
+
     public static bool operator ==(FP2I left, FP2I right)
     {
         return left.RawValue == right.RawValue;
@@ -342,7 +342,7 @@ public struct FP2I : IFixedPoint<FP2I>, IBaseFixedPoint<int>
     {
         return left.RawValue <= right.RawValue;
     }
-    
+
     /// <summary>
     ///     Returns the absolute value of a fixed-point number.
     /// </summary>
@@ -592,21 +592,21 @@ public struct FP2I : IFixedPoint<FP2I>, IBaseFixedPoint<int>
         if (typeof(TOther) == typeof(double))
         {
             var doubleValue = (double)(object)value;
-            result = (FP2I)CreateFromDouble(doubleValue);
+            result = CreateFromDouble(doubleValue);
             return true;
         }
 
         if (typeof(TOther) == typeof(float))
         {
             var floatValue = (float)(object)value;
-            result = (FP2I)CreateFromFloat(floatValue);
+            result = CreateFromFloat(floatValue);
             return true;
         }
 
         if (typeof(TOther) == typeof(decimal))
         {
             var decimalValue = (decimal)(object)value;
-            result = (FP2I)CreateFromDouble((double)decimalValue);
+            result = CreateFromDouble((double)decimalValue);
             return true;
         }
 
@@ -669,7 +669,7 @@ public struct FP2I : IFixedPoint<FP2I>, IBaseFixedPoint<int>
 
         if (typeof(TOther) == typeof(int))
         {
-            var intValue = (int)(value.RawValue / BaseOne);
+            var intValue = value.RawValue / BaseOne;
             result = (TOther)(object)intValue;
             return true;
         }
@@ -705,7 +705,7 @@ public struct FP2I : IFixedPoint<FP2I>, IBaseFixedPoint<int>
     {
         return new FP2I { RawValue = value * BaseOne };
     }
-    
+
     /// <summary>
     ///     Converts a short to a fixed-point number.
     /// </summary>
@@ -713,7 +713,7 @@ public struct FP2I : IFixedPoint<FP2I>, IBaseFixedPoint<int>
     {
         return new FP2I(value);
     }
-    
+
     /// <summary>
     ///     Converts a long to a fixed-point number.
     /// </summary>
@@ -721,29 +721,29 @@ public struct FP2I : IFixedPoint<FP2I>, IBaseFixedPoint<int>
     {
         return new FP2I { RawValue = (int)value * BaseOne };
     }
-    
+
     /// <summary>
     ///     Converts a decimal to a fixed-point number.
     /// </summary>
     public static implicit operator FP2I(decimal value)
     {
-        return (FP2I)CreateFromDouble((double)value);
+        return CreateFromDouble((double)value);
     }
-    
+
     /// <summary>
     ///     Converts a double to a fixed-point number.
     /// </summary>
     public static implicit operator FP2I(double value)
     {
-        return (FP2I)CreateFromDouble(value);
+        return CreateFromDouble(value);
     }
-    
+
     /// <summary>
     ///     Converts a float to a fixed-point number.
     /// </summary>
     public static implicit operator FP2I(float value)
     {
-        return (FP2I)CreateFromFloat(value);
+        return CreateFromFloat(value);
     }
 
     /// <summary>
@@ -767,6 +767,6 @@ public struct FP2I : IFixedPoint<FP2I>, IBaseFixedPoint<int>
     /// </summary>
     public static explicit operator int(FP2I value)
     {
-        return (int)(value.RawValue / BaseOne);
+        return value.RawValue / BaseOne;
     }
 }

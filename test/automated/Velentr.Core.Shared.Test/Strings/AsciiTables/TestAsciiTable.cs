@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
 using Velentr.Core.Strings.AsciiTables;
 
 namespace Velentr.Core.Test.Strings.AsciiTables;
@@ -9,41 +6,84 @@ namespace Velentr.Core.Test.Strings.AsciiTables;
 [TestFixture]
 public class TestAsciiTable
 {
-    private List<AsciiTableColumn> columns;
-    private List<AsciiTableColumn> aggregatableColumns;
-    private List<AsciiTableColumn> mixedColumns;
-
     [SetUp]
     public void SetUp()
     {
         this.columns = new List<AsciiTableColumn>
         {
-            new AsciiTableColumn { Key = "Column1", DisplayName = "Column 1", DefaultValue = "", HeaderJustification = AsciiTableJustification.Left },
-            new AsciiTableColumn { Key = "Column2", DisplayName = "Column 2", DefaultValue = "", HeaderJustification = AsciiTableJustification.Left }
+            new()
+            {
+                Key = "Column1", DisplayName = "Column 1", DefaultValue = "",
+                HeaderJustification = AsciiTableJustification.Left
+            },
+            new()
+            {
+                Key = "Column2", DisplayName = "Column 2", DefaultValue = "",
+                HeaderJustification = AsciiTableJustification.Left
+            }
         };
 
         this.aggregatableColumns = new List<AsciiTableColumn>
         {
-            new AsciiTableColumn { Key = "Column1", DisplayName = "Column 1", DefaultValue = "", TotalsRowJustification = AsciiTableJustification.Center, AveragesRowJustification = AsciiTableJustification.Right, IsAggregatable = true, TotalsAggregateFunction = x => x.Select(y => double.Parse(y.ToString())).Sum(), AverageAggregateFunction = x => x.Select(y => double.Parse(y.ToString())).Average() },
-            new AsciiTableColumn { Key = "Column2", DisplayName = "Column 2", DefaultValue = "", TotalsRowJustification = AsciiTableJustification.Right, AveragesRowJustification = AsciiTableJustification.Center, IsAggregatable = true, TotalsAggregateFunction = x => x.Select(y => double.Parse(y.ToString())).Sum(), AverageAggregateFunction = x => x.Select(y => double.Parse(y.ToString())).Average() }
+            new()
+            {
+                Key = "Column1", DisplayName = "Column 1", DefaultValue = "",
+                TotalsRowJustification = AsciiTableJustification.Center,
+                AveragesRowJustification = AsciiTableJustification.Right, IsAggregatable = true,
+                TotalsAggregateFunction = x => x.Select(y => double.Parse(y.ToString())).Sum(),
+                AverageAggregateFunction = x => x.Select(y => double.Parse(y.ToString())).Average()
+            },
+            new()
+            {
+                Key = "Column2", DisplayName = "Column 2", DefaultValue = "",
+                TotalsRowJustification = AsciiTableJustification.Right,
+                AveragesRowJustification = AsciiTableJustification.Center, IsAggregatable = true,
+                TotalsAggregateFunction = x => x.Select(y => double.Parse(y.ToString())).Sum(),
+                AverageAggregateFunction = x => x.Select(y => double.Parse(y.ToString())).Average()
+            }
         };
 
         this.mixedColumns = new List<AsciiTableColumn>
         {
-            new AsciiTableColumn { Key = "Column1", DisplayName = "Column 1", DefaultValue = "", HeaderJustification = AsciiTableJustification.Left },
-            new AsciiTableColumn { Key = "Column2", DisplayName = "Column 2", DefaultValue = 0, SerializationMode = AsciiColumnSerializationMode.Formatted, ValueDisplayFormat = "{value:F2}", ValueJustification = AsciiTableJustification.Right, TotalsRowJustification = AsciiTableJustification.Center, AveragesRowJustification = AsciiTableJustification.Right, IsAggregatable = true, TotalsAggregateFunction = x => x.Select(y => double.Parse(y?.ToString() ?? "0")).Sum(), AverageAggregateFunction = x => x.Select(y => double.Parse(y?.ToString() ?? "0")).Average() },
-            new AsciiTableColumn { Key = "Column3", DisplayName = "Column 3", DefaultValue = 0, SerializationMode = AsciiColumnSerializationMode.Formatted, ValueDisplayFormat = "{value:F4}", TotalsRowJustification = AsciiTableJustification.Right, AveragesRowJustification = AsciiTableJustification.Center, IsAggregatable = true, TotalsAggregateFunction = x => x.Select(y => double.Parse(y?.ToString() ?? "0")).Sum(), AverageAggregateFunction = x => x.Select(y => double.Parse(y?.ToString() ?? "0")).Average() }
+            new()
+            {
+                Key = "Column1", DisplayName = "Column 1", DefaultValue = "",
+                HeaderJustification = AsciiTableJustification.Left
+            },
+            new()
+            {
+                Key = "Column2", DisplayName = "Column 2", DefaultValue = 0,
+                SerializationMode = AsciiColumnSerializationMode.Formatted, ValueDisplayFormat = "{value:F2}",
+                ValueJustification = AsciiTableJustification.Right,
+                TotalsRowJustification = AsciiTableJustification.Center,
+                AveragesRowJustification = AsciiTableJustification.Right, IsAggregatable = true,
+                TotalsAggregateFunction = x => x.Select(y => double.Parse(y?.ToString() ?? "0")).Sum(),
+                AverageAggregateFunction = x => x.Select(y => double.Parse(y?.ToString() ?? "0")).Average()
+            },
+            new()
+            {
+                Key = "Column3", DisplayName = "Column 3", DefaultValue = 0,
+                SerializationMode = AsciiColumnSerializationMode.Formatted, ValueDisplayFormat = "{value:F4}",
+                TotalsRowJustification = AsciiTableJustification.Right,
+                AveragesRowJustification = AsciiTableJustification.Center, IsAggregatable = true,
+                TotalsAggregateFunction = x => x.Select(y => double.Parse(y?.ToString() ?? "0")).Sum(),
+                AverageAggregateFunction = x => x.Select(y => double.Parse(y?.ToString() ?? "0")).Average()
+            }
         };
     }
+
+    private List<AsciiTableColumn> columns;
+    private List<AsciiTableColumn> aggregatableColumns;
+    private List<AsciiTableColumn> mixedColumns;
 
     [Test]
     public void GetAsciiTableRows_ShouldReturnCorrectRows()
     {
-        var parameters = new AsciiTableParameters
+        AsciiTableParameters? parameters = new()
         {
             Rows = new List<Dictionary<string, object>>
             {
-                new Dictionary<string, object> { { "Column1", "Value1" }, { "Column2", "Value2" } }
+                new() { { "Column1", "Value1" }, { "Column2", "Value2" } }
             },
             IncludeHeaders = true,
             IncludeSeperatorRowAfterHeaders = true,
@@ -51,8 +91,8 @@ public class TestAsciiTable
             IncludeTotalsRow = false
         };
 
-        var table = new AsciiTable(this.columns);
-        var rows = table.GetAsciiTableRows(parameters);
+        AsciiTable table = new(this.columns);
+        List<string> rows = table.GetAsciiTableRows(parameters);
 
         Assert.That(rows.Count, Is.EqualTo(3));
         Assert.That(rows[0], Is.EqualTo("| Column 1 | Column 2 |"));
@@ -63,11 +103,11 @@ public class TestAsciiTable
     [Test]
     public void GetAsciiTableString_ShouldReturnCorrectString()
     {
-        var parameters = new AsciiTableParameters
+        AsciiTableParameters? parameters = new()
         {
             Rows = new List<Dictionary<string, object>>
             {
-                new Dictionary<string, object> { { "Column1", "Value1" }, { "Column2", "Value2" } }
+                new() { { "Column1", "Value1" }, { "Column2", "Value2" } }
             },
             IncludeHeaders = true,
             IncludeSeperatorRowAfterHeaders = true,
@@ -77,7 +117,7 @@ public class TestAsciiTable
             IncludeTotalsRow = false
         };
 
-        var table = new AsciiTable(this.columns);
+        AsciiTable table = new(this.columns);
         var tableString = table.GetAsciiTableString(parameters);
 
         var expectedString = "Column 1 | Column 2" + Environment.NewLine +
@@ -90,11 +130,11 @@ public class TestAsciiTable
     [Test]
     public void GetAsciiTableStringBuilder_ShouldReturnCorrectStringBuilder()
     {
-        var parameters = new AsciiTableParameters
+        AsciiTableParameters? parameters = new()
         {
             Rows = new List<Dictionary<string, object>>
             {
-                new Dictionary<string, object> { { "Column1", "Value1" }, { "Column2", "Value2" } }
+                new() { { "Column1", "Value1" }, { "Column2", "Value2" } }
             },
             IncludeHeaders = true,
             IncludeSeperatorRowAfterHeaders = true,
@@ -102,10 +142,10 @@ public class TestAsciiTable
             ColumnKeyForAveragesRowDisplayString = "Column1"
         };
 
-        var table = new AsciiTable(this.columns);
-        var tableStringBuilder = table.GetAsciiTableStringBuilder(parameters);
+        AsciiTable table = new(this.columns);
+        StringBuilder tableStringBuilder = table.GetAsciiTableStringBuilder(parameters);
 
-        var expectedStringBuilder = new StringBuilder();
+        StringBuilder expectedStringBuilder = new();
         expectedStringBuilder.AppendLine("| Column 1 | Column 2 |");
         expectedStringBuilder.AppendLine("| -------- | -------- |");
         expectedStringBuilder.AppendLine("| Value1   | Value2   |");
@@ -119,13 +159,13 @@ public class TestAsciiTable
     [Test]
     public void GetAsciiTableRows_ShouldThrowException_WhenParametersAreInvalid()
     {
-        var parameters = new AsciiTableParameters
+        AsciiTableParameters? parameters = new()
         {
             Rows = null!,
             IncludeHeaders = true
         };
 
-        var table = new AsciiTable(this.columns);
+        AsciiTable table = new(this.columns);
 
         Assert.Throws<ArgumentException>(() => table.GetAsciiTableRows(parameters));
     }
@@ -133,7 +173,7 @@ public class TestAsciiTable
     [Test]
     public void GetAsciiTableRows_ShouldHandleEmptyRows()
     {
-        var parameters = new AsciiTableParameters
+        AsciiTableParameters? parameters = new()
         {
             Rows = new List<Dictionary<string, object>>(),
             IncludeHeaders = true,
@@ -144,8 +184,8 @@ public class TestAsciiTable
             IncludeColumnSeperatorAfterRow = false
         };
 
-        var table = new AsciiTable(this.columns);
-        var rows = table.GetAsciiTableRows(parameters);
+        AsciiTable table = new(this.columns);
+        List<string> rows = table.GetAsciiTableRows(parameters);
 
         Assert.That(rows.Count, Is.EqualTo(2));
         Assert.That(rows[0], Is.EqualTo("Column 1 | Column 2"));
@@ -155,11 +195,11 @@ public class TestAsciiTable
     [Test]
     public void GetAsciiTableString_ShouldHandleNoHeaders()
     {
-        var parameters = new AsciiTableParameters
+        AsciiTableParameters? parameters = new()
         {
             Rows = new List<Dictionary<string, object>>
             {
-                new Dictionary<string, object> { { "Column1", "Value1" }, { "Column2", "Value2" } }
+                new() { { "Column1", "Value1" }, { "Column2", "Value2" } }
             },
             IncludeHeaders = false,
             IncludeColumnSeperatorAfterRow = false,
@@ -168,7 +208,7 @@ public class TestAsciiTable
             IncludeAveragesRow = false
         };
 
-        var table = new AsciiTable(this.columns);
+        AsciiTable table = new(this.columns);
         var tableString = table.GetAsciiTableString(parameters);
 
         var expectedString = "Value1 | Value2";
@@ -179,11 +219,11 @@ public class TestAsciiTable
     [Test]
     public void GetAsciiTableString_ShouldHandleCustomSeparator()
     {
-        var parameters = new AsciiTableParameters
+        AsciiTableParameters? parameters = new()
         {
             Rows = new List<Dictionary<string, object>>
             {
-                new Dictionary<string, object> { { "Column1", "Value1" }, { "Column2", "Value2" } }
+                new() { { "Column1", "Value1" }, { "Column2", "Value2" } }
             },
             IncludeHeaders = true,
             IncludeSeperatorRowAfterHeaders = true,
@@ -192,7 +232,7 @@ public class TestAsciiTable
             IncludeColumnSeperatorBeforeRow = false
         };
 
-        var table = new AsciiTable(this.columns, columnSeperator: " || ");
+        AsciiTable table = new(this.columns, " || ");
         var tableString = table.GetAsciiTableString(parameters);
 
         var expectedString = "Column 1 || Column 2 ||" + Environment.NewLine +
@@ -205,12 +245,12 @@ public class TestAsciiTable
     [Test]
     public void GetAsciiTableString_ShouldIncludeTotalsRow()
     {
-        var parameters = new AsciiTableParameters
+        AsciiTableParameters? parameters = new()
         {
             Rows = new List<Dictionary<string, object>>
             {
-                new Dictionary<string, object> { { "Column1", 1 }, { "Column2", 2 } },
-                new Dictionary<string, object> { { "Column1", 3 }, { "Column2", 4 } }
+                new() { { "Column1", 1 }, { "Column2", 2 } },
+                new() { { "Column1", 3 }, { "Column2", 4 } }
             },
             IncludeHeaders = true,
             IncludeSeperatorRowAfterHeaders = true,
@@ -218,7 +258,7 @@ public class TestAsciiTable
             IncludeAveragesRow = false
         };
 
-        var table = new AsciiTable(this.aggregatableColumns);
+        AsciiTable table = new(this.aggregatableColumns);
         var tableString = table.GetAsciiTableString(parameters);
 
         var expectedString = "| Column 1 | Column 2 |" + Environment.NewLine +
@@ -234,12 +274,12 @@ public class TestAsciiTable
     [Test]
     public void GetAsciiTableString_ShouldIncludeAveragesRow()
     {
-        var parameters = new AsciiTableParameters
+        AsciiTableParameters? parameters = new()
         {
             Rows = new List<Dictionary<string, object>>
             {
-                new Dictionary<string, object> { { "Column1", 1 }, { "Column2", 2 } },
-                new Dictionary<string, object> { { "Column1", 3 }, { "Column2", 4 } }
+                new() { { "Column1", 1 }, { "Column2", 2 } },
+                new() { { "Column1", 3 }, { "Column2", 4 } }
             },
             IncludeHeaders = true,
             IncludeSeperatorRowAfterHeaders = true,
@@ -249,7 +289,7 @@ public class TestAsciiTable
             IncludeColumnSeperatorBeforeRow = false
         };
 
-        var table = new AsciiTable(this.aggregatableColumns);
+        AsciiTable table = new(this.aggregatableColumns);
         var tableString = table.GetAsciiTableString(parameters);
 
         var expectedString = "Column 1 | Column 2" + Environment.NewLine +
@@ -265,14 +305,14 @@ public class TestAsciiTable
     [Test]
     public void GetAsciiTableString_ShouldIncludeTotalsAndAveragesNames()
     {
-        var parameters = new AsciiTableParameters
+        AsciiTableParameters? parameters = new()
         {
             Rows = new List<Dictionary<string, object?>>
             {
-                new Dictionary<string, object?> { { "Column1", "Cell1A" }, { "Column2", 1 }, { "Column3", 2 } },
-                new Dictionary<string, object?> { { "Column1", "Cell1B" }, { "Column2", 3 }, { "Column3", null } },
-                new Dictionary<string, object?> { { "Column1", "Cell1C" }, { "Column2", 12 }, { "Column3", 0 } },
-                new Dictionary<string, object?> { { "Column1", "Cell1D" }, { "Column2", 1122 }, { "Column3", 0 } }
+                new() { { "Column1", "Cell1A" }, { "Column2", 1 }, { "Column3", 2 } },
+                new() { { "Column1", "Cell1B" }, { "Column2", 3 }, { "Column3", null } },
+                new() { { "Column1", "Cell1C" }, { "Column2", 12 }, { "Column3", 0 } },
+                new() { { "Column1", "Cell1D" }, { "Column2", 1122 }, { "Column3", 0 } }
             },
             IncludeHeaders = true,
             IncludeSeperatorRowAfterHeaders = true,
@@ -280,7 +320,7 @@ public class TestAsciiTable
             ColumnKeyForTotalsRowDisplayString = "Column1"
         };
 
-        var table = new AsciiTable(this.mixedColumns);
+        AsciiTable table = new(this.mixedColumns);
         var tableString = table.GetAsciiTableString(parameters);
 
         var expectedString = "| Column 1 | Column 2 | Column 3 |" + Environment.NewLine +

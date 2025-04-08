@@ -1,6 +1,3 @@
-using System;
-using System.IO;
-using NUnit.Framework;
 using Velentr.Core.IO;
 
 namespace Velentr.Core.Test.IO;
@@ -8,8 +5,6 @@ namespace Velentr.Core.Test.IO;
 [TestFixture]
 public class TestDirectoryHelpersDeleteDirectoryIfExists
 {
-    private string testDir;
-
     [SetUp]
     public void SetUp()
     {
@@ -24,6 +19,8 @@ public class TestDirectoryHelpersDeleteDirectoryIfExists
             Directory.Delete(this.testDir, true);
         }
     }
+
+    private string testDir;
 
     [Test]
     public void TestDeleteDirectoryIfExists_DirectoryExists()
@@ -90,10 +87,11 @@ public class TestDirectoryHelpersDeleteDirectoryIfExists
         File.WriteAllText(filePath, "Hello, World!");
 
         // Lock the file to simulate a deletion failure
-        using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.None))
+        using (FileStream? stream = new(filePath, FileMode.Open, FileAccess.Read, FileShare.None))
         {
             // Act & Assert
-            var ex = Assert.Throws<Exception>(() => DirectoryHelpers.DeleteDirectoryIfExists(this.testDir, maxRetries: 3, baseDelayMs: 10, maxDelayMs: 20, delayMultiplier: 1));
+            Exception? ex =
+                Assert.Throws<Exception>(() => DirectoryHelpers.DeleteDirectoryIfExists(this.testDir, 3, 10, 20, 1));
             Assert.That(ex.Message, Is.EqualTo("Failed to delete directory after maximum retries."));
         }
     }

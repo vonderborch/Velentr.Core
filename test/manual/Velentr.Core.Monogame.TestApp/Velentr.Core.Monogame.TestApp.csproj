@@ -2,6 +2,7 @@
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
         <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
         <RollForward>Major</RollForward>
         <PublishReadyToRun>false</PublishReadyToRun>
         <TieredCompilation>false</TieredCompilation>
@@ -13,6 +14,7 @@
         <Platforms>AnyCPU</Platforms>
         <AssemblyVersion>3.0.0.0</AssemblyVersion>
         <FileVersion>3.0.0.0</FileVersion>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
     <PropertyGroup>
         <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -34,8 +36,8 @@
         </None>
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.3" />
-        <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.3" />
+        <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.3"/>
+        <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.3"/>
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\..\..\source\Velentr.Core.Monogame\Velentr.Core.Monogame.csproj"/>

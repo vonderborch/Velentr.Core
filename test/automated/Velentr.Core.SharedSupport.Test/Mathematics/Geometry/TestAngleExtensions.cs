@@ -1,6 +1,5 @@
-using NUnit.Framework;
-using Velentr.Core.Mathematics.Geometry;
 using Microsoft.Xna.Framework;
+using Velentr.Core.Mathematics.Geometry;
 
 namespace Velentr.Core.Test.Mathematics.Geometry;
 
@@ -20,7 +19,7 @@ public class TestAngleExtensions
     public void TestGetTransformationMatrixFromAngleAndAxis()
     {
         Angle angle = Angle.FromDegrees(90.0);
-        Vector3 axis = new Vector3(1, 0, 0);
+        Vector3 axis = new(1, 0, 0);
         Matrix expectedMatrix = Matrix.CreateFromAxisAngle(axis, (float)angle.Radians);
         Matrix resultMatrix = angle.GetTransformationMatrix(axis);
         Assert.That(resultMatrix, Is.EqualTo(expectedMatrix));
@@ -30,8 +29,8 @@ public class TestAngleExtensions
     public void TestGetTransformationMatrixFromAngleAndCoordinates()
     {
         Angle angle = Angle.FromDegrees(90.0);
-        Vector2 coordinates = new Vector2(1, 0);
-        Vector3 axis = new Vector3(coordinates.X, coordinates.Y, 0);
+        Vector2 coordinates = new(1, 0);
+        Vector3 axis = new(coordinates.X, coordinates.Y, 0);
         Matrix expectedMatrix = Matrix.CreateFromAxisAngle(axis, (float)angle.Radians);
         Matrix resultMatrix = angle.GetTransformationMatrix(coordinates);
         Assert.That(resultMatrix, Is.EqualTo(expectedMatrix));
@@ -41,9 +40,9 @@ public class TestAngleExtensions
     public void TestGetTransformationMatrixFromAngleAndDoubleCoordinates()
     {
         Angle angle = Angle.FromDegrees(90.0);
-        double x = 1.0;
-        double y = 0.0;
-        Vector3 axis = new Vector3((float)x, (float)y, 0);
+        var x = 1.0;
+        var y = 0.0;
+        Vector3 axis = new((float)x, (float)y, 0);
         Matrix expectedMatrix = Matrix.CreateFromAxisAngle(axis, (float)angle.Radians);
         Matrix resultMatrix = angle.GetTransformationMatrix(x, y);
         Assert.That(resultMatrix, Is.EqualTo(expectedMatrix));
@@ -53,9 +52,9 @@ public class TestAngleExtensions
     public void TestGetTransformationMatrixFromAngleAndIntCoordinates()
     {
         Angle angle = Angle.FromDegrees(90.0);
-        int x = 1;
-        int y = 0;
-        Vector3 axis = new Vector3(x, y, 0);
+        var x = 1;
+        var y = 0;
+        Vector3 axis = new(x, y, 0);
         Matrix expectedMatrix = Matrix.CreateFromAxisAngle(axis, (float)angle.Radians);
         Matrix resultMatrix = angle.GetTransformationMatrix(x, y);
         Assert.That(resultMatrix, Is.EqualTo(expectedMatrix));

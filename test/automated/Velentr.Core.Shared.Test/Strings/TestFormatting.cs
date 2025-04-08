@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using Velentr.Core.Json;
 using Velentr.Core.Strings;
 
@@ -88,7 +87,7 @@ public class FormattingTests
         // Assert
         Assert.That(result, Is.EqualTo(expected));
     }
-    
+
     [Test]
     public void FormatString_ShouldReplaceMultiplePlaceholders_WithParameters()
     {
@@ -169,6 +168,7 @@ public class FormattingTests
         // Assert
         Assert.That(result, Is.EqualTo(expected));
     }
+
     [Test]
     public void FormatString_ShouldHandleNullFormatString()
     {
@@ -287,7 +287,8 @@ public class FormattingTests
         var expected = $"Value: 123.46, Value2: 123.45679, Value: 123.4568, DateValue: {now:yyyy-MM-dd}";
 
         // Act
-        var result = Formatting.FormatString(format, 123.456789, new { value2 = 123.456789 }, 123.456789, new { dateValue = now });
+        var result = Formatting.FormatString(format, 123.456789, new { value2 = 123.456789 }, 123.456789,
+            new { dateValue = now });
 
         // Assert
         Assert.That(result, Is.EqualTo(expected));

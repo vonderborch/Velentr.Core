@@ -1,6 +1,3 @@
-using System;
-using System.IO;
-using NUnit.Framework;
 using Velentr.Core.IO;
 
 namespace Velentr.Core.Test.IO;
@@ -8,9 +5,6 @@ namespace Velentr.Core.Test.IO;
 [TestFixture]
 public class TestFileHelpersSafeCopyFile
 {
-    private string sourceFile;
-    private string destinationFile;
-
     [SetUp]
     public void SetUp()
     {
@@ -34,6 +28,9 @@ public class TestFileHelpersSafeCopyFile
             File.Delete(this.destinationFile);
         }
     }
+
+    private string sourceFile;
+    private string destinationFile;
 
     [Test]
     public void TestSafeCopyFile_FileCopiedSuccessfully()
@@ -62,10 +59,11 @@ public class TestFileHelpersSafeCopyFile
     public void TestSafeCopyFile_MaxRetriesExceeded()
     {
         // Arrange
-        using (var stream = new FileStream(this.sourceFile, FileMode.Open, FileAccess.Read, FileShare.None))
+        using (FileStream? stream = new(this.sourceFile, FileMode.Open, FileAccess.Read, FileShare.None))
         {
             // Act & Assert
-            Assert.Throws<Exception>(() => FileHelpers.SafeCopyFile(this.sourceFile, this.destinationFile, maxRetries: 3, baseDelayMs: 10, maxDelayMs: 20, delayMultiplier: 1));
+            Assert.Throws<Exception>(
+                () => FileHelpers.SafeCopyFile(this.sourceFile, this.destinationFile, 3, 10, 20, 1));
         }
     }
 

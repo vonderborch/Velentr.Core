@@ -9,15 +9,15 @@ namespace Velentr.Core.Mathematics.FixedPoint;
 public interface IFixedPoint<TSelf> : INumber<TSelf> where TSelf : INumber<TSelf>
 {
     /// <summary>
-    /// Represents the maximum value of the fixed-point number.
+    ///     Represents the maximum value of the fixed-point number.
     /// </summary>
     static abstract TSelf MaxValue { get; }
-    
+
     /// <summary>
-    /// Represents the minimum value of the fixed-point number.
+    ///     Represents the minimum value of the fixed-point number.
     /// </summary>
     static abstract TSelf MinValue { get; }
-    
+
     /// <summary>
     ///     Gets the external precision of the fixed-point number.
     /// </summary>

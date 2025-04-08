@@ -1,6 +1,4 @@
-using System.IO;
 using System.Text.Json;
-using NUnit.Framework;
 using Velentr.Core.Json;
 
 namespace Velentr.Core.Test.Json;
@@ -19,11 +17,11 @@ public class JsonHelpersTests
     {
         // Arrange
         var path = "test.json";
-        var expected = new TestClass { Id = 1, Name = "Test" };
+        TestClass? expected = new() { Id = 1, Name = "Test" };
         File.WriteAllText(path, JsonSerializer.Serialize(expected));
 
         // Act
-        var result = JsonHelpers.DeserializeFromFile<TestClass>(path);
+        TestClass? result = JsonHelpers.DeserializeFromFile<TestClass>(path);
 
         // Assert
         Assert.That(result, Is.Not.Null);
@@ -41,7 +39,7 @@ public class JsonHelpersTests
         var path = "nonexistent.json";
 
         // Act
-        var result = JsonHelpers.DeserializeFromFile<TestClass>(path);
+        TestClass? result = JsonHelpers.DeserializeFromFile<TestClass>(path);
 
         // Assert
         Assert.That(result, Is.Null);
@@ -52,7 +50,7 @@ public class JsonHelpersTests
     {
         // Arrange
         var path = "test.json";
-        var obj = new TestClass { Id = 1, Name = "Test" };
+        TestClass? obj = new() { Id = 1, Name = "Test" };
 
         // Act
         JsonHelpers.SerializeToFile(path, obj);
@@ -60,7 +58,7 @@ public class JsonHelpersTests
         // Assert
         Assert.That(path, Does.Exist);
         var content = File.ReadAllText(path);
-        var deserialized = JsonSerializer.Deserialize<TestClass>(content);
+        TestClass? deserialized = JsonSerializer.Deserialize<TestClass>(content);
         Assert.That(deserialized, Is.Not.Null);
         Assert.That(deserialized.Id, Is.EqualTo(obj.Id));
         Assert.That(deserialized.Name, Is.EqualTo(obj.Name));
@@ -73,14 +71,14 @@ public class JsonHelpersTests
     public void SerializeToString_ShouldReturnJsonString()
     {
         // Arrange
-        var obj = new TestClass { Id = 1, Name = "Test" };
+        TestClass? obj = new() { Id = 1, Name = "Test" };
 
         // Act
         var jsonString = JsonHelpers.SerializeToString(obj);
 
         // Assert
         Assert.That(string.IsNullOrWhiteSpace(jsonString), Is.False);
-        var deserialized = JsonSerializer.Deserialize<TestClass>(jsonString);
+        TestClass? deserialized = JsonSerializer.Deserialize<TestClass>(jsonString);
         Assert.That(deserialized, Is.Not.Null);
         Assert.That(deserialized.Id, Is.EqualTo(obj.Id));
         Assert.That(deserialized.Name, Is.EqualTo(obj.Name));

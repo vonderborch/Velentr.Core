@@ -2,69 +2,68 @@ using System.Diagnostics;
 
 namespace Velentr.Core.PerformanceMetrics;
 
-
 /// <summary>
-/// A class that represents CPU and Memory metrics.
+///     A class that represents CPU and Memory metrics.
 /// </summary>
 public class ResourceMetrics : IDisposable
 {
     /// <summary>
-    /// The process.
-    /// </summary>
-    private Process process;
-
-    /// <summary>
-    /// The garbage collection memory samples.
-    /// </summary>
-    private readonly Dictionary<int, long> gcMemorySamples;
-
-    /// <summary>
-    /// The memory samples.
-    /// </summary>
-    private readonly Dictionary<int, long> memorySamples;
-
-    /// <summary>
-    /// The CPU samples.
+    ///     The CPU samples.
     /// </summary>
     private readonly Dictionary<int, double> cpuSamples;
 
     /// <summary>
-    /// The current index.
+    ///     The garbage collection memory samples.
     /// </summary>
-    private int currentIndex;
+    private readonly Dictionary<int, long> gcMemorySamples;
 
     /// <summary>
-    /// The previous time.
-    /// </summary>
-    private DateTime previousTime;
-
-    /// <summary>
-    /// The previous processor time.
-    /// </summary>
-    private TimeSpan previousProcessorTime;
-
-    /// <summary>
-    /// The sleep time in milliseconds.
-    /// </summary>
-    private readonly int sleepTimeMilliseconds;
-
-    /// <summary>
-    /// The cancellation token.
-    /// </summary>
-    private CancellationTokenSource cancellationToken;
-
-    /// <summary>
-    /// The update thread.
-    /// </summary>
-    private Task updateThread;
-
-    /// <summary>
-    /// The maximum number of samples to keep.
+    ///     The maximum number of samples to keep.
     /// </summary>
     private readonly int maximumSamples;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="ResourceMetrics"/> class.
+    ///     The memory samples.
+    /// </summary>
+    private readonly Dictionary<int, long> memorySamples;
+
+    /// <summary>
+    ///     The process.
+    /// </summary>
+    private readonly Process process;
+
+    /// <summary>
+    ///     The sleep time in milliseconds.
+    /// </summary>
+    private readonly int sleepTimeMilliseconds;
+
+    /// <summary>
+    ///     The cancellation token.
+    /// </summary>
+    private CancellationTokenSource cancellationToken;
+
+    /// <summary>
+    ///     The current index.
+    /// </summary>
+    private int currentIndex;
+
+    /// <summary>
+    ///     The previous processor time.
+    /// </summary>
+    private TimeSpan previousProcessorTime;
+
+    /// <summary>
+    ///     The previous time.
+    /// </summary>
+    private DateTime previousTime;
+
+    /// <summary>
+    ///     The update thread.
+    /// </summary>
+    private Task updateThread;
+
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="ResourceMetrics" /> class.
     /// </summary>
     /// <param name="maximumSamples">The maximum samples to keep.</param>
     /// <param name="sleepTimeMilliseconds">The update thead sleep time in milliseconds.</param>
@@ -85,22 +84,32 @@ public class ResourceMetrics : IDisposable
     }
 
     /// <summary>
-    /// The average memory usage in MB.
-    /// </summary>
-    public double AverageMemoryUsageMb { get; private set; }
-
-    /// <summary>
-    /// The average garbage collection memory usage in MB.
-    /// </summary>
-    public double AverageGcMemoryUsageMb { get; private set; }
-
-    /// <summary>
-    /// The average CPU percent.
+    ///     The average CPU percent.
     /// </summary>
     public double AverageCpuPercent { get; private set; }
 
     /// <summary>
-    /// The update method.
+    ///     The average garbage collection memory usage in MB.
+    /// </summary>
+    public double AverageGcMemoryUsageMb { get; private set; }
+
+    /// <summary>
+    ///     The average memory usage in MB.
+    /// </summary>
+    public double AverageMemoryUsageMb { get; private set; }
+
+    /// <summary>
+    ///     Disposes of the object.
+    /// </summary>
+    public void Dispose()
+    {
+        this.cancellationToken.Cancel();
+        this.updateThread.Wait();
+        this.cancellationToken.Dispose();
+    }
+
+    /// <summary>
+    ///     The update method.
     /// </summary>
     public void Update()
     {
@@ -118,15 +127,15 @@ public class ResourceMetrics : IDisposable
     }
 
     /// <summary>
-    /// The update task.
+    ///     The update task.
     /// </summary>
     private void UpdateTask()
     {
         while (!this.cancellationToken.Token.IsCancellationRequested)
         {
             this.process.Refresh();
-            var newTime = DateTime.Now;
-            var newProcessorTime = this.process.TotalProcessorTime;
+            DateTime newTime = DateTime.Now;
+            TimeSpan newProcessorTime = this.process.TotalProcessorTime;
 
             this.gcMemorySamples[this.currentIndex] = GC.GetTotalMemory(false);
             this.memorySamples[this.currentIndex] = this.process.WorkingSet64;
@@ -145,15 +154,5 @@ public class ResourceMetrics : IDisposable
             this.previousProcessorTime = newProcessorTime;
             Thread.Sleep(this.sleepTimeMilliseconds);
         }
-    }
-
-    /// <summary>
-    /// Disposes of the object.
-    /// </summary>
-    public void Dispose()
-    {
-        this.cancellationToken.Cancel();
-        this.updateThread.Wait();
-        this.cancellationToken.Dispose();
     }
 }

@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using Velentr.Core.Strings;
 
 namespace Velentr.Core.Test.Strings;
@@ -10,12 +9,12 @@ public class TestReplacement
     public void ReplaceAny_ShouldReplaceSingleString()
     {
         // Arrange
-        string input = "Hello World";
-        string replacement = "Universe";
+        var input = "Hello World";
+        var replacement = "Universe";
         string[] stringsToReplace = { "World" };
 
         // Act
-        string result = input.ReplaceAny(replacement, stringsToReplace);
+        var result = input.ReplaceAny(replacement, stringsToReplace);
 
         // Assert
         Assert.That(result, Is.EqualTo("Hello Universe"));
@@ -25,12 +24,12 @@ public class TestReplacement
     public void ReplaceAny_ShouldReplaceMultipleStrings()
     {
         // Arrange
-        string input = "Hello World, Hello Universe";
-        string replacement = "Everyone";
+        var input = "Hello World, Hello Universe";
+        var replacement = "Everyone";
         string[] stringsToReplace = { "World", "Universe" };
 
         // Act
-        string result = input.ReplaceAny(replacement, stringsToReplace);
+        var result = input.ReplaceAny(replacement, stringsToReplace);
 
         // Assert
         Assert.That(result, Is.EqualTo("Hello Everyone, Hello Everyone"));
@@ -40,12 +39,12 @@ public class TestReplacement
     public void ReplaceAny_ShouldHandleNoReplacements()
     {
         // Arrange
-        string input = "Hello World";
-        string replacement = "Everyone";
+        var input = "Hello World";
+        var replacement = "Everyone";
         string[] stringsToReplace = { };
 
         // Act
-        string result = input.ReplaceAny(replacement, stringsToReplace);
+        var result = input.ReplaceAny(replacement, stringsToReplace);
 
         // Assert
         Assert.That(result, Is.EqualTo("Hello World"));
@@ -55,8 +54,8 @@ public class TestReplacement
     public void ReplaceAny_ShouldHandleNullInput()
     {
         // Arrange
-        string input = "Everyone";
-        string replacement = "Everyone";
+        var input = "Everyone";
+        var replacement = "Everyone";
         string[]? stringsToReplace = null;
 
         // Act/Assert
@@ -67,7 +66,7 @@ public class TestReplacement
     public void ReplaceAny_ShouldHandleNullReplacement()
     {
         // Arrange
-        string input = "Hello World";
+        var input = "Hello World";
         string replacement = null;
         string[] stringsToReplace = { "World" };
 

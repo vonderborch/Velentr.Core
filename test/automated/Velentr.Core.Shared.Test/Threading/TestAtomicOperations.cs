@@ -8,11 +8,11 @@ public class TestAtomicOperations
     [Test]
     public void TestCAS_Success()
     {
-        int value = 10;
-        int newValue = 20;
-        int expectedValue = 10;
+        var value = 10;
+        var newValue = 20;
+        var expectedValue = 10;
 
-        bool result = AtomicOperations.CAS(ref value, newValue, expectedValue);
+        var result = AtomicOperations.CAS(ref value, newValue, expectedValue);
 
         Assert.That(result, Is.True);
         Assert.That(value, Is.EqualTo(newValue));
@@ -21,11 +21,11 @@ public class TestAtomicOperations
     [Test]
     public void TestCAS_Failure()
     {
-        int value = 10;
-        int newValue = 20;
-        int expectedValue = 15;
+        var value = 10;
+        var newValue = 20;
+        var expectedValue = 15;
 
-        bool result = AtomicOperations.CAS(ref value, newValue, expectedValue);
+        var result = AtomicOperations.CAS(ref value, newValue, expectedValue);
 
         Assert.That(result, Is.False);
         Assert.That(value, Is.EqualTo(10));
@@ -34,11 +34,11 @@ public class TestAtomicOperations
     [Test]
     public void TestCAS_Double_Success()
     {
-        double value = 10.5;
-        double newValue = 20.5;
-        double expectedValue = 10.5;
+        var value = 10.5;
+        var newValue = 20.5;
+        var expectedValue = 10.5;
 
-        bool result = AtomicOperations.CAS(ref value, newValue, expectedValue);
+        var result = AtomicOperations.CAS(ref value, newValue, expectedValue);
 
         Assert.That(result, Is.True);
         Assert.That(value, Is.EqualTo(newValue));
@@ -47,27 +47,27 @@ public class TestAtomicOperations
     [Test]
     public void TestCAS_Double_Failure()
     {
-        double value = 10.5;
-        double newValue = 20.5;
-        double expectedValue = 15.5;
+        var value = 10.5;
+        var newValue = 20.5;
+        var expectedValue = 15.5;
 
-        bool result = AtomicOperations.CAS(ref value, newValue, expectedValue);
+        var result = AtomicOperations.CAS(ref value, newValue, expectedValue);
 
         Assert.That(result, Is.False);
         Assert.That(value, Is.EqualTo(10.5));
     }
-    
+
     [Test]
     public void TestCAS_ThreadSafety()
     {
-        int value = 0;
-        int newValue = 1;
-        int expectedValue = 0;
-        int threadCount = 100;
-        var threads = new Thread[threadCount];
+        var value = 0;
+        var newValue = 1;
+        var expectedValue = 0;
+        var threadCount = 100;
+        Thread[] threads = new Thread[threadCount];
         var successCount = 0;
 
-        for (int i = 0; i < threadCount; i++)
+        for (var i = 0; i < threadCount; i++)
         {
             threads[i] = new Thread(() =>
             {
@@ -79,7 +79,7 @@ public class TestAtomicOperations
             threads[i].Start();
         }
 
-        foreach (var thread in threads)
+        foreach (Thread thread in threads)
         {
             thread.Join();
         }

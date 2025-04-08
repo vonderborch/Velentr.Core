@@ -14,52 +14,52 @@ public struct FP4 : IFixedPoint<FP4>, IBaseFixedPoint<long>
     ///     Gets the precision of the fixed-point number.
     /// </summary>
     public static ushort Precision => 4;
-    
+
     /// <summary>
     ///     Gets the shift value used for fixed-point calculations.
     /// </summary>
     public static ushort Shift => 14;
-    
+
     /// <summary>
     ///     Gets the format string used for converting the fixed-point number to a string.
     /// </summary>
     public static string StringFormat => $"{{0:F{Precision}}}";
-    
+
     /// <summary>
     ///     Gets the base value representing one in the fixed-point format.
     /// </summary>
     public static long BaseOne { get; } = 1 << Shift;
-    
+
     /// <summary>
-    /// Represents the maximum value of the fixed-point number.
+    ///     Represents the maximum value of the fixed-point number.
     /// </summary>
     public static FP4 MaxValue { get; } = new() { RawValue = long.MaxValue };
-    
+
     /// <summary>
-    /// Represents the minimum value of the fixed-point number.
+    ///     Represents the minimum value of the fixed-point number.
     /// </summary>
     public static FP4 MinValue { get; } = new() { RawValue = long.MinValue };
-    
+
     /// <summary>
     ///     Represents the fixed-point number zero.
     /// </summary>
     public static FP4 Zero { get; } = new() { RawValue = 0 };
-    
+
     /// <summary>
     ///     Represents the fixed-point number one.
     /// </summary>
     public static FP4 One { get; } = new() { RawValue = 1 << Shift };
-    
+
     /// <summary>
     ///     Gets the additive identity for the fixed-point number.
     /// </summary>
     public static FP4 AdditiveIdentity => Zero;
-    
+
     /// <summary>
     ///     Gets the multiplicative identity for the fixed-point number.
     /// </summary>
     public static FP4 MultiplicativeIdentity => One;
-    
+
     /// <summary>
     ///     Gets the radix (base) of the fixed-point number.
     /// </summary>
@@ -79,7 +79,7 @@ public struct FP4 : IFixedPoint<FP4>, IBaseFixedPoint<long>
     {
         this.RawValue = value * BaseOne;
     }
-    
+
     /// <summary>
     ///     Creates a fixed-point number from a double value.
     /// </summary>
@@ -174,17 +174,17 @@ public struct FP4 : IFixedPoint<FP4>, IBaseFixedPoint<long>
         charsWritten = formattedValue.Length;
         return true;
     }
-    
+
     public static FP4 Parse(string s, IFormatProvider? provider)
     {
-        return (FP4)CreateFromDouble(double.Parse(s, provider));
+        return CreateFromDouble(double.Parse(s, provider));
     }
 
     public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out FP4 result)
     {
         if (double.TryParse(s, provider, out var value))
         {
-            result = (FP4)CreateFromDouble(value);
+            result = CreateFromDouble(value);
             return true;
         }
 
@@ -194,14 +194,14 @@ public struct FP4 : IFixedPoint<FP4>, IBaseFixedPoint<long>
 
     public static FP4 Parse(ReadOnlySpan<char> s, IFormatProvider? provider)
     {
-        return (FP4)CreateFromDouble(double.Parse(s, provider));
+        return CreateFromDouble(double.Parse(s, provider));
     }
 
     public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out FP4 result)
     {
         if (double.TryParse(s, provider, out var value))
         {
-            result = (FP4)CreateFromDouble(value);
+            result = CreateFromDouble(value);
             return true;
         }
 
@@ -211,19 +211,19 @@ public struct FP4 : IFixedPoint<FP4>, IBaseFixedPoint<long>
 
     public static FP4 Parse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider)
     {
-        return (FP4)CreateFromDouble(double.Parse(s, style, provider));
+        return CreateFromDouble(double.Parse(s, style, provider));
     }
 
     public static FP4 Parse(string s, NumberStyles style, IFormatProvider? provider)
     {
-        return (FP4)CreateFromDouble(double.Parse(s, style, provider));
+        return CreateFromDouble(double.Parse(s, style, provider));
     }
 
     public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out FP4 result)
     {
         if (double.TryParse(s, style, provider, out var value))
         {
-            result = (FP4)CreateFromDouble(value);
+            result = CreateFromDouble(value);
             return true;
         }
 
@@ -236,14 +236,14 @@ public struct FP4 : IFixedPoint<FP4>, IBaseFixedPoint<long>
     {
         if (double.TryParse(s, style, provider, out var value))
         {
-            result = (FP4)CreateFromDouble(value);
+            result = CreateFromDouble(value);
             return true;
         }
 
         result = default;
         return false;
     }
-    
+
     /// <summary>
     ///     Adds two fixed-point numbers.
     /// </summary>
@@ -317,7 +317,7 @@ public struct FP4 : IFixedPoint<FP4>, IBaseFixedPoint<long>
     {
         return new FP4 { RawValue = value.RawValue - BaseOne };
     }
-    
+
     public static bool operator ==(FP4 left, FP4 right)
     {
         return left.RawValue == right.RawValue;
@@ -347,7 +347,7 @@ public struct FP4 : IFixedPoint<FP4>, IBaseFixedPoint<long>
     {
         return left.RawValue <= right.RawValue;
     }
-    
+
     /// <summary>
     ///     Returns the absolute value of a fixed-point number.
     /// </summary>
@@ -597,21 +597,21 @@ public struct FP4 : IFixedPoint<FP4>, IBaseFixedPoint<long>
         if (typeof(TOther) == typeof(double))
         {
             var doubleValue = (double)(object)value;
-            result = (FP4)CreateFromDouble(doubleValue);
+            result = CreateFromDouble(doubleValue);
             return true;
         }
 
         if (typeof(TOther) == typeof(float))
         {
             var floatValue = (float)(object)value;
-            result = (FP4)CreateFromFloat(floatValue);
+            result = CreateFromFloat(floatValue);
             return true;
         }
 
         if (typeof(TOther) == typeof(decimal))
         {
             var decimalValue = (decimal)(object)value;
-            result = (FP4)CreateFromDouble((double)decimalValue);
+            result = CreateFromDouble((double)decimalValue);
             return true;
         }
 
@@ -710,7 +710,7 @@ public struct FP4 : IFixedPoint<FP4>, IBaseFixedPoint<long>
     {
         return new FP4(value);
     }
-    
+
     /// <summary>
     ///     Converts a short to a fixed-point number.
     /// </summary>
@@ -718,7 +718,7 @@ public struct FP4 : IFixedPoint<FP4>, IBaseFixedPoint<long>
     {
         return new FP4(value);
     }
-    
+
     /// <summary>
     ///     Converts a long to a fixed-point number.
     /// </summary>
@@ -726,29 +726,29 @@ public struct FP4 : IFixedPoint<FP4>, IBaseFixedPoint<long>
     {
         return new FP4 { RawValue = value * BaseOne };
     }
-    
+
     /// <summary>
     ///     Converts a decimal to a fixed-point number.
     /// </summary>
     public static implicit operator FP4(decimal value)
     {
-        return (FP4)CreateFromDouble((double)value);
+        return CreateFromDouble((double)value);
     }
-    
+
     /// <summary>
     ///     Converts a double to a fixed-point number.
     /// </summary>
     public static implicit operator FP4(double value)
     {
-        return (FP4)CreateFromDouble(value);
+        return CreateFromDouble(value);
     }
-    
+
     /// <summary>
     ///     Converts a float to a fixed-point number.
     /// </summary>
     public static implicit operator FP4(float value)
     {
-        return (FP4)CreateFromFloat(value);
+        return CreateFromFloat(value);
     }
 
     /// <summary>

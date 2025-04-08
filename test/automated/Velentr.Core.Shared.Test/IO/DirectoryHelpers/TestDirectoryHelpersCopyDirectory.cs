@@ -1,6 +1,3 @@
-using System;
-using System.IO;
-using NUnit.Framework;
 using Velentr.Core.IO;
 
 namespace Velentr.Core.Test.IO;
@@ -8,9 +5,6 @@ namespace Velentr.Core.Test.IO;
 [TestFixture]
 public class TestDirectoryHelpersCopyDirectory
 {
-    private string sourceDir;
-    private string destDir;
-
     [SetUp]
     public void SetUp()
     {
@@ -32,6 +26,9 @@ public class TestDirectoryHelpersCopyDirectory
             Directory.Delete(this.destDir, true);
         }
     }
+
+    private string sourceDir;
+    private string destDir;
 
     [Test]
     public void TestCopyDirectory_ValidDirectories()

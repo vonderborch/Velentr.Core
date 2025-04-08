@@ -1,8 +1,5 @@
 using System.Collections.Concurrent;
-using NUnit.Framework;
 using Velentr.Core.Mathematics.Random;
-using System.Linq;
-using Microsoft.VisualStudio.TestPlatform.Common.Utilities;
 
 namespace Velentr.Core.Test.Mathematics.Random;
 
@@ -14,11 +11,11 @@ public class TestSimpleRng : TestRandomness<SimpleRng>
     {
         return new SimpleRng();
     }
-    
+
     [Test]
     public void TestDefaultConstructor()
     {
-        var rng = new SimpleRng();
+        SimpleRng? rng = new();
         Assert.That(rng, Is.Not.Null);
     }
 
@@ -26,31 +23,31 @@ public class TestSimpleRng : TestRandomness<SimpleRng>
     public void TestSeedConstructor()
     {
         long seed = 123456789;
-        var rng = new SimpleRng(seed);
+        SimpleRng? rng = new(seed);
         Assert.That(rng.Seed, Is.EqualTo(seed));
     }
 
     [Test]
     public void TestNextUInt()
     {
-        var rng = new SimpleRng();
-        uint value = rng.NextUInt();
+        SimpleRng? rng = new();
+        var value = rng.NextUInt();
         Assert.That(value, Is.GreaterThanOrEqualTo(0));
     }
 
     [Test]
     public void TestNextULong()
     {
-        var rng = new SimpleRng();
-        ulong value = rng.NextULong();
+        SimpleRng? rng = new();
+        var value = rng.NextULong();
         Assert.That(value, Is.GreaterThanOrEqualTo(0));
     }
 
     [Test]
     public void TestNextBytes()
     {
-        var rng = new SimpleRng();
-        byte[] buffer = new byte[10];
+        SimpleRng? rng = new();
+        var buffer = new byte[10];
         rng.NextBytes(buffer);
         Assert.That(buffer.Any(b => b != 0), Is.True);
     }
@@ -59,7 +56,7 @@ public class TestSimpleRng : TestRandomness<SimpleRng>
     public void TestSetSeed()
     {
         DateTime startingTime = DateTime.Now;
-        var rng = new SimpleRng();
+        SimpleRng? rng = new();
         long seed = 987654321;
         rng.SetSeed(seed);
         Assert.That(rng.Seed, Is.EqualTo(seed));
@@ -72,9 +69,9 @@ public class TestSimpleRng : TestRandomness<SimpleRng>
     [Test]
     public void TestSeedUpdate()
     {
-        var rng = new SimpleRng();
+        SimpleRng? rng = new();
         _ = rng.NextUInt(); // Call NextUInt to ensure the state is updated
-        var rng2 = new SimpleRng(rng.Seed);
+        SimpleRng rng2 = new(rng.Seed);
         Assert.That(rng2.Seed, Is.EqualTo(rng.Seed));
         Assert.That(rng2.NextUInt(), Is.EqualTo(rng.NextUInt()));
     }
@@ -82,33 +79,33 @@ public class TestSimpleRng : TestRandomness<SimpleRng>
     [Test]
     public void TestSharedRandom()
     {
-        var sharedRng = SimpleRng.SharedRandom;
+        ARandomGenerator? sharedRng = SimpleRng.SharedRandom;
         Assert.That(sharedRng, Is.Not.Null);
     }
 
     [Test]
     public void TestSharedRandom_ThreadSafety()
     {
-        var sharedRng = SimpleRng.SharedRandom;
+        ARandomGenerator? sharedRng = SimpleRng.SharedRandom;
         Assert.That(sharedRng, Is.Not.Null);
 
         // Test that multiple threads each get their own seed
-        int threadCount = 100;
-        var seeds = new ConcurrentBag<long>();
-        var threads = new List<Thread>();
+        var threadCount = 100;
+        ConcurrentBag<long>? seeds = new();
+        List<Thread> threads = new();
 
-        for (int i = 0; i < threadCount; i++)
+        for (var i = 0; i < threadCount; i++)
         {
-            var thread = new Thread(() =>
+            Thread thread = new(() =>
             {
-                var rng = SimpleRng.SharedRandom;
+                ARandomGenerator rng = SimpleRng.SharedRandom;
                 seeds.Add(rng.Seed);
             });
             threads.Add(thread);
             thread.Start();
         }
 
-        foreach (var thread in threads)
+        foreach (Thread thread in threads)
         {
             thread.Join();
         }
