@@ -3,19 +3,20 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <Version>3.0.0.4</Version>
+        <Version>3.0.0.6</Version>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>Velentr.Core.FNA</Title>
         <Authors>Christian Webber</Authors>
         <Description>The core Velentr package, containing helpers and basic objects and interfaces shared across other Velentr packages.</Description>
-        <Copyright>COPYRIGHT</Copyright>
+        <Copyright>2025</Copyright>
         <PackageProjectUrl>https://github.com/vonderborch/Velentr.Core</PackageProjectUrl>
-        <PackageLicenseUrl>MIT</PackageLicenseUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageIcon>logo.png</PackageIcon>
         <RepositoryUrl>https://github.com/vonderborch/Velentr.Core</RepositoryUrl>
         <PackageTags>Velentr, FNA, Monogame</PackageTags>
-        <AssemblyVersion>3.0.0.4</AssemblyVersion>
-        <FileVersion>3.0.0.4</FileVersion>
+        <AssemblyVersion>3.0.0.6</AssemblyVersion>
+        <FileVersion>3.0.0.6</FileVersion>
         <Company>Christian Webber</Company>
     </PropertyGroup>
 
@@ -34,6 +35,11 @@
             <Pack>True</Pack>
             <PackagePath></PackagePath>
             <Link>logo.png</Link>
+        </None>
+        <None Include="..\..\README.md">
+            <Pack>True</Pack>
+            <PackagePath></PackagePath>
+            <Link>README.md</Link>
         </None>
     </ItemGroup>
 
