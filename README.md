@@ -19,7 +19,17 @@ Alternatively, you can clone this repo and reference the Velentr.Core project in
 
 ## Features
 
-- A feature
+- Color Helpers: Convert from RGB to hex, HSL, and HSV (and back)
+- Various helpers for working with directories, files and archive files
+- Wrappers on common JSON operations
+- Various mathematical helpers:
+  - Bounds struct (representing a range of valid values)
+  - Fixed Point Math structs (ranging from 2 decimals of precision to 8), including math helpers
+  - Pseudo-random number generators, with some common extensions added
+  - Various math helpers that are missing by default
+- Classes to help with tracking performance
+- Various string helpers and extensions, such as MessageTemplate-style formatting, ascii tables, and string similarity.
+- Various default interfaces for common potential methods in XNA-derived frameworks
 
 ## Development
 

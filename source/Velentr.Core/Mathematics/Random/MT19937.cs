@@ -42,6 +42,8 @@
 */
 //  Originally converted to C# by Dave Loeser, https://www.codeproject.com/Articles/5147/A-C-Mersenne-Twister-class
 
+using Velentr.Core.Threading;
+
 namespace Velentr.Core.Mathematics.Random;
 
 /// <summary>
@@ -107,8 +109,11 @@ public class MT19937 : ARandomGenerator
     /// <returns>The thread-local random number generator instance.</returns>
     protected static MT19937 CreateThreadLocalInstance()
     {
-        var newSharedSeed = _sharedSeed++;
-        Interlocked.Increment(ref _sharedSeed);
+        var newSharedSeed = _sharedSeed + 1;
+        while (!AtomicOperations.CAS(ref _sharedSeed, newSharedSeed, _sharedSeed))
+        {
+            newSharedSeed = _sharedSeed + 1;
+        }
         return new MT19937(newSharedSeed);
     }
 

@@ -11,6 +11,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
  */
 
 
+using Velentr.Core.Threading;
+
 namespace Velentr.Core.Mathematics.Random;
 
 /// <summary>
@@ -63,8 +65,11 @@ public class SimpleRng : ARandomGenerator
     /// <returns>The thread-local random number generator instance.</returns>
     protected static SimpleRng CreateThreadLocalInstance()
     {
-        var newSharedSeed = _sharedSeed++;
-        Interlocked.Increment(ref _sharedSeed);
+        var newSharedSeed = _sharedSeed + 1;
+        while (!AtomicOperations.CAS(ref _sharedSeed, newSharedSeed, _sharedSeed))
+        {
+            newSharedSeed = _sharedSeed + 1;
+        }
         return new SimpleRng(newSharedSeed);
     }
 

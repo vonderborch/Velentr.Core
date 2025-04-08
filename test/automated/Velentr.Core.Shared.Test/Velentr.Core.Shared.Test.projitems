@@ -40,6 +40,7 @@
         <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Numerics\TestBoundedNumber.cs"/>
         <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Numerics\TestCircularBoundedNumber.cs"/>
         <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Numerics\TestNumericExtensions.cs"/>
+    <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Random\TestFastRandom.cs" />
         <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Random\TestRandomness.cs"/>
         <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Random\TestMT19937.cs"/>
         <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Random\TestSimpleRng.cs"/>
