@@ -22,10 +22,8 @@
     <File Path=".gitignore" />
     <File Path="CODEOWNERS" />
     <File Path="LICENSE" />
-    <File Path="logo.png" />
     <File Path="README.md" />
     <File Path="update_or_install_fna.py" />
-    <File Path="logo.ico" />
     <File Path="setup_repo.py" />
     <File Path="generate_logo.py" />
   </Folder>
