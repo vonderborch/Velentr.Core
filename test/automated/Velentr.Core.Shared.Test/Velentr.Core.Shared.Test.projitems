@@ -59,9 +59,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Threading\TestAtomicOperations.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Threading\TestGuard.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Time\TestTimeHelpers.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)UnitConversion\Byte\TestBytes.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)UnitConversion\Heat\TestTemperature.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)UnitConversion\Heat\TestTemperatureScales.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Validation\TestValidations.cs" />
   </ItemGroup>
 </Project>

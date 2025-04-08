@@ -1,6 +1,6 @@
 # Velentr.Core
 
-![Screenshot](https://github.com/vonderborch/Velentr.Core/blob/main/logo.png?raw=true)
+![Screenshot](logo.png)
 
 The core Velentr package, containing helpers and basic objects and interfaces shared across other Velentr packages.
 

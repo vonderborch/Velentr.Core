@@ -1,6 +1,4 @@
 using System.Runtime.InteropServices;
-using Velentr.Core.UnitConversion;
-using Velentr.Core.UnitConversion.Byte;
 
 namespace Velentr.Core;
 
@@ -20,7 +18,7 @@ public sealed class SystemInfo
     /// <summary>
     /// Gets the total memory available on the current machine.
     /// </summary>
-    public Bytes TotalMemory;
+    public ulong TotalMemory;
 
     /// <summary>
     /// Gets the estimated number of GPUs on the current machine.
@@ -169,7 +167,7 @@ public sealed class SystemInfo
     /// Gets the total system memory.
     /// </summary>
     /// <returns>The total system memory in bytes.</returns>
-    private Bytes GetTotalSystemMemory()
+    private ulong GetTotalSystemMemory()
     {
         try
         {
@@ -196,12 +194,13 @@ public sealed class SystemInfo
                 totalMemoryBytes = (ulong)GC.GetGCMemoryInfo().TotalAvailableMemoryBytes;
             }
 
-            return new Bytes(totalMemoryBytes, unit: ByteUnits.Byte);
+            return totalMemoryBytes;
         }
         catch
         {
             // Fallback to a reasonable default if memory detection fails
-            return new Bytes(4L * 1024 * 1024 * 1024, unit: ByteUnits.Byte); // Default to 4 GB
+            // This is a _low end_ assumption
+            return 4L * 1024 * 1024 * 1024; // Default to 4 GB
         }
     }
 

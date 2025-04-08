@@ -11,6 +11,8 @@
     <File Path=".build\version_bump_common.ps1" />
     <File Path=".build\version_bump_dialog.ps1" />
     <File Path=".build\fna_updator.py" />
+    <File Path=".build\generate_virtual_environment.py" />
+    <File Path=".build\generate_project_logo.py" />
   </Folder>
   <Folder Name="/.fna/">
     <Project Path="..\.fna\FNA\FNA.Core.csproj" Type="Classic C#" />
@@ -25,6 +27,7 @@
     <File Path="update_or_install_fna.py" />
     <File Path="logo.ico" />
     <File Path="setup_repo.py" />
+    <File Path="generate_ico.py" />
   </Folder>
   <Folder Name="/source/">
     <Project Path="source\Velentr.Core.FNA\Velentr.Core.FNA.csproj" Type="Classic C#" />
