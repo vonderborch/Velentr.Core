@@ -17,9 +17,8 @@ public class AtomicOperations
     /// <typeparam name="T">The type of the values.</typeparam>
     /// <returns>True if we swapped the values, False if we did not.</returns>
     public static bool CAS<T>(ref T valueReference, T newValue, T expectedValueAtValueReference)
-        where T : struct, INumber<T>
     {
-        return expectedValueAtValueReference.Equals(Interlocked.CompareExchange(ref valueReference, newValue,
-            expectedValueAtValueReference));
+        var originalValue = Interlocked.CompareExchange(ref valueReference, newValue, expectedValueAtValueReference);
+        return EqualityComparer<T>.Default.Equals(originalValue, expectedValueAtValueReference);
     }
 }
