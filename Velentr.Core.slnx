@@ -13,6 +13,8 @@
     <File Path=".build\fna_updator.py" />
     <File Path=".build\generate_virtual_environment.py" />
     <File Path=".build\generate_project_logo.py" />
+    <File Path=".build\post_build.ps1" />
+    <File Path=".build\pre_build.ps1" />
   </Folder>
   <Folder Name="/.fna/">
     <Project Path="..\.fna\FNA\FNA.Core.csproj" Type="Classic C#" />
