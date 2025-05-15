@@ -17,6 +17,7 @@
         <Compile Include="$(MSBuildThisFileDirectory)DataStructures\TestCollectionEquivalency.cs"/>
         <Compile Include="$(MSBuildThisFileDirectory)DataStructures\TestListHelpers.cs"/>
         <Compile Include="$(MSBuildThisFileDirectory)DataStructures\TestListQuickSort.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Eventing\TestEvents.cs"/>
         <Compile Include="$(MSBuildThisFileDirectory)General\TestDisposingHelpers.cs"/>
         <Compile Include="$(MSBuildThisFileDirectory)IO\ArchiveHelpers\TestArchiveHelpersArchiveDirectory.cs"/>
         <Compile Include="$(MSBuildThisFileDirectory)IO\ArchiveHelpers\TestArchiveHelpersExtractDirectory.cs"/>
@@ -40,7 +41,7 @@
         <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Numerics\TestBoundedNumber.cs"/>
         <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Numerics\TestCircularBoundedNumber.cs"/>
         <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Numerics\TestNumericExtensions.cs"/>
-    <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Random\TestFastRandom.cs" />
+        <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Random\TestFastRandom.cs"/>
         <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Random\TestRandomness.cs"/>
         <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Random\TestMT19937.cs"/>
         <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Random\TestSimpleRng.cs"/>

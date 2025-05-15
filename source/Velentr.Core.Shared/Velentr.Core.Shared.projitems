@@ -10,10 +10,10 @@
     </PropertyGroup>
     <ItemGroup>
         <Compile Include="$(MSBuildThisFileDirectory)Colors\ColorConvertors.cs"/>
-    <Compile Include="$(MSBuildThisFileDirectory)IDrawable.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IInitializeable.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ILoadable.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IUpdateable.cs" />
+        <Compile Include="$(MSBuildThisFileDirectory)IDrawable.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)IInitializeable.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)ILoadable.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)IUpdateable.cs"/>
         <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Geometry\AngleExtensions.cs"/>
         <Compile Include="$(MSBuildThisFileDirectory)Time\TimeHelpersExtended.cs"/>
     </ItemGroup>

@@ -16,8 +16,10 @@ public class TestGuard
     public void TestCheckSet()
     {
         Guard guard = new();
+        Assert.That(guard.Check, Is.False);
         Assert.That(guard.CheckSet, Is.True);
         Assert.That(guard.Check, Is.True);
+        Assert.That(guard.CheckSet, Is.False);
     }
 
     [Test]

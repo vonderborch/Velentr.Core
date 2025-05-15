@@ -1,5 +1,3 @@
-using System.Numerics;
-
 namespace Velentr.Core.Threading;
 
 /// <summary>
@@ -18,7 +16,7 @@ public class AtomicOperations
     /// <returns>True if we swapped the values, False if we did not.</returns>
     public static bool CAS<T>(ref T valueReference, T newValue, T expectedValueAtValueReference)
     {
-        var originalValue = Interlocked.CompareExchange(ref valueReference, newValue, expectedValueAtValueReference);
+        T originalValue = Interlocked.CompareExchange(ref valueReference, newValue, expectedValueAtValueReference);
         return EqualityComparer<T>.Default.Equals(originalValue, expectedValueAtValueReference);
     }
 }

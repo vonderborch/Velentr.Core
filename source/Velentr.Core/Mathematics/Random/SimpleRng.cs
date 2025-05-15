@@ -70,6 +70,7 @@ public class SimpleRng : ARandomGenerator
         {
             newSharedSeed = _sharedSeed + 1;
         }
+
         return new SimpleRng(newSharedSeed);
     }
 

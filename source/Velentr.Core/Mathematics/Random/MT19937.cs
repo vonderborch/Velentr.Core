@@ -114,6 +114,7 @@ public class MT19937 : ARandomGenerator
         {
             newSharedSeed = _sharedSeed + 1;
         }
+
         return new MT19937(newSharedSeed);
     }
 

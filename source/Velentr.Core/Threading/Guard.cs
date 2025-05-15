@@ -48,7 +48,10 @@ public struct Guard
     /// <param name="left">The Guard instance to compare.</param>
     /// <param name="right">The boolean value to compare against.</param>
     /// <returns>True if the Guard's state matches the boolean value; otherwise, false.</returns>
-    public static bool operator ==(Guard left, bool right) => left.Check == right;
+    public static bool operator ==(Guard left, bool right)
+    {
+        return left.Check == right;
+    }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="Guard" /> struct.
@@ -56,7 +59,10 @@ public struct Guard
     /// <param name="left">The Guard instance to compare.</param>
     /// <param name="right">The boolean value to compare against.</param>
     /// <returns>True if the Guard's state matches the boolean value; otherwise, false.</returns>
-    public static bool operator ==(bool left, Guard right) => left == right.Check;
+    public static bool operator ==(bool left, Guard right)
+    {
+        return left == right.Check;
+    }
 
     /// <summary>
     ///     Compares the specified Guard instance to a boolean value.
@@ -64,7 +70,10 @@ public struct Guard
     /// <param name="left">The Guard instance to compare.</param>
     /// <param name="right">The boolean value to compare against.</param>
     /// <returns>True if the Guard's Check is not equal to the boolean value; otherwise, false.</returns>
-    public static bool operator !=(Guard left, bool right) => left.Check != right;
+    public static bool operator !=(Guard left, bool right)
+    {
+        return left.Check != right;
+    }
 
     /// <summary>
     ///     Compares the specified Guard instance to a boolean value.
@@ -72,7 +81,10 @@ public struct Guard
     /// <param name="left">The Guard instance to compare.</param>
     /// <param name="right">The boolean value to compare against.</param>
     /// <returns>True if the Guard's Check is not equal to the boolean value; otherwise, false.</returns>
-    public static bool operator !=(bool left, Guard right) => left != right.Check;
+    public static bool operator !=(bool left, Guard right)
+    {
+        return left != right.Check;
+    }
 
     /// <summary>
     ///     Mark the <see cref="Guard" /> as being checked.

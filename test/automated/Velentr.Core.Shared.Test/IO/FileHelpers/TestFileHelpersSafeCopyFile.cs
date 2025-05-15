@@ -62,8 +62,8 @@ public class TestFileHelpersSafeCopyFile
         using (FileStream? stream = new(this.sourceFile, FileMode.Open, FileAccess.Read, FileShare.None))
         {
             // Act & Assert
-            Assert.Throws<Exception>(
-                () => FileHelpers.SafeCopyFile(this.sourceFile, this.destinationFile, 3, 10, 20, 1));
+            Assert.Throws<Exception>(() =>
+                FileHelpers.SafeCopyFile(this.sourceFile, this.destinationFile, 3, 10, 20, 1));
         }
     }
 
