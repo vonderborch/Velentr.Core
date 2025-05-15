@@ -8,7 +8,7 @@ public class TestEvents
     [SetUp]
     public void SetUp()
     {
-        this._events = new Events<TestEventArgs>();
+        this._events = new Event<TestEventArgs>();
         this._receivedMessage = string.Empty;
     }
 
@@ -17,13 +17,13 @@ public class TestEvents
         public string Message { get; set; }
     }
 
-    private Events<TestEventArgs> _events;
+    private Event<TestEventArgs> _events;
     private string _receivedMessage;
 
     [Test]
     public void TestSubscribeAndTriggerEvent()
     {
-        this._events.Event += OnTestEvent;
+        this._events.Events += OnTestEvent;
 
         TestEventArgs args = new() { Message = "Hello, World!" };
         this._events.Trigger(this, args);
@@ -34,8 +34,8 @@ public class TestEvents
     [Test]
     public void TestUnsubscribeEvent()
     {
-        this._events.Event += OnTestEvent;
-        this._events.Event -= OnTestEvent;
+        this._events.Events += OnTestEvent;
+        this._events.Events -= OnTestEvent;
 
         TestEventArgs args = new() { Message = "Hello, World!" };
         this._events.Trigger(this, args);
@@ -46,7 +46,7 @@ public class TestEvents
     [Test]
     public void TestClearEventHandlers()
     {
-        this._events.Event += OnTestEvent;
+        this._events.Events += OnTestEvent;
         this._events.Clear();
 
         TestEventArgs args = new() { Message = "Hello, World!" };

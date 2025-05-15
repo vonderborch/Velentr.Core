@@ -5,7 +5,7 @@ namespace Velentr.Core.Eventing;
 ///     and maintains a list of registered event handlers.
 /// </summary>
 /// <typeparam name="T">The type of EventArgs used by the event.</typeparam>
-public class Events<T> where T : EventArgs
+public class Event<T> where T : EventArgs
 {
     /// <summary>
     ///     List of registered event handlers to enable tracking and bulk operations.
@@ -29,7 +29,7 @@ public class Events<T> where T : EventArgs
     /// <summary>
     ///     Gets or sets the event that clients can subscribe to or unsubscribe from.
     /// </summary>
-    public event EventHandler<T> Event
+    public event EventHandler<T> Events
     {
         add
         {
@@ -75,7 +75,7 @@ public class Events<T> where T : EventArgs
     /// <param name="left">The collection event to add to.</param>
     /// <param name="right">The event handler to add.</param>
     /// <returns>The modified collection event.</returns>
-    public static Events<T> operator +(Events<T> left, EventHandler<T> right)
+    public static Event<T> operator +(Event<T> left, EventHandler<T> right)
     {
         left.InternalEvent += right;
         left.Delegates.Add(right);
@@ -89,12 +89,22 @@ public class Events<T> where T : EventArgs
     /// <param name="left">The collection event to remove from.</param>
     /// <param name="right">The event handler to remove.</param>
     /// <returns>The modified collection event.</returns>
-    public static Events<T> operator -(Events<T> left, EventHandler<T> right)
+    public static Event<T> operator -(Event<T> left, EventHandler<T> right)
     {
         left.InternalEvent -= right;
         left.Delegates.Remove(right);
 
         return left;
+    }
+
+    /// <summary>
+    ///     Registers an event handler with the collection to enable subscription to events.
+    /// </summary>
+    /// <param name="handler">The event handler to subscribe.</param>
+    public void Subscribe(EventHandler<T> handler)
+    {
+        this.InternalEvent += handler;
+        this.Delegates.Add(handler);
     }
 
     /// <summary>
@@ -105,5 +115,15 @@ public class Events<T> where T : EventArgs
     public void Trigger(object sender, T e)
     {
         EventTriggered(sender, e);
+    }
+
+    /// <summary>
+    ///     Removes the specified event handler from the collection of event handlers.
+    /// </summary>
+    /// <param name="handler">The event handler to remove.</param>
+    public void Unsubscribe(EventHandler<T> handler)
+    {
+        this.InternalEvent -= handler;
+        this.Delegates.Remove(handler);
     }
 }
