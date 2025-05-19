@@ -3,7 +3,7 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <Version>3.1.1.5</Version>
+        <Version>3.2.0.0</Version>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>Velentr.Core</Title>
         <Authors>Christian Webber</Authors>
@@ -15,8 +15,8 @@
         <PackageIcon>logo.png</PackageIcon>
         <RepositoryUrl>https://github.com/vonderborch/Velentr.Core</RepositoryUrl>
         <PackageTags>Velentr, FNA, Monogame</PackageTags>
-        <AssemblyVersion>3.1.1.5</AssemblyVersion>
-        <FileVersion>3.1.1.5</FileVersion>
+        <AssemblyVersion>3.2.0.0</AssemblyVersion>
+        <FileVersion>3.2.0.0</FileVersion>
         <Company>Christian Webber</Company>
         <AssemblyName>Velentr.Core</AssemblyName>
         <RootNamespace>Velentr.Core</RootNamespace>
@@ -43,6 +43,10 @@
             <PackagePath></PackagePath>
             <Link>README.md</Link>
         </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Serialize.Linq" Version="4.0.167" />
     </ItemGroup>
 
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">

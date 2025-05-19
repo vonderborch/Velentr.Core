@@ -27,6 +27,7 @@
         <Compile Include="$(MSBuildThisFileDirectory)IO\DirectoryHelpers\TestDirectoryHelpersDeleteDirectoryIfExists.cs"/>
         <Compile Include="$(MSBuildThisFileDirectory)IO\FileHelpers\TestFileHelpersDeleteFileIfExists.cs"/>
         <Compile Include="$(MSBuildThisFileDirectory)IO\FileHelpers\TestFileHelpersSafeCopyFile.cs"/>
+    <Compile Include="$(MSBuildThisFileDirectory)Json\TestExpressionSerializer.cs" />
         <Compile Include="$(MSBuildThisFileDirectory)Json\TestJsonHelpers.cs"/>
         <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Bound\TestBounds.cs"/>
         <Compile Include="$(MSBuildThisFileDirectory)Mathematics\FixedPoint\TestFixedPointConversions.cs"/>
