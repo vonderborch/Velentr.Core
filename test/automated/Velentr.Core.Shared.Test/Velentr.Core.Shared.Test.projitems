@@ -27,7 +27,8 @@
         <Compile Include="$(MSBuildThisFileDirectory)IO\DirectoryHelpers\TestDirectoryHelpersDeleteDirectoryIfExists.cs"/>
         <Compile Include="$(MSBuildThisFileDirectory)IO\FileHelpers\TestFileHelpersDeleteFileIfExists.cs"/>
         <Compile Include="$(MSBuildThisFileDirectory)IO\FileHelpers\TestFileHelpersSafeCopyFile.cs"/>
-    <Compile Include="$(MSBuildThisFileDirectory)Json\TestExpressionSerializer.cs" />
+        <Compile Include="$(MSBuildThisFileDirectory)JsonConverters\TestStringToExpressionConversion.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Json\TestExpressionSerializer.cs"/>
         <Compile Include="$(MSBuildThisFileDirectory)Json\TestJsonHelpers.cs"/>
         <Compile Include="$(MSBuildThisFileDirectory)Mathematics\Bound\TestBounds.cs"/>
         <Compile Include="$(MSBuildThisFileDirectory)Mathematics\FixedPoint\TestFixedPointConversions.cs"/>
@@ -55,6 +56,7 @@
         <Compile Include="$(MSBuildThisFileDirectory)Streams\TestStreamHelpers.cs"/>
         <Compile Include="$(MSBuildThisFileDirectory)Strings\AsciiTables\TestAsciiTable.cs"/>
         <Compile Include="$(MSBuildThisFileDirectory)Strings\AsciiTables\TestAsciiTableParameters.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)Strings\TestStringExtensions.cs"/>
         <Compile Include="$(MSBuildThisFileDirectory)Strings\TestFormatting.cs"/>
         <Compile Include="$(MSBuildThisFileDirectory)Strings\TestReplacement.cs"/>
         <Compile Include="$(MSBuildThisFileDirectory)Strings\TestSimilarity.cs"/>

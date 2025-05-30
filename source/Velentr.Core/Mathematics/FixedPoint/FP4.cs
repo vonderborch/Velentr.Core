@@ -70,11 +70,17 @@ public struct FP4 : IFixedPoint<FP4>, IBaseFixedPoint<long>
     /// </summary>
     public long RawValue { get; set; }
 
+    /// <summary>
+    ///     Initializes a new instance of <see cref="FP4"/> with a raw internal value.
+    /// </summary>
     private FP4(long rawValue)
     {
         this.RawValue = rawValue;
     }
 
+    /// <summary>
+    ///     Initializes a new instance of <see cref="FP4"/> from an integer value.
+    /// </summary>
     private FP4(int value)
     {
         this.RawValue = value * BaseOne;
@@ -118,7 +124,9 @@ public struct FP4 : IFixedPoint<FP4>, IBaseFixedPoint<long>
         return (float)this.RawValue / BaseOne;
     }
 
-    // Comparison methods
+    /// <summary>
+    ///     Compares this instance to a specified object and returns an indication of their relative values.
+    /// </summary>
     public int CompareTo(object? obj)
     {
         if (obj is FP4 other)
@@ -129,37 +137,62 @@ public struct FP4 : IFixedPoint<FP4>, IBaseFixedPoint<long>
         throw new ArgumentException("Object is not an FPL4");
     }
 
+    /// <summary>
+    ///     Compares this instance to another <see cref="FP4"/> and returns an indication of their relative values.
+    /// </summary>
     public int CompareTo(FP4 other)
     {
         return this.RawValue.CompareTo(other.RawValue);
     }
 
+    /// <summary>
+    ///     Determines whether this instance is equal to another <see cref="FP4"/>.
+    /// </summary>
     public bool Equals(FP4 other)
     {
         return this.RawValue == other.RawValue;
     }
 
+    /// <summary>
+    ///     Determines whether the specified object is equal to the current <see cref="FP4"/> instance.
+    /// </summary>
     public override bool Equals(object? obj)
     {
         return obj is FP4 other && Equals(other);
     }
 
+    /// <summary>
+    ///     Returns a hash code for this instance.
+    /// </summary>
     public override int GetHashCode()
     {
         return HashCode.Combine(nameof(FP4), this.RawValue);
     }
 
-    // Formatting
+    /// <summary>
+    ///     Returns the string representation of the fixed-point number using the default format.
+    /// </summary>
     public override string ToString()
     {
         return string.Format(StringFormat, ToDouble());
     }
 
+    /// <summary>
+    ///     Returns the string representation of the fixed-point number using the specified format and culture.
+    /// </summary>
     public string ToString(string? format, IFormatProvider? formatProvider)
     {
         return string.Format(formatProvider, format ?? StringFormat, ToDouble());
     }
 
+    /// <summary>
+    ///     Attempts to format the fixed-point number into the given character span.
+    /// </summary>
+    /// <param name="destination">The span to write into.</param>
+    /// <param name="charsWritten">The number of characters written.</param>
+    /// <param name="format">The format string.</param>
+    /// <param name="provider">The format provider.</param>
+    /// <returns>True if formatting succeeded; otherwise false.</returns>
     public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format,
         IFormatProvider? provider)
     {
@@ -175,11 +208,24 @@ public struct FP4 : IFixedPoint<FP4>, IBaseFixedPoint<long>
         return true;
     }
 
+    /// <summary>
+    ///     Parses the string representation of a number to its fixed-point equivalent.
+    /// </summary>
+    /// <param name="s">The string to parse.</param>
+    /// <param name="provider">The format provider.</param>
+    /// <returns>The parsed <see cref="FP4"/> value.</returns>
     public static FP4 Parse(string s, IFormatProvider? provider)
     {
         return CreateFromDouble(double.Parse(s, provider));
     }
 
+    /// <summary>
+    ///     Tries to parse the string representation of a number to its fixed-point equivalent.
+    /// </summary>
+    /// <param name="s">The string to parse.</param>
+    /// <param name="provider">The format provider.</param>
+    /// <param name="result">The parsed result if successful; otherwise default.</param>
+    /// <returns>True if parsing succeeded; otherwise false.</returns>
     public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out FP4 result)
     {
         if (double.TryParse(s, provider, out var value))
@@ -192,11 +238,24 @@ public struct FP4 : IFixedPoint<FP4>, IBaseFixedPoint<long>
         return false;
     }
 
+    /// <summary>
+    ///     Parses the span representation of a number to its fixed-point equivalent.
+    /// </summary>
+    /// <param name="s">The span to parse.</param>
+    /// <param name="provider">The format provider.</param>
+    /// <returns>The parsed <see cref="FP4"/> value.</returns>
     public static FP4 Parse(ReadOnlySpan<char> s, IFormatProvider? provider)
     {
         return CreateFromDouble(double.Parse(s, provider));
     }
 
+    /// <summary>
+    ///     Tries to parse the span representation of a number to its fixed-point equivalent.
+    /// </summary>
+    /// <param name="s">The span to parse.</param>
+    /// <param name="provider">The format provider.</param>
+    /// <param name="result">The parsed result if successful; otherwise default.</param>
+    /// <returns>True if parsing succeeded; otherwise false.</returns>
     public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out FP4 result)
     {
         if (double.TryParse(s, provider, out var value))
@@ -209,16 +268,38 @@ public struct FP4 : IFixedPoint<FP4>, IBaseFixedPoint<long>
         return false;
     }
 
+    /// <summary>
+    ///     Parses the span representation of a number using specified number style and culture.
+    /// </summary>
+    /// <param name="s">The span to parse.</param>
+    /// <param name="style">The number style.</param>
+    /// <param name="provider">The format provider.</param>
+    /// <returns>The parsed <see cref="FP4"/> value.</returns>
     public static FP4 Parse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider)
     {
         return CreateFromDouble(double.Parse(s, style, provider));
     }
 
+    /// <summary>
+    ///     Parses the string representation of a number using specified number style and culture.
+    /// </summary>
+    /// <param name="s">The string to parse.</param>
+    /// <param name="style">The number style.</param>
+    /// <param name="provider">The format provider.</param>
+    /// <returns>The parsed <see cref="FP4"/> value.</returns>
     public static FP4 Parse(string s, NumberStyles style, IFormatProvider? provider)
     {
         return CreateFromDouble(double.Parse(s, style, provider));
     }
 
+    /// <summary>
+    ///     Tries to parse the span representation of a number using specified number style and culture.
+    /// </summary>
+    /// <param name="s">The span to parse.</param>
+    /// <param name="style">The number style.</param>
+    /// <param name="provider">The format provider.</param>
+    /// <param name="result">The parsed result if successful; otherwise default.</param>
+    /// <returns>True if parsing succeeded; otherwise false.</returns>
     public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out FP4 result)
     {
         if (double.TryParse(s, style, provider, out var value))
@@ -231,6 +312,14 @@ public struct FP4 : IFixedPoint<FP4>, IBaseFixedPoint<long>
         return false;
     }
 
+    /// <summary>
+    ///     Tries to parse the string representation of a number using specified number style and culture.
+    /// </summary>
+    /// <param name="s">The string to parse.</param>
+    /// <param name="style">The number style.</param>
+    /// <param name="provider">The format provider.</param>
+    /// <param name="result">The parsed result if successful; otherwise default.</param>
+    /// <returns>True if parsing succeeded; otherwise false.</returns>
     public static bool TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider,
         out FP4 result)
     {
@@ -318,31 +407,49 @@ public struct FP4 : IFixedPoint<FP4>, IBaseFixedPoint<long>
         return new FP4 { RawValue = value.RawValue - BaseOne };
     }
 
+    /// <summary>
+    ///     Determines whether two <see cref="FP4"/> values are equal.
+    /// </summary>
     public static bool operator ==(FP4 left, FP4 right)
     {
         return left.RawValue == right.RawValue;
     }
 
+    /// <summary>
+    ///     Determines whether two <see cref="FP4"/> values are not equal.
+    /// </summary>
     public static bool operator !=(FP4 left, FP4 right)
     {
         return left.RawValue != right.RawValue;
     }
 
+    /// <summary>
+    ///     Determines whether one <see cref="FP4"/> value is greater than another.
+    /// </summary>
     public static bool operator >(FP4 left, FP4 right)
     {
         return left.RawValue > right.RawValue;
     }
 
+    /// <summary>
+    ///     Determines whether one <see cref="FP4"/> value is greater than or equal to another.
+    /// </summary>
     public static bool operator >=(FP4 left, FP4 right)
     {
         return left.RawValue >= right.RawValue;
     }
 
+    /// <summary>
+    ///     Determines whether one <see cref="FP4"/> value is less than another.
+    /// </summary>
     public static bool operator <(FP4 left, FP4 right)
     {
         return left.RawValue < right.RawValue;
     }
 
+    /// <summary>
+    ///     Determines whether one <see cref="FP4"/> value is less than or equal to another.
+    /// </summary>
     public static bool operator <=(FP4 left, FP4 right)
     {
         return left.RawValue <= right.RawValue;
@@ -589,7 +696,13 @@ public struct FP4 : IFixedPoint<FP4>, IBaseFixedPoint<long>
         return MinMagnitude(x, y);
     }
 
-    // Conversion methods
+    /// <summary>
+    ///     Attempts to convert the specified value to an <see cref="FP4"/> using checked conversion.
+    /// </summary>
+    /// <typeparam name="TOther">The source numeric type.</typeparam>
+    /// <param name="value">The value to convert.</param>
+    /// <param name="result">The converted result if successful.</param>
+    /// <returns>True if conversion succeeded; otherwise false.</returns>
     public static bool TryConvertFromChecked<TOther>(TOther value, out FP4 result) where TOther : INumberBase<TOther>
     {
         result = default;
@@ -632,6 +745,13 @@ public struct FP4 : IFixedPoint<FP4>, IBaseFixedPoint<long>
         return false;
     }
 
+    /// <summary>
+    ///     Attempts to convert the specified value to an <see cref="FP4"/>, saturating on overflow.
+    /// </summary>
+    /// <typeparam name="TOther">The source numeric type.</typeparam>
+    /// <param name="value">The value to convert.</param>
+    /// <param name="result">The converted result if successful.</param>
+    /// <returns>True if conversion succeeded; otherwise false.</returns>
     public static bool TryConvertFromSaturating<TOther>(TOther value, out FP4 result)
         where TOther : INumberBase<TOther>
     {
@@ -639,6 +759,13 @@ public struct FP4 : IFixedPoint<FP4>, IBaseFixedPoint<long>
         return TryConvertFromChecked(value, out result);
     }
 
+    /// <summary>
+    ///     Attempts to convert the specified value to an <see cref="FP4"/>, truncating on overflow.
+    /// </summary>
+    /// <typeparam name="TOther">The source numeric type.</typeparam>
+    /// <param name="value">The value to convert.</param>
+    /// <param name="result">The converted result if successful.</param>
+    /// <returns>True if conversion succeeded; otherwise false.</returns>
     public static bool TryConvertFromTruncating<TOther>(TOther value, out FP4 result)
         where TOther : INumberBase<TOther>
     {
@@ -646,6 +773,13 @@ public struct FP4 : IFixedPoint<FP4>, IBaseFixedPoint<long>
         return TryConvertFromChecked(value, out result);
     }
 
+    /// <summary>
+    ///     Attempts to convert this <see cref="FP4"/> to the specified numeric type using checked conversion.
+    /// </summary>
+    /// <typeparam name="TOther">The target numeric type.</typeparam>
+    /// <param name="value">The fixed-point number to convert.</param>
+    /// <param name="result">The converted result if successful.</param>
+    /// <returns>True if conversion succeeded; otherwise false.</returns>
     public static bool TryConvertToChecked<TOther>(FP4 value, [MaybeNullWhen(false)] out TOther result)
         where TOther : INumberBase<TOther>
     {
@@ -689,6 +823,13 @@ public struct FP4 : IFixedPoint<FP4>, IBaseFixedPoint<long>
         return false;
     }
 
+    /// <summary>
+    ///     Attempts to convert this <see cref="FP4"/> to the specified numeric type, saturating on overflow.
+    /// </summary>
+    /// <typeparam name="TOther">The target numeric type.</typeparam>
+    /// <param name="value">The fixed-point number to convert.</param>
+    /// <param name="result">The converted result if successful.</param>
+    /// <returns>True if conversion succeeded; otherwise false.</returns>
     public static bool TryConvertToSaturating<TOther>(FP4 value, [MaybeNullWhen(false)] out TOther result)
         where TOther : INumberBase<TOther>
     {
@@ -696,6 +837,13 @@ public struct FP4 : IFixedPoint<FP4>, IBaseFixedPoint<long>
         return TryConvertToChecked(value, out result);
     }
 
+    /// <summary>
+    ///     Attempts to convert this <see cref="FP4"/> to the specified numeric type, truncating on overflow.
+    /// </summary>
+    /// <typeparam name="TOther">The target numeric type.</typeparam>
+    /// <param name="value">The fixed-point number to convert.</param>
+    /// <param name="result">The converted result if successful.</param>
+    /// <returns>True if conversion succeeded; otherwise false.</returns>
     public static bool TryConvertToTruncating<TOther>(FP4 value, [MaybeNullWhen(false)] out TOther result)
         where TOther : INumberBase<TOther>
     {

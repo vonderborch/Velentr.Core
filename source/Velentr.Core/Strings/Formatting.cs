@@ -104,7 +104,7 @@ public static class Formatting
                 }
                 else
                 {
-                    i = ProcessParameter(value, parameters, finalParameters, parameterIndexMap, outputFormatString, i);
+                    i = ProcessParameter(value, parameters!, finalParameters, parameterIndexMap, outputFormatString, i);
                     evenBraces = null;
                 }
             }
@@ -156,7 +156,7 @@ public static class Formatting
             PropertyInfo? property = parameter.GetType().GetProperty(paramKey);
             if (property != null)
             {
-                return property.GetValue(parameter);
+                return property.GetValue(parameter) ?? "";
             }
         }
 

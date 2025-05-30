@@ -66,7 +66,7 @@ public class SimpleRng : ARandomGenerator
     protected static SimpleRng CreateThreadLocalInstance()
     {
         var newSharedSeed = _sharedSeed + 1;
-        while (!AtomicOperations.CAS(ref _sharedSeed, newSharedSeed, _sharedSeed))
+        while (!AtomicOperations.CompareAndSwap(ref _sharedSeed, newSharedSeed, _sharedSeed))
         {
             newSharedSeed = _sharedSeed + 1;
         }

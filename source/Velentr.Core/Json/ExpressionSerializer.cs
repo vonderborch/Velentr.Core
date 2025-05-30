@@ -3,9 +3,14 @@ using Serialize.Linq.Serializers;
 
 namespace Velentr.Core.Json;
 
-public class ExpressionSerializer<T> where T : Delegate
+/// <summary>
+///     Provides methods for serializing and deserializing expressions into Base64 encoded strings.
+/// </summary>
+/// <typeparam name="T">The type of delegate representing the expression to serialize or deserialize.</typeparam>
+public static class ExpressionSerializer<T> where T : Delegate
 {
-    public static ExpressionSerializer Serializer = new(new JsonSerializer());
+    // ReSharper disable once StaticMemberInGenericType
+    private static readonly ExpressionSerializer Serializer = new(new JsonSerializer());
 
     /// <summary>
     ///     Deserializes a Base64 encoded string into an expression of type T.

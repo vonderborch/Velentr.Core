@@ -70,11 +70,17 @@ public struct FP6 : IFixedPoint<FP6>, IBaseFixedPoint<long>
     /// </summary>
     public long RawValue { get; set; }
 
+    /// <summary>
+    ///     Initializes a new instance of <see cref="FP6"/> with a raw internal value.
+    /// </summary>
     private FP6(long rawValue)
     {
         this.RawValue = rawValue;
     }
 
+    /// <summary>
+    ///     Initializes a new instance of <see cref="FP6"/> from an integer value.
+    /// </summary>
     private FP6(int value)
     {
         this.RawValue = value * BaseOne;
@@ -118,7 +124,7 @@ public struct FP6 : IFixedPoint<FP6>, IBaseFixedPoint<long>
         return (float)this.RawValue / BaseOne;
     }
 
-    // Comparison methods
+    /// <inheritdoc/>
     public int CompareTo(object? obj)
     {
         if (obj is FP6 other)
@@ -129,27 +135,35 @@ public struct FP6 : IFixedPoint<FP6>, IBaseFixedPoint<long>
         throw new ArgumentException("Object is not an FPL4");
     }
 
+    /// <inheritdoc/>
     public int CompareTo(FP6 other)
     {
         return this.RawValue.CompareTo(other.RawValue);
     }
 
+    /// <summary>
+    ///     Determines whether this instance and another <see cref="FP6"/> have the same value.
+    /// </summary>
     public bool Equals(FP6 other)
     {
         return this.RawValue == other.RawValue;
     }
 
+    /// <inheritdoc/>
     public override bool Equals(object? obj)
     {
         return obj is FP6 other && Equals(other);
     }
 
+    /// <inheritdoc/>
     public override int GetHashCode()
     {
         return HashCode.Combine(nameof(FP6), this.RawValue);
     }
 
-    // Formatting
+    /// <summary>
+    ///     Returns the string representation of the fixed-point number.
+    /// </summary>
     public override string ToString()
     {
         return string.Format(StringFormat, ToDouble());
@@ -318,31 +332,49 @@ public struct FP6 : IFixedPoint<FP6>, IBaseFixedPoint<long>
         return new FP6 { RawValue = value.RawValue - BaseOne };
     }
 
+    /// <summary>
+    ///     Determines whether two <see cref="FP6"/> values are equal.
+    /// </summary>
     public static bool operator ==(FP6 left, FP6 right)
     {
         return left.RawValue == right.RawValue;
     }
 
+    /// <summary>
+    ///     Determines whether two <see cref="FP6"/> values are not equal.
+    /// </summary>
     public static bool operator !=(FP6 left, FP6 right)
     {
         return left.RawValue != right.RawValue;
     }
 
+    /// <summary>
+    ///     Determines whether one <see cref="FP6"/> value is greater than another.
+    /// </summary>
     public static bool operator >(FP6 left, FP6 right)
     {
         return left.RawValue > right.RawValue;
     }
 
+    /// <summary>
+    ///     Determines whether one <see cref="FP6"/> value is greater than or equal to another.
+    /// </summary>
     public static bool operator >=(FP6 left, FP6 right)
     {
         return left.RawValue >= right.RawValue;
     }
 
+    /// <summary>
+    ///     Determines whether one <see cref="FP6"/> value is less than another.
+    /// </summary>
     public static bool operator <(FP6 left, FP6 right)
     {
         return left.RawValue < right.RawValue;
     }
 
+    /// <summary>
+    ///     Determines whether one <see cref="FP6"/> value is less than or equal to another.
+    /// </summary>
     public static bool operator <=(FP6 left, FP6 right)
     {
         return left.RawValue <= right.RawValue;

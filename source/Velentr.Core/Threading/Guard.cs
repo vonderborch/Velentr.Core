@@ -6,8 +6,39 @@ namespace Velentr.Core.Threading;
 ///     A thread-safe boolean guard/flag.
 /// </summary>
 [DebuggerDisplay("State = {Check}")]
-public struct Guard
+public struct Guard : IEquatable<Guard>
 {
+    /// <summary>
+    /// Determines whether the specified <see cref="Guard"/> instance is equal to this instance.
+    /// </summary>
+    /// <param name="other">The <see cref="Guard"/> instance to compare with this instance.</param>
+    /// <returns>True if the state of the specified <see cref="Guard"/> instance matches the state of this instance; otherwise, false.</returns>
+    public bool Equals(Guard other)
+    {
+        return this.state == other.state;
+    }
+
+    /// <summary>
+    /// Determines whether the specified <see cref="Guard"/> instance is equal to this instance.
+    /// </summary>
+    /// <param name="obj">The <see cref="Guard"/> instance to compare with this instance.</param>
+    /// <returns>True if the state of the specified <see cref="Guard"/> instance matches the state of this instance; otherwise, false.</returns>
+    public override bool Equals(object? obj)
+    {
+        return obj is Guard other && Equals(other);
+    }
+
+    /// <summary>
+    /// Gets a hash code for this instance of the <see cref="Guard"/> struct.
+    /// </summary>
+    /// <returns>
+    /// An integer representing the current state of the guard. The value is 0 if the state is false, or 1 if the state is true.
+    /// </returns>
+    public override int GetHashCode()
+    {
+        return this.state;
+    }
+
     /// <summary>
     ///     The value for false.
     /// </summary>

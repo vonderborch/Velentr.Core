@@ -138,6 +138,7 @@ public static class ColorThresholds
     /// <param name="alpha">The alpha component of the color.</param>
     /// <param name="thresholdRed">The minimum red threshold value.</param>
     /// <param name="thresholdGreen">The minimum green threshold value.</param>
+    /// <param name="thresholdBlue">The minimum blue threshold value.</param>
     /// <param name="thresholdAlpha">The minimum alpha threshold value.</param>
     /// <returns>True if the color meets the threshold values, otherwise false.</returns>
     public static bool RgbMeetsMinRgbThreshold(double red, double green, double blue, double alpha, double thresholdRed,

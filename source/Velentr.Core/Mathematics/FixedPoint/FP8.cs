@@ -70,11 +70,17 @@ public struct FP8 : IFixedPoint<FP8>, IBaseFixedPoint<long>
     /// </summary>
     public long RawValue { get; set; }
 
+    /// <summary>
+    /// Initializes a new instance of <see cref="FP8"/> with a raw internal value.
+    /// </summary>
     private FP8(long rawValue)
     {
         this.RawValue = rawValue;
     }
 
+    /// <summary>
+    /// Initializes a new instance of <see cref="FP8"/> from an integer value.
+    /// </summary>
     private FP8(int value)
     {
         this.RawValue = value * BaseOne;
@@ -118,7 +124,7 @@ public struct FP8 : IFixedPoint<FP8>, IBaseFixedPoint<long>
         return (float)this.RawValue / BaseOne;
     }
 
-    // Comparison methods
+    /// <inheritdoc/>
     public int CompareTo(object? obj)
     {
         if (obj is FP8 other)
@@ -129,37 +135,51 @@ public struct FP8 : IFixedPoint<FP8>, IBaseFixedPoint<long>
         throw new ArgumentException("Object is not an FPL4");
     }
 
+    /// <inheritdoc/>
     public int CompareTo(FP8 other)
     {
         return this.RawValue.CompareTo(other.RawValue);
     }
 
+    /// <summary>
+    /// Determines whether this instance and another <see cref="FP8"/> have the same value.
+    /// </summary>
     public bool Equals(FP8 other)
     {
         return this.RawValue == other.RawValue;
     }
 
+    /// <inheritdoc/>
     public override bool Equals(object? obj)
     {
         return obj is FP8 other && Equals(other);
     }
 
+    /// <inheritdoc/>
     public override int GetHashCode()
     {
         return HashCode.Combine(nameof(FP8), this.RawValue);
     }
 
-    // Formatting
+    /// <summary>
+    /// Returns the string representation of the fixed-point number.
+    /// </summary>
     public override string ToString()
     {
         return string.Format(StringFormat, ToDouble());
     }
 
+    /// <summary>
+    /// Converts the fixed-point number to a string using the specified format and culture.
+    /// </summary>
     public string ToString(string? format, IFormatProvider? formatProvider)
     {
         return string.Format(formatProvider, format ?? StringFormat, ToDouble());
     }
 
+    /// <summary>
+    /// Tries to format the fixed-point number into the given character span.
+    /// </summary>
     public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format,
         IFormatProvider? provider)
     {
@@ -175,11 +195,17 @@ public struct FP8 : IFixedPoint<FP8>, IBaseFixedPoint<long>
         return true;
     }
 
+    /// <summary>
+    /// Parses the string into an <see cref="FP8"/> using the specified provider.
+    /// </summary>
     public static FP8 Parse(string s, IFormatProvider? provider)
     {
         return CreateFromDouble(double.Parse(s, provider));
     }
 
+    /// <summary>
+    /// Tries to parse the string into an <see cref="FP8"/> using the specified provider.
+    /// </summary>
     public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out FP8 result)
     {
         if (double.TryParse(s, provider, out var value))
@@ -192,11 +218,17 @@ public struct FP8 : IFixedPoint<FP8>, IBaseFixedPoint<long>
         return false;
     }
 
+    /// <summary>
+    /// Parses the span into an <see cref="FP8"/> using the specified provider.
+    /// </summary>
     public static FP8 Parse(ReadOnlySpan<char> s, IFormatProvider? provider)
     {
         return CreateFromDouble(double.Parse(s, provider));
     }
 
+    /// <summary>
+    /// Tries to parse the span into an <see cref="FP8"/> using the specified provider.
+    /// </summary>
     public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out FP8 result)
     {
         if (double.TryParse(s, provider, out var value))
@@ -209,16 +241,25 @@ public struct FP8 : IFixedPoint<FP8>, IBaseFixedPoint<long>
         return false;
     }
 
+    /// <summary>
+    /// Parses the span into an <see cref="FP8"/> using the specified number style and provider.
+    /// </summary>
     public static FP8 Parse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider)
     {
         return CreateFromDouble(double.Parse(s, style, provider));
     }
 
+    /// <summary>
+    /// Parses the string into an <see cref="FP8"/> using the specified number style and provider.
+    /// </summary>
     public static FP8 Parse(string s, NumberStyles style, IFormatProvider? provider)
     {
         return CreateFromDouble(double.Parse(s, style, provider));
     }
 
+    /// <summary>
+    /// Tries to parse the span into an <see cref="FP8"/> using the specified number style and provider.
+    /// </summary>
     public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out FP8 result)
     {
         if (double.TryParse(s, style, provider, out var value))
@@ -231,6 +272,9 @@ public struct FP8 : IFixedPoint<FP8>, IBaseFixedPoint<long>
         return false;
     }
 
+    /// <summary>
+    /// Tries to parse the string into an <see cref="FP8"/> using the specified number style and provider.
+    /// </summary>
     public static bool TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider,
         out FP8 result)
     {
@@ -245,7 +289,7 @@ public struct FP8 : IFixedPoint<FP8>, IBaseFixedPoint<long>
     }
 
     /// <summary>
-    ///     Adds two fixed-point numbers.
+    ///     Adds two <see cref="FP8"/> values.
     /// </summary>
     public static FP8 operator +(FP8 left, FP8 right)
     {
@@ -253,7 +297,7 @@ public struct FP8 : IFixedPoint<FP8>, IBaseFixedPoint<long>
     }
 
     /// <summary>
-    ///     Subtracts the second fixed-point number from the first.
+    ///     Subtracts one <see cref="FP8"/> value from another.
     /// </summary>
     public static FP8 operator -(FP8 left, FP8 right)
     {
@@ -261,7 +305,7 @@ public struct FP8 : IFixedPoint<FP8>, IBaseFixedPoint<long>
     }
 
     /// <summary>
-    ///     Multiplies two fixed-point numbers.
+    ///     Multiplies two <see cref="FP8"/> values.
     /// </summary>
     public static FP8 operator *(FP8 left, FP8 right)
     {
@@ -270,7 +314,7 @@ public struct FP8 : IFixedPoint<FP8>, IBaseFixedPoint<long>
     }
 
     /// <summary>
-    ///     Divides the first fixed-point number by the second.
+    ///     Divides one <see cref="FP8"/> value by another.
     /// </summary>
     public static FP8 operator /(FP8 left, FP8 right)
     {
@@ -279,7 +323,7 @@ public struct FP8 : IFixedPoint<FP8>, IBaseFixedPoint<long>
     }
 
     /// <summary>
-    ///     Returns the remainder after dividing the first fixed-point number by the second.
+    ///     Returns the remainder after dividing two <see cref="FP8"/> values.
     /// </summary>
     public static FP8 operator %(FP8 left, FP8 right)
     {
@@ -287,7 +331,7 @@ public struct FP8 : IFixedPoint<FP8>, IBaseFixedPoint<long>
     }
 
     /// <summary>
-    ///     Returns the negation of the fixed-point number.
+    ///     Returns the negation of the specified <see cref="FP8"/> value.
     /// </summary>
     public static FP8 operator -(FP8 value)
     {
@@ -295,7 +339,7 @@ public struct FP8 : IFixedPoint<FP8>, IBaseFixedPoint<long>
     }
 
     /// <summary>
-    ///     Returns the fixed-point number unchanged (unary plus).
+    /// Unary plus operator for <see cref="FP8"/>.
     /// </summary>
     public static FP8 operator +(FP8 value)
     {
@@ -318,41 +362,57 @@ public struct FP8 : IFixedPoint<FP8>, IBaseFixedPoint<long>
         return new FP8 { RawValue = value.RawValue - BaseOne };
     }
 
+    /// <summary>
+    ///     Determines whether two <see cref="FP8"/> values are equal.
+    /// </summary>
     public static bool operator ==(FP8 left, FP8 right)
     {
         return left.RawValue == right.RawValue;
     }
 
+    /// <summary>
+    ///     Determines whether two <see cref="FP8"/> values are not equal.
+    /// </summary>
     public static bool operator !=(FP8 left, FP8 right)
     {
         return left.RawValue != right.RawValue;
     }
 
+    /// <summary>
+    ///     Determines whether one <see cref="FP8"/> value is greater than another.
+    /// </summary>
     public static bool operator >(FP8 left, FP8 right)
     {
         return left.RawValue > right.RawValue;
     }
 
+    /// <summary>
+    ///     Determines whether one <see cref="FP8"/> value is greater than or equal to another.
+    /// </summary>
     public static bool operator >=(FP8 left, FP8 right)
     {
         return left.RawValue >= right.RawValue;
     }
 
+    /// <summary>
+    ///     Determines whether one <see cref="FP8"/> value is less than another.
+    /// </summary>
     public static bool operator <(FP8 left, FP8 right)
     {
         return left.RawValue < right.RawValue;
     }
 
+    /// <summary>
+    ///     Determines whether one <see cref="FP8"/> value is less than or equal to another.
+    /// </summary>
     public static bool operator <=(FP8 left, FP8 right)
     {
         return left.RawValue <= right.RawValue;
     }
 
     /// <summary>
-    ///     Returns the absolute value of a fixed-point number.
+    /// Returns the absolute value of the specified <see cref="FP8"/>.
     /// </summary>
-    /// <param name="value">The fixed-point number.</param>
-    /// <returns>The absolute value of the fixed-point number.</returns>
     public static FP8 Abs(FP8 value)
     {
         return new FP8 { RawValue = Math.Abs(value.RawValue) };
@@ -589,7 +649,9 @@ public struct FP8 : IFixedPoint<FP8>, IBaseFixedPoint<long>
         return MinMagnitude(x, y);
     }
 
-    // Conversion methods
+    /// <summary>
+    /// Attempts to convert another numeric type to <see cref="FP8"/>, throwing on overflow.
+    /// </summary>
     public static bool TryConvertFromChecked<TOther>(TOther value, out FP8 result) where TOther : INumberBase<TOther>
     {
         result = default;
@@ -632,6 +694,9 @@ public struct FP8 : IFixedPoint<FP8>, IBaseFixedPoint<long>
         return false;
     }
 
+    /// <summary>
+    /// Attempts to convert another numeric type to <see cref="FP8"/>, saturating on overflow.
+    /// </summary>
     public static bool TryConvertFromSaturating<TOther>(TOther value, out FP8 result)
         where TOther : INumberBase<TOther>
     {
@@ -639,6 +704,9 @@ public struct FP8 : IFixedPoint<FP8>, IBaseFixedPoint<long>
         return TryConvertFromChecked(value, out result);
     }
 
+    /// <summary>
+    /// Attempts to convert another numeric type to <see cref="FP8"/>, truncating on overflow.
+    /// </summary>
     public static bool TryConvertFromTruncating<TOther>(TOther value, out FP8 result)
         where TOther : INumberBase<TOther>
     {
@@ -646,6 +714,9 @@ public struct FP8 : IFixedPoint<FP8>, IBaseFixedPoint<long>
         return TryConvertFromChecked(value, out result);
     }
 
+    /// <summary>
+    /// Attempts to convert this <see cref="FP8"/> to another numeric type, throwing on overflow.
+    /// </summary>
     public static bool TryConvertToChecked<TOther>(FP8 value, [MaybeNullWhen(false)] out TOther result)
         where TOther : INumberBase<TOther>
     {
@@ -689,6 +760,9 @@ public struct FP8 : IFixedPoint<FP8>, IBaseFixedPoint<long>
         return false;
     }
 
+    /// <summary>
+    /// Attempts to convert this <see cref="FP8"/> to another numeric type, saturating on overflow.
+    /// </summary>
     public static bool TryConvertToSaturating<TOther>(FP8 value, [MaybeNullWhen(false)] out TOther result)
         where TOther : INumberBase<TOther>
     {
@@ -696,6 +770,9 @@ public struct FP8 : IFixedPoint<FP8>, IBaseFixedPoint<long>
         return TryConvertToChecked(value, out result);
     }
 
+    /// <summary>
+    /// Attempts to convert this <see cref="FP8"/> to another numeric type, truncating on overflow.
+    /// </summary>
     public static bool TryConvertToTruncating<TOther>(FP8 value, [MaybeNullWhen(false)] out TOther result)
         where TOther : INumberBase<TOther>
     {

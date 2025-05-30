@@ -33,6 +33,7 @@ public class StreamHelpers
     ///     Reads the entire content of a stream and returns it as a string using the specified encoding.
     /// </summary>
     /// <param name="stream">The stream to read from.</param>
+    /// <param name="encoding">The encoding to use for converting the byte array to a string.</param>
     /// <returns>A string containing the content of the stream.</returns>
     public static string ReadStream(Stream stream, Encoding encoding)
     {

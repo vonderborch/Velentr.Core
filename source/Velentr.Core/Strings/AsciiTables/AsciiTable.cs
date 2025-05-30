@@ -425,11 +425,11 @@ public class AsciiTable
     /// <summary>
     ///     Serializes the table rows.
     /// </summary>
-    private List<Dictionary<string, string>> SerializeTableRows(List<Dictionary<string, object>> rows,
+    private List<Dictionary<string, string>> SerializeTableRows(List<Dictionary<string, object?>> rows,
         Dictionary<string, List<object>> columnValues, Dictionary<string, int> maxColumnSizes)
     {
         List<Dictionary<string, string>> serializedRows = new();
-        foreach (Dictionary<string, object> row in rows)
+        foreach (Dictionary<string, object?> row in rows)
         {
             Dictionary<string, string> serializedRow = new();
             foreach (AsciiTableColumn column in this.columns)

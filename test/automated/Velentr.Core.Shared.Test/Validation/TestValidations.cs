@@ -43,6 +43,28 @@ public class TestValidations
     }
 
     [Test]
+    public void TestNotNullOrEmptyCheck_ValidList()
+    {
+        Assert.DoesNotThrow(() => Validations.NotNullOrEmptyCheck(new List<string> { "hello" }, "testParam"));
+    }
+
+    [Test]
+    public void TestNotNullOrEmptyCheck_NullList()
+    {
+        ArgumentException? ex =
+            Assert.Throws<ArgumentException>(() => Validations.NotNullOrEmptyCheck<List<string>>(null, "testParam"));
+        Assert.That(ex.Message, Is.EqualTo("testParam can not be null or empty."));
+    }
+
+    [Test]
+    public void TestNotNullOrEmptyCheck_EmptyList()
+    {
+        ArgumentException? ex =
+            Assert.Throws<ArgumentException>(() => Validations.NotNullOrEmptyCheck(new List<string>(), "testParam"));
+        Assert.That(ex.Message, Is.EqualTo("testParam can not be null or empty."));
+    }
+
+    [Test]
     public void TestNotNullOrWhiteSpaceCheck_ValidString()
     {
         Assert.DoesNotThrow(() => Validations.NotNullOrWhiteSpaceCheck("valid", "testParam"));

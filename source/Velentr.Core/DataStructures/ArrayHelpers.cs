@@ -30,6 +30,7 @@ public static class ArrayHelpers
     /// </summary>
     /// <typeparam name="T">The type of the elements in the array.</typeparam>
     /// <param name="baseArray">The 2D array to convert.</param>
+    /// <param name="width">The width of the 2D array.</param>
     /// <param name="height">The height of the 2D array.</param>
     /// <returns>A 1D array containing the elements of the 2D array.</returns>
     public static T[] Convert2DArrayTo1DArray<T>(T[,] baseArray, int width, int height)

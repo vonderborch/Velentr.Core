@@ -113,7 +113,14 @@ public struct FP2I : IFixedPoint<FP2I>, IBaseFixedPoint<int>
         return (float)this.RawValue / BaseOne;
     }
 
-    // Comparison methods
+    /// <summary>
+    /// Compares this instance to another object.
+    /// </summary>
+    /// <param name="obj">The object to compare with.</param>
+    /// <returns>
+    /// A signed integer indicating the relative values: less than zero if this instance
+    /// is less, zero if equal, greater than zero if greater.
+    /// </returns>
     public int CompareTo(object? obj)
     {
         if (obj is FP2I other)
@@ -124,16 +131,30 @@ public struct FP2I : IFixedPoint<FP2I>, IBaseFixedPoint<int>
         throw new ArgumentException("Object is not an FPL4");
     }
 
+    /// <summary>
+    /// Compares this instance to another <see cref="FP2I"/>.
+    /// </summary>
+    /// <param name="other">The <see cref="FP2I"/> to compare with.</param>
+    /// <returns>
+    /// A signed integer indicating the relative values: less than zero if this instance
+    /// is less, zero if equal, greater than zero if greater.
+    /// </returns>
     public int CompareTo(FP2I other)
     {
         return this.RawValue.CompareTo(other.RawValue);
     }
 
+    /// <summary>
+    /// Determines whether this instance is equal to another <see cref="FP2I"/>.
+    /// </summary>
+    /// <param name="other">The <see cref="FP2I"/> to compare with.</param>
+    /// <returns>True if the values are equal; otherwise, false.</returns>
     public bool Equals(FP2I other)
     {
         return this.RawValue == other.RawValue;
     }
 
+    /// <inheritdoc/>
     public override bool Equals(object? obj)
     {
         return obj is FP2I other && Equals(other);
@@ -144,17 +165,34 @@ public struct FP2I : IFixedPoint<FP2I>, IBaseFixedPoint<int>
         return HashCode.Combine(nameof(FP2I), this.RawValue);
     }
 
-    // Formatting
+    /// <summary>
+    /// Returns the string representation of the fixed-point number.
+    /// </summary>
+    /// <returns>The formatted numeric string.</returns>
     public override string ToString()
     {
         return string.Format(StringFormat, ToDouble());
     }
 
+    /// <summary>
+    /// Returns the string representation of the fixed-point number using the specified format and provider.
+    /// </summary>
+    /// <param name="format">The format string.</param>
+    /// <param name="formatProvider">The format provider.</param>
+    /// <returns>The formatted numeric string.</returns>
     public string ToString(string? format, IFormatProvider? formatProvider)
     {
         return string.Format(formatProvider, format ?? StringFormat, ToDouble());
     }
 
+    /// <summary>
+    /// Attempts to format the fixed-point number into the provided character span.
+    /// </summary>
+    /// <param name="destination">The target span.</param>
+    /// <param name="charsWritten">The number of characters written on success.</param>
+    /// <param name="format">The format specifier span.</param>
+    /// <param name="provider">The format provider.</param>
+    /// <returns>True if formatting succeeded; otherwise, false.</returns>
     public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format,
         IFormatProvider? provider)
     {
@@ -170,11 +208,24 @@ public struct FP2I : IFixedPoint<FP2I>, IBaseFixedPoint<int>
         return true;
     }
 
+    /// <summary>
+    /// Parses the specified string into an <see cref="FP2I"/>.
+    /// </summary>
+    /// <param name="s">The string to parse.</param>
+    /// <param name="provider">The format provider.</param>
+    /// <returns>The parsed <see cref="FP2I"/>.</returns>
     public static FP2I Parse(string s, IFormatProvider? provider)
     {
         return CreateFromDouble(double.Parse(s, provider));
     }
 
+    /// <summary>
+    /// Attempts to parse the specified string into an <see cref="FP2I"/>.
+    /// </summary>
+    /// <param name="s">The string to parse.</param>
+    /// <param name="provider">The format provider.</param>
+    /// <param name="result">The parsed result if successful.</param>
+    /// <returns>True if parsing succeeded; otherwise, false.</returns>
     public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out FP2I result)
     {
         if (double.TryParse(s, provider, out var value))
@@ -187,11 +238,24 @@ public struct FP2I : IFixedPoint<FP2I>, IBaseFixedPoint<int>
         return false;
     }
 
+    /// <summary>
+    /// Parses the specified character span into an <see cref="FP2I"/>.
+    /// </summary>
+    /// <param name="s">The span to parse.</param>
+    /// <param name="provider">The format provider.</param>
+    /// <returns>The parsed <see cref="FP2I"/>.</returns>
     public static FP2I Parse(ReadOnlySpan<char> s, IFormatProvider? provider)
     {
         return CreateFromDouble(double.Parse(s, provider));
     }
 
+    /// <summary>
+    /// Attempts to parse the specified character span into an <see cref="FP2I"/>.
+    /// </summary>
+    /// <param name="s">The span to parse.</param>
+    /// <param name="provider">The format provider.</param>
+    /// <param name="result">The parsed result if successful.</param>
+    /// <returns>True if parsing succeeded; otherwise, false.</returns>
     public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out FP2I result)
     {
         if (double.TryParse(s, provider, out var value))
@@ -204,16 +268,38 @@ public struct FP2I : IFixedPoint<FP2I>, IBaseFixedPoint<int>
         return false;
     }
 
+    /// <summary>
+    /// Parses the specified character span, using the given number style and provider, into an <see cref="FP2I"/>.
+    /// </summary>
+    /// <param name="s">The span to parse.</param>
+    /// <param name="style">The number style to use.</param>
+    /// <param name="provider">The format provider.</param>
+    /// <returns>The parsed <see cref="FP2I"/>.</returns>
     public static FP2I Parse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider)
     {
         return CreateFromDouble(double.Parse(s, style, provider));
     }
 
+    /// <summary>
+    /// Parses the specified string, using the given number style and provider, into an <see cref="FP2I"/>.
+    /// </summary>
+    /// <param name="s">The string to parse.</param>
+    /// <param name="style">The number style to use.</param>
+    /// <param name="provider">The format provider.</param>
+    /// <returns>The parsed <see cref="FP2I"/>.</returns>
     public static FP2I Parse(string s, NumberStyles style, IFormatProvider? provider)
     {
         return CreateFromDouble(double.Parse(s, style, provider));
     }
 
+    /// <summary>
+    /// Attempts to parse the specified span, using the given number style and provider, into an <see cref="FP2I"/>.
+    /// </summary>
+    /// <param name="s">The span to parse.</param>
+    /// <param name="style">The number style to use.</param>
+    /// <param name="provider">The format provider.</param>
+    /// <param name="result">The parsed result if successful.</param>
+    /// <returns>True if parsing succeeded; otherwise, false.</returns>
     public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out FP2I result)
     {
         if (double.TryParse(s, style, provider, out var value))
@@ -226,6 +312,14 @@ public struct FP2I : IFixedPoint<FP2I>, IBaseFixedPoint<int>
         return false;
     }
 
+    /// <summary>
+    /// Attempts to parse the specified string, using the given number style and provider, into an <see cref="FP2I"/>.
+    /// </summary>
+    /// <param name="s">The string to parse.</param>
+    /// <param name="style">The number style to use.</param>
+    /// <param name="provider">The format provider.</param>
+    /// <param name="result">The parsed result if successful.</param>
+    /// <returns>True if parsing succeeded; otherwise, false.</returns>
     public static bool TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider,
         out FP2I result)
     {
@@ -313,31 +407,49 @@ public struct FP2I : IFixedPoint<FP2I>, IBaseFixedPoint<int>
         return new FP2I { RawValue = value.RawValue - BaseOne };
     }
 
+    /// <summary>
+    ///     Determines whether two <see cref="FP2I"/> values are equal.
+    /// </summary>
     public static bool operator ==(FP2I left, FP2I right)
     {
         return left.RawValue == right.RawValue;
     }
 
+    /// <summary>
+    ///     Determines whether two <see cref="FP2I"/> values are not equal.
+    /// </summary>
     public static bool operator !=(FP2I left, FP2I right)
     {
         return left.RawValue != right.RawValue;
     }
 
+    /// <summary>
+    ///     Determines whether one <see cref="FP2I"/> value is greater than another.
+    /// </summary>
     public static bool operator >(FP2I left, FP2I right)
     {
         return left.RawValue > right.RawValue;
     }
 
+    /// <summary>
+    ///     Determines whether one <see cref="FP2I"/> value is greater than or equal to another.
+    /// </summary>
     public static bool operator >=(FP2I left, FP2I right)
     {
         return left.RawValue >= right.RawValue;
     }
 
+    /// <summary>
+    ///     Determines whether one <see cref="FP2I"/> value is less than another.
+    /// </summary>
     public static bool operator <(FP2I left, FP2I right)
     {
         return left.RawValue < right.RawValue;
     }
 
+    /// <summary>
+    ///     Determines whether one <see cref="FP2I"/> value is less than or equal to another.
+    /// </summary>
     public static bool operator <=(FP2I left, FP2I right)
     {
         return left.RawValue <= right.RawValue;

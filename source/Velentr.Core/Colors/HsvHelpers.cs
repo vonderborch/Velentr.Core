@@ -153,6 +153,15 @@ public static class HsvHelpers
         return (red, green, blue);
     }
 
+    /// <summary>
+    /// Converts RGB color values to HSV color values.
+    /// </summary>
+    /// <param name="red">The red component of the color (0-255).</param>
+    /// <param name="green">The green component of the color (0-255).</param>
+    /// <param name="blue">The blue component of the color (0-255).</param>
+    /// <param name="hue">The hue component of the color (0-360).</param>
+    /// <param name="saturation">The saturation component of the color (0-1).</param>
+    /// <param name="value">The value component of the color (0-1).</param>
     public static void ConvertRgbToHsv(byte red, byte green, byte blue, out double hue, out double saturation,
         out double value)
     {
@@ -224,9 +233,7 @@ public static class HsvHelpers
     /// <param name="red">The red component of the color (0-1).</param>
     /// <param name="green">The green component of the color (0-1).</param>
     /// <param name="blue">The blue component of the color (0-1).</param>
-    /// <param name="hue">The hue component of the color (0-360).</param>
-    /// <param name="saturation">The saturation component of the color (0-1).</param>
-    /// <param name="value">The value component of the color (0-1).</param>
+    /// <returns>A tuple containing the hue, saturation, and value components of the color (0-360, 0-1, 0-1).</returns>
     public static (double hue, double saturation, double value) ConvertRgbToHsv(double red, double green, double blue)
     {
         ConvertRgbToHsv(red, green, blue, out var hue, out var saturation, out var value);
